@@ -6,14 +6,15 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
 ![](https://media.giphy.com/media/3oEjHFzI1y4erDQ4kE/giphy.gif?cid=790b7611d8kr4at5b4kvqvrpkr8eq70hdd2uy6so6trzmnpe&ep=v1_gifs_search&rid=giphy.gif&ct=g)
 
 [Functional](#funtional)
-- [Use Cases](#use-cases)
-- [Data Model](#data-model)
-    - [Masper and Player](#master-and-player)
-    - [Campain](#campain)
-    - [Missions](#missions)
-    - [Character](#character)
-    - [Weapon](#weapon)
-    - [Npc](#npc)
+- [Dnd master complement](#dnd-master-complement)
+  - [Funtional](#funtional)
+    - [Use Cases](#use-cases)
+    - [Data Model](#data-model)
+      - [Master and Player](#master-and-player)
+      - [Campain](#campain)
+      - [Missions](#missions)
+      - [Character](#character)
+      - [Npc](#npc)
 
 
 ## Funtional
@@ -40,7 +41,7 @@ Player | Master
 - Surname (string, required).
 - Email (etring, required).
 - Password (string, required).
-- role (string , required, enum: Master , Plater)
+- role (string , required, enum: Master , Player)
 
 #### Campain
 
@@ -73,7 +74,7 @@ Player | Master
 #### Character
 
 - ID(auto)
-- Postrait (img)
+- Portrait (img)
 - Sice
 - Name (string, required)
 - Class (string, required, enum: Barbarian | Bard | Cleric | Druid | Fighter | Sorcerer | Wizard | Monk | Paladin | Rogue | Ranger | Warlock).
@@ -106,17 +107,6 @@ Player | Master
 - Features and Traits (string, required)
 - Other proeficiences and Languages(array, required)
 
-
-#### Weapon
-
-- Name (string, required)
-- Damage( number of dices , kind of dices)
-- Damage type( string, required, enum: Slashing | Bludgeoning | Piercing | Fire | Cold | Acid | Lightning | Thunder | Poison | Necrotic | Radiant | Psychic | Force | Magical)
-- Min range( number, required)
-- Max Range(number, required)
-- Critical Value( number, required, default: 20)
-- Weight (number, required)
-- Price (number and kind of coin, required)
 
 
 #### Npc
