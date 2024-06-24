@@ -7,6 +7,7 @@ function Header (){
     return <header className='Header'>
         <Heading level={1} className='Title'>Master Tools</Heading>
         <Button>Select</Button>
+        <Button>User</Button>
     </header>
 }
 
