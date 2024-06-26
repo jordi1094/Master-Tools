@@ -12,7 +12,7 @@ function App() {
 
 
   return (<>
-  {view === 'home' && <Home></Home>}
+  {view === 'home' && <Home className = 'View'></Home>}
   </>
 
   )
