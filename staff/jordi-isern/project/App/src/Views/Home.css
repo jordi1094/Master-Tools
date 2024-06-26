@@ -1,0 +1,5 @@
+.Main {
+    background-image: url(../../public/images/background.jpeg);
+    background-size: cover;
+    height: 95vh;
+}
