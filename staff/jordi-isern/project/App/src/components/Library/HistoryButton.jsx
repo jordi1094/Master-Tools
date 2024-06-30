@@ -4,7 +4,7 @@ import Image from "../core/Image";
 
 function HistoryButton ({src, Title }){
     return <Button className={'HistoryButton'}>
-        <Image src={src}></Image>
+        <Image src={'/images/PortadasCampañas/Reseña DnD - Icewindale Rime of the Frostmaiden.jpg'}></Image>
         <Heading level={4}>{Title}</Heading>
     </Button>
 }

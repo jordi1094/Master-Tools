@@ -1,7 +1,7 @@
 import './Image.css'
 
 function Image ({ src }) {
-    return <image className="Image" src={src}></image>
+    return <img className="Image" src={src}></img>
 }
 
 export default Image
