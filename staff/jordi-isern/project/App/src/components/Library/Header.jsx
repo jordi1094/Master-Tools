@@ -1,6 +1,8 @@
 import './Header.css'
 import Button from '../core/Button'
+import Image from '../core/Image'
 import Heading from '../core/Heading'
+import  userIcon from '../../icons/user.svg'
 
 
 function Header (){
@@ -9,7 +11,9 @@ function Header (){
         <div className='MenuContainer'>
             <Button>Select</Button>
             <Button>New</Button>
-            <Button>User</Button>
+            <Button>
+                <Image src= {userIcon}></Image>
+            </Button>
         </div>
     </header>
 }
