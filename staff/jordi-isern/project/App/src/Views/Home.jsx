@@ -12,10 +12,11 @@ function Home () {
         <Header></Header>
         <View className={'Main'}>
             <HistoryButton Title={'Dragon Lance'}></HistoryButton>
+            <HistoryButton Title={'Dragon Lance 2'}></HistoryButton>
+
         </View>
     </View>
     )
 }
 
 export default Home
-

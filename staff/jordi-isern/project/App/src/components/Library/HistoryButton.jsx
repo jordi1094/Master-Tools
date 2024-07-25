@@ -1,6 +1,11 @@
-import Button from "../core/Button";
+import './HistoryButton.css'
+
+
+import Button from '../core/Button';
 import Heading from "../core/Heading";
 import Image from "../core/Image";
+
+
 
 function HistoryButton ({src, Title }){
     return <Button className={'HistoryButton'}>
