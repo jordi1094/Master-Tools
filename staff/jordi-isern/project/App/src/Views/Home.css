@@ -1,5 +1,14 @@
-.Main {
-    background-image: url(../../public/images/background.jpeg);
-    background-size: cover;
-    height: 95vh;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .Main {
+    @apply 
+    bg-[url(../../public/images/background.jpeg)] 
+    bg-cover 
+    h-[95vh]
+    pl-8
+    grid-cols-5 gap-5;
+  }
 }
