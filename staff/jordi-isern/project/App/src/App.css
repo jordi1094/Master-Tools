@@ -1,12 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root{
-    --gold1: #F9D978;
+    --gold1: #ffbf00;
     --blueBackgroundBox: #949E9A;
     --black: #16161D;
     --red: #880808;
     --translucidBlue: #949E9A 67%;
-    --backgroundImage: url('../public/images/background.jpeg');
+    --backgroundImage:url(../../public/images/background.jpg);
+
 }
 
-body{
-    margin:0;
+
+@layer base {
+    body{
+        @apply
+        m-0
+    }
+}
+
+@layer base {
+    h1 {
+        @apply
+        text-3xl
+        font-extrabold
+    }
+}
+
+@layer base {
+    h2 {
+        @apply
+        text-xl
+        text-gold1
+        mt-2
+        font-semibold
+    }
+}
+
+@layer base {
+    * {
+        @apply
+        text-gold1
+    }
+}
+
+@layer base {
+    a{
+        @apply
+        text-black1
+        font-medium
+        visited:text-purple-600
+    }
 }

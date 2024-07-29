@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer components{
+    .Register{
+        @apply
+        bg-[url(../../public/images/background.jpg)]
+        bg-cover
+        h-[100vh]
+        flex
+        items-center
+        justify-center
+        flex-col
+    }
+}
+
+@layer components{
+    .Register .FormWithFeedback{
+        @apply
+        bg-gradient-to-b from-blueBackgroundBox
+        p-3
+        /* h-[40vh] */
+        pt-0
+        rounded-lg
+        flex
+        flex-col
+        items-center
+        justify-between
+        gap-y-3
+    }
+}
+
+@layer components{
+    .FormWithFeedback .Button{
+        @apply
+        text-white
+        bg-[--blueBackgroundBox]
+        rounded-md
+        mt-4
+        hover:h-8
+        hover:mt-3
+        active:h-6
+        active:mt-4
+        px-3
+        w-[100%]
+    }
+}
+
+
+
+
+

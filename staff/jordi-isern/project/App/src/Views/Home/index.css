@@ -5,10 +5,14 @@
 @layer components {
   .Main {
     @apply 
-    bg-[url(../../public/images/background.jpeg)] 
+    bg-[url(../../public/images/background.jpg)]
     bg-cover 
     h-[95vh]
+    pt-6
     pl-8
-    grid-cols-5 gap-5;
+    grid
+    grid-cols-5
+    gap-7
+    items-start
   }
 }

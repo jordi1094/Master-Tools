@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .InputContainer{
+        @apply
+        bg-white
+        rounded-md
+        p-1
+        flex
+        w-52
+    }
+}
+
+@layer components{
+    .Input{
+        @apply
+        border-none
+        bg-transparent
+    }
+}
+

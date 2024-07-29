@@ -1,6 +1,6 @@
 import {Schema, model, Types} from 'mongoose'
 
-const {ObjectId} = Types
+const { ObjectId } = Types
 
 const user = new Schema({
     name:{
@@ -26,8 +26,8 @@ const user = new Schema({
         required: true
     },
     role:{
-        type: String,
-        required:true
+      type: String,
+      required:true
     },
     characters: [{
             type: ObjectId,
@@ -39,6 +39,6 @@ const user = new Schema({
     }]
 })
 
-const User = model('user'. user)
+const User = model('User', user)
 
 export default User
