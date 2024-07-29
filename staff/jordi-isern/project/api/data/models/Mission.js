@@ -20,7 +20,7 @@ const mission = new Schema({
         type: String,
         required: true
     },
-    StartUbication: {
+    StartLocation: {
         type: ObjectId,
         ref: 'Ubication'
     },

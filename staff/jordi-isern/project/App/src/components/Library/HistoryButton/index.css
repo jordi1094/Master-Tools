@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .HistoryButtonBackground {
+      @apply
+      bg-white/20
+      p-3
+      rounded-lg
+      h-max
+  }
+}
+h4{
+  font-size: x-large;
+}
+
+@layer components{
+  .HistoryButton .Image{
+    @apply
+    border-[1px]
+    border-[--black]
+    rounded-lg
+  }
+}

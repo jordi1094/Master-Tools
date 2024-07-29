@@ -2,7 +2,7 @@ import { Schema, model, Types } from "mongoose";
 
 const { ObjectId} = Types
 
-const ubication = new Schema({
+const location = new Schema({
     author: {
         type: ObjectId,
         required: true,
@@ -12,29 +12,27 @@ const ubication = new Schema({
         type: String,
         required: true
     },
-    npcList: [{
+    npcs: [{
         type: ObjectId,
         ref: 'Npc'
     }],
-    enemyList:[{
+    enemies:[{
         type: ObjectId,
         ref: 'Enemy'
     }],
-    objectsList: [{
-        //TODO no estoy seguro en principio no ha de tener Id por que es extraido de la api la información del objeto
-        type: ObjectId,
-        ref: 'Object'
+    objects: [{
+        type: String, // index api D&D 5e SRD API
     }],
     history: {
         type: String,
         required: true
     },
-    ubicationsToGo: [{
+    nextLocations: [{
         type: ObjectId,
-        ref:'Ubication'
+        ref:'Locations'
     }]
 })
 
-const Ubication = model('Ubication', ubication)
+const Ubication = model('Locations', location)
 
 export default Ubication

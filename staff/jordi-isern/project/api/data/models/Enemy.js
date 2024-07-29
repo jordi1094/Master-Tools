@@ -2,18 +2,12 @@ import {Schema, model, Types} from 'mongoose'
 
 const {ObjectId} = Types
 
-const character = new Schema({
-    player: {
-        type: ObjectId,
-        ref: 'User'
-    },
-    image: {
-        type: String
-    },
-    sice:{
-        type: String
-    },
+const enemy = new Schema({
     name: {
+        type: String,
+        required: true
+    },
+    description:{
         type: String,
         required: true
     },
@@ -21,56 +15,11 @@ const character = new Schema({
         type: String,
         required: true
     },
-    class:{
-        type: String,
-        required: true
-    },
-    level:{
-        type: Number,
-        requir : true
-    },
-    perdonalityTraits:{
-        type: String,
-        required: true
-    },
-    ideals:{
-        type: String,
-        required: true
-    },
-    bonds:{
-        type: String,
-        required: true
-    },
-    flaws:{
-        type: String,
-        required: true
-    },
-    featuresAndTraits:{
-        type: String
-    },
-    
-    ExpiriencePoint:{
-        type: Number,
-        required: true
-    },
-    
-    backgound:{
-        type: String,
-        required: true
-    },
     aligment:{
         type: String,
         required: true
     },
-    inspiration:{
-        type: Boolean,
-        required: true
-    },
     armorClas:{
-        type: Number,
-        required: true
-    },
-    iniciative:{
         type: Number,
         required: true
     },
@@ -83,19 +32,6 @@ const character = new Schema({
             currentHitPoints: {
                 type: Number,
                 required: true
-            },
-            dice:{
-                type: String
-            }
-        }
-    },
-    deathSaves:{
-        type:{
-            successes:{
-                type: Number
-            },
-            fails:{
-                type: Number
             }
         }
     },
@@ -253,54 +189,31 @@ const character = new Schema({
     senses:{
         type:{
             sense:{
-                type: String,
-                required: true
+                type: String
             },
             modifier:{
-                type: Number,
-                required: true
+                type: Number
             }
-        }
-    },
-    equipment: [{
-        type:{
-            type: String,
-            required: true
-        }
-    }],
-    weapons: [{
-        type:{
-            type: String,
-            required: true
-        }
-    }],
-    attacsAndSpellcasting:{
-        type:{
-            type: String,
-            required: true
         }
     },
     lenguages:{
-        type: String,
-        required: true
-    },
-    money:{
-        type:{
-            coin: {
-                type: String,
-                required: true
-            },
-            quantity: {
-                type: Number,
-                required: true
-            }
-        }
-    },
-    otherProeficiencesAndLanguages: [{
         type: String
+    },
+    challengeRatin:{
+        type: Number
+    },
+    acctions: [{
+        action:{
+            type: String,
+            required:true
+        },
+        description:{
+            type: String,
+            required: true
+        }
     }]
 })
 
+const Enemy = model('Enemy', enemy)
 
-const Character = model('Character', character)
-export default Character
+export default Enemy

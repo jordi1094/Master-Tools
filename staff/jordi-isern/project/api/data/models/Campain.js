@@ -24,9 +24,9 @@ const campain = new Schema({
         type: String,
         required: true
     },
-    StartUbication: {
+    StartLocation: {
         type: ObjectId,
-        ref: 'Ubication'
+        ref: 'Location'
     },
     missions: [{
         type: ObjectId,
