@@ -1,6 +1,7 @@
-import {Schema, model, Types} from 'mongoose'
+import {Schema, model} from 'mongoose'
 
-const {ObjectId} = Types
+const { ObjectId } = Schema.Types
+
 
 const enemy = new Schema({
     name: {

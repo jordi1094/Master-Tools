@@ -1,9 +1,10 @@
-import {Schema, model, Types} from 'mongoose'
+import {Schema, model} from 'mongoose'
 
-const {ObjectId} = Types
+const { ObjectId } = Schema.Types
+
 
 const character = new Schema({
-    player: {
+    author: {
         type: ObjectId,
         ref: 'User'
     },
@@ -28,43 +29,26 @@ const character = new Schema({
     level:{
         type: Number,
         requir : true
-    },
-    perdonalityTraits:{
-        type: String,
-        required: true
-    },
-    ideals:{
-        type: String,
-        required: true
-    },
-    bonds:{
-        type: String,
-        required: true
-    },
-    flaws:{
-        type: String,
-        required: true
-    },
-    featuresAndTraits:{
-        type: String
-    },
-    
-    ExpiriencePoint:{
-        type: Number,
-        required: true
-    },
-    
+    }, 
     backgound:{
         type: String,
         required: true
-    },
+    },   
     aligment:{
         type: String,
+        required: true
+    },    
+    expiriencePoint:{
+        type: Number,
         required: true
     },
     inspiration:{
         type: Boolean,
         required: true
+    },
+    proficiencyBonus:{
+        type: Number,
+        required:true
     },
     armorClas:{
         type: Number,
@@ -74,42 +58,17 @@ const character = new Schema({
         type: Number,
         required: true
     },
-    hitPoint: {
-        type:{
-            macHitPoints:{
-                type: Number,
-                required: true
-            },
-            currentHitPoints: {
-                type: Number,
-                required: true
-            },
-            dice:{
-                type: String
-            }
-        }
-    },
-    deathSaves:{
-        type:{
-            successes:{
-                type: Number
-            },
-            fails:{
-                type: Number
-            }
-        }
-    },
     speed:{
         type:Number,
         required: true
     },
     strength:{
         type:{
-            StrengthScore:{
+            score:{
                 type: Number,
                 required: true
             },
-            StrengthModifier:{
+            modifier:{
                 type: Number,
                 required: true
             }
@@ -117,11 +76,11 @@ const character = new Schema({
     },
     dexterity:{
         type:{
-            dexterityScore:{
+            score:{
                 type: Number,
                 required: true
             },
-            dexterityModifier:{
+            modifier:{
                 type: Number,
                 required: true
             }
@@ -129,11 +88,11 @@ const character = new Schema({
     },
     constitution:{
         type:{
-            constitutionScore:{
+            score:{
                 type: Number,
                 required: true
             },
-            constitutionModifier:{
+            modifier:{
                 type: Number,
                 required: true
             }
@@ -141,11 +100,11 @@ const character = new Schema({
     },
     iniciative:{
         type:{
-            iniciativeScore:{
+            score:{
                 type: Number,
                 required: true
             },
-            iniciativeModifier:{
+            modifier:{
                 type: Number,
                 required: true
             }
@@ -153,11 +112,11 @@ const character = new Schema({
     },
     wishdom:{
         type:{
-            wishdomScore:{
+            score:{
                 type: Number,
                 required: true
             },
-            wishdomModifier:{
+            modifier:{
                 type: Number,
                 required: true
             }
@@ -165,16 +124,16 @@ const character = new Schema({
     },
     charisma:{
         type:{
-            charismaScore:{
+            score:{
                 type: Number,
                 required: true
             },
-            charismaModifier:{
+            modifier:{
                 type: Number,
                 required: true
             }
         }
-    },
+    },   
     skills:{
         type:{
             acrobatics:{
@@ -280,10 +239,6 @@ const character = new Schema({
             required: true
         }
     },
-    lenguages:{
-        type: String,
-        required: true
-    },
     money:{
         type:{
             coin: {
@@ -296,9 +251,54 @@ const character = new Schema({
             }
         }
     },
-    otherProeficiencesAndLanguages: [{
+    personalityTraits:{
+        type: String,
+        required: true
+    },
+    ideals:{
+        type: String,
+        required: true
+    },
+    bonds:{
+        type: String,
+        required: true
+    },
+    flaws:{
+        type: String,
+        required: true
+    },
+    hitPoint: {
+        type:{
+            macHitPoints:{
+                type: Number,
+                required: true
+            },
+            currentHitPoints: {
+                type: Number,
+                required: true
+            },
+            dice:{
+                type: String
+            }
+        }
+    },
+    deathSaves:{
+        type:{
+            successes:{
+                type: Number
+            },
+            fails:{
+                type: Number
+            }
+        }
+    },
+    featuresAndTraits:{
         type: String
-    }]
+    },
+    otherProeficiencesAndLanguages:{
+        type: String,
+        required: true
+    }
 })
 
 

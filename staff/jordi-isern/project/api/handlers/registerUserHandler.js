@@ -4,10 +4,10 @@ import handleErrorResponse from '../helper/handleErrorResponse.js'
 
 
 const registerUserHandler = (req, res) => {
-    const{name , surname,email,username, password, passwordRepeat} = res.body
+    const{name , surname,email,username, role, password, passwordRepeat} = req.body
 
         try{
-            logic.registerUser(name, surname,email,username,password,passwordRepeat)
+            logic.registerUser(name, surname,email,username, role, password,passwordRepeat)
                 .then(() => res.status(201).send())
                 .catch(error => {
                     handleErrorResponse(error, res)
