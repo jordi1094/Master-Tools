@@ -15,13 +15,20 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
   - [Funtional](#funtional)
     - [Use Cases](#use-cases)
       - [Master](#master)
+        - [v0.1](#v01)
       - [Player | Master](#player--master)
     - [Data Model](#data-model)
-      - [Master and Player](#master-and-player)
-      - [Campain](#campain)
-      - [Ubication](#ubication)
+      - [User](#user)
+      - [Campaign](#campaign)
+      - [Location](#location)
       - [Missions](#missions)
+        - [Task](#task)
+        - [v0.1](#v01-1)
       - [Character](#character)
+        - [Sense](#sense)
+        - [HitPoint](#hitpoint)
+        - [DeathSaves](#deathsaves)
+        - [Money](#money)
       - [Npc](#npc)
       - [Enemy](#enemy)
   - [Future Skills](#future-skills)
@@ -46,147 +53,226 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
 
 #### Master
 
-- Create a campain.
-- Next steps in the campain.
-- Easy accses to every character player or Npc.
-- Information abou the actual ubication and possiblities of movement.
-- List of the missions to do.
-- Notes.
+- Create  campaign
+  
+  - add character
+  - add objective
+  - add background
+  - add Startlocation
+    - add Npc
+    - add enemy
+    - add object
+    - add description
+    - add next locations
+  - add mission
+    - add background
+    - add objective
+    - add Task
+  
+
+- Delete campaign
+  - Delete character
+  - Delete objective
+  - Delete background
+  - Delete Startlocation
+    - Delete Npc
+    - Delete enemy
+    - Delete object
+    - Delete description
+    - Delete next locations
+  - Delete mission
+    - Delete background
+    - Delete objective
+    - Delete Task
+
+ - View Campaigns
+  
+    - View Campaign
+    - View Character details
+    - view Npcs
+    - View Npc details
+    - view Enemies
+    - View Enemy details
+    - View location details
+    - View missions List
+    - view Notes list
+    - view nest locations
+    
+
+
+##### v0.1
+
+- Edit campaign
+  - edit character
+  - edit objective
+  - edit background
+  - edit location
+    - edit Npc
+    - edit enemy
+  - edit mission
+    - edit background
 
 #### Player | Master
-- Generate new characters
+- Create character
+- Edit  character
+- Delete  character
+- View characters
+
+
+
 ---
 
 ### Data Model
 
-#### Master and Player
-- **Id**(String)
-- **Name** (string, required).
-- **Surname** (string, required).
-- **Email** (etring, required).
-- **Password** (string, required).
-- **Role** (string , required, enum: Master , Player)
+#### User
+- id(String, auto)
+- name (string, required).
+- surname (string, required).
+- email (etring, required).
+- password (string, required).
+- role (string , required, enum: Master , Player)
 
-#### Campain
+#### Campaign
 
-- **Id** (String)
-- **Title** (string, required)
-- **Adventure, background**( string, required)
-- **Player Characters** (array[Object{character}], required)
-- **Objective**(string, required)
-- **World**(array, required)
-- **Places**(array[Object{Places}], required)
+- id (String,auto)
+- author(User.id)
+- title (string, required)
+- background( string, required)
+- characters([Charater.id], required)
+- objective(string, required)
+- location(Location.id, required)
 
-#### Ubication
-- **Npc List** (Array[Npc...], required)
-- **Enemy List**(Array [Enemy...], required)
-- **Objects**(Array[Game-Objects], required)
-- **background**(String)
-- **Check List**(array)
-- **Posibilities to go**(Array [Ubication])
-
-
+#### Location
+- id (String, auto)
+- author(User.id)
+- npcs ([Npc.id], required)
+- enemies([Enemy.id], required)
+- objects([string(Dnd.index)], required)
+- description(String)
+- misions([Mission.id],required)
+- nextLocations([Location.id])
 
 #### Missions
 
-- **Id**(String)
-- **name**(string, required)
-- **Main ubication** (object{Ubication}, required)
-- **Min decomended Level** (nunmber, required)
-- **Space description** (string, required)
-- **Mision objective** (string, required)
-- **Events** (array, required)
-- **Objective**(string, required)
-- **Background**(string, required)
-- **Check List**(Array, required)
-- **Map** (img)
+- id(String,auto)
+- author(User.id)
+- name(string, required)
+- mainUbication (object{Ubication}, required)
+- minRecomendedLevel (nunmber, required)
+- background (string, required)
+- objective (string, required)
+- checkList([Task])
+  
+  ##### Task
+  - id(string,auto)
+  - description(string, required)
+  - status(boolean, required)
+
+##### v0.1
+- map (img)
 
 #### Character
 
-- **ID**(String)
-- **Image** (img) 
-- **Sice**(number) 
-- **Name** (string, required) 
-- **Class** (string, required, enum: Barbarian | Bard | Cleric | Druid | Fighter | Sorcerer | Wizard | Monk | Paladin | Rogue | Ranger | Warlock). 
-- **Level**( number, required, default :0) 
-- **Background** ( string, required, enum:Acolyte | Charlatan | Criminal | Entertainer | Folk Hero | Guild Artisan | Hermit | Noble | Outlander | Sage | Sailor | Soldier | Urchin) 
-- **Player Name**(String, required) 
-- **Race** ( string, required, enum: Dragonborn | Dwarf | Elf | Gnome | Half-Elf | Half-Orc | Halfling | Human | Tiefling ) 
-- **Aligment** (string, required, enum: Lawful Good | Neutral Good | Chaotic Good | Lawful Neutral | True Neutral | Chaotic Neutral | Lawful Evil | Neutral Evil | Chaotic Evil) 
-- **Expirience Points** (number, required, default: 0) 
-- **Inspiration**(boolean, required, default: false) 
-- **Proficiency Bonus**( number, required) 
+- id (String)
+- author(User.Id)
+- image (img) 
+- sice(number) 
+- name (string, required) 
+- race ( string, required, enum: Dragonborn | Dwarf | Elf | Gnome | Half-Elf | Half-Orc | Halfling | Human | Tiefling )
+- class (string, required, enum: Barbarian | Bard | Cleric | Druid | Fighter | Sorcerer | Wizard | Monk | Paladin | Rogue | Ranger | Warlock). 
+- level( number, required, default :0) 
+- background ( string, required, enum:Acolyte | Charlatan | Criminal | Entertainer | Folk Hero | Guild Artisan | Hermit | Noble | Outlander | Sage | Sailor | Soldier | Urchin) 
+- aligment (string, required, enum: Lawful Good | Neutral Good | Chaotic Good | Lawful Neutral | True Neutral | Chaotic Neutral | Lawful Evil | Neutral Evil | Chaotic Evil) 
+- expiriencePoints (number, required, default: 0) 
+- inspiration (boolean, required, default: false) 
+- proficiencyBonus( number, required) 
 
-- **Class Armor**(object{ base: number , variable:(number)}, required ) 
-- **Initiative**(number, required) 
-- **Speed**(number, required) 
+- armorClass (object{ base: number , variable:(number)}, required ) 
+- initiative (number, required) 
+- speed (number, required) 
 
-- **Strength** (number, required) 
-- **Dexterity** (number, required) 
-- **Constitution** (number, required) 
-- **Inteligence** (number, required) 
-- **Wisdom** (number, required) 
-- **Charisma** (number, required) 
+- strength ({Score(number, required), modifier(number, required)}) 
+- dexterity ({Score(number, required), modifier(number, required)}) 
+- constitution ({Score(number, required), modifier(number, required)}) 
+- inteligence ({Score(number, required), modifier(number, required)}) 
+- wisdom ({Score(number, required), modifier(number, required)}) 
+- charisma ({Score(number, required), modifier(number, required)}) 
+- skills(Skill, required) // NO SE COMO rellenarlo
+- sense (Sense)
+- equipment ( objects Array, Required) 
+- weapons ( array , required) 
+- attacks&spellcasting (object Array, Required)
+- money (Money) 
+- personalityTraits ( string, required)  
+- ideals (string, required) 
+- bonds (String , requires) 
+- flaws (string, required) 
+- hitPoint (HitPoint)
+- deathSaves (DeathSaves)
+- featuresAndTraits (string, required)
+- otherProeficiencesAndLanguages (array, required)
 
-- **Equipment**( objects Array, Required) 
-- **Weapons**( array , required) 
-- **Attacks & spellcasting**(object Array, Required)
-- **Money** (object Array, required) 
-- **Personality traits**( string, required)  
-- **Ideals**( string, required) 
-- **Bonds** (String , requires) 
-- **Flaws**(string, required) 
-- **Death saves succeses** (number, requires enum: 0| 1| 2| 3) 
-- **Death saves Failures** (number, requires enum: 0| 1| 2| 3) 
-- **Features and Traits** (string, required)
-- **Other proeficiences and Languages**(array, required)
+##### Sense
+  - sense (String, required)
+  - modifier (Number, required)
 
+##### HitPoint
+  - maxHitPoints(number, required)
+  - currentHitPoint(number, required)
+  - dice (string)
 
+##### DeathSaves
+- deathSavesSucceses (number, requires enum: 0| 1| 2| 3) 
+- deathSavesFailures (number, requires enum: 0| 1| 2| 3)
+
+##### Money
+- [{coin:(string), quantity:(number)}]
 
 #### Npc
 
-- **ID:**(auto)
-- **Name:**( string, required)
-- **Description:** (string , required)
-- **Race:** (string, required)
-- **Aligment:** (string, required)
-- **Armor Class:** ( Object{base: (number), variable:(number)}, required)
-- **Hit points:** (Object{ points:( number), Dice: (string)}, required)
-- **Speed:** (number, required)
-- **Strength:** (Object { points: (number), Variable:(number)},required)
-- **Dexterity** (Object { points: (number), Variable:(number)},required)
-- **Constitution** (Object { points: (number), Variable:(number)},required)
-- **Initiative** (Object { points: (number), Variable:(number)},required)
-- **Wisdom** (Object { points: (number), Variable:(number)},required)
-- **Charisma** (Object { points: (number), Variable:(number)},required)
-- **Skills**  (Array [object{name skill(string, required),enum:Acrobatics | Animal Handling | Arcana | Athletics | Deception | History | Insight | Intimidation | Investigation | Medicine | Nature | Perception | Performance | Persuasion | Religion | Sleight of Hand | Stealth | Survival =>  variable}])
-- **Senses** (Array [Object {name sense( string, required), enum: Blindsight | Darkvision | Tremorsense | Truesight ==> variable}])
-- **Lenguages** (Array , required)
-- **Challenge** (Object{ level: number, points: number})
-- **Accions** (Object{acction: description(string)... })
+
+- id (auto)
+- name ( string, required)
+- description (string , required)
+- race  (string, required)
+- aligment (string, required)
+- armorClass ( Object{base: (number), variable:(number)}, required)
+  hHitPoints (Object{ points:( number), Dice: (string)}, required)
+- speed (number, required)
+- strength (Object { points: (number), Variable:(number)},required)
+- dexterity (Object { points: (number), Variable:(number)},required)
+- constitution (Object { points: (number), Variable:(number)},required)
+- initiative (Object { points: (number), Variable:(number)},required)
+- wisdom (Object { points: (number), Variable:(number)},required)
+- charisma (Object { points: (number), Variable:(number)},required)
+- skills  (Array [object{name skill(string, required),enum:Acrobatics | Animal Handling | Arcana | Athletics | Deception | History | Insight | Intimidation | Investigation | Medicine | Nature | Perception | Performance | Persuasion | Religion | Sleight of Hand | Stealth | Survival =>  variable}])
+- senses (Array [Object {name sense( string, required), enum: Blindsight | Darkvision | Tremorsense | Truesight ==> variable}])
+- lenguages (Array , required)
+- challenge (Object{ level: number, points: number})
+- accions (Object{acction: description(string)... })
 
 
 #### Enemy
 
-- **ID:**(auto)
-- **Name:**( string, required)
-- **Description:** (string , required)
-- **Race:** (string, required)
-- **Aligment:** (string, required)
-- **Armor Class:** ( Object{base: (number), variable:(number)}, required)
-- **Hit points:** (Object{ points:( number), Dice: (string)}, required)
-- **Speed:** (number, required)
-- **Strength:** (Object { points: (number), Variable:(number)},required)
-- **Dexterity** (Object { points: (number), Variable:(number)},required)
-- **Constitution** (Object { points: (number), Variable:(number)},required)
-- **Initiative** (Object { points: (number), Variable:(number)},required)
-- **Wisdom** (Object { points: (number), Variable:(number)},required)
-- **Charisma** (Object { points: (number), Variable:(number)},required)
-- **Skills**  (Array [object{name skill(string, required),enum:Acrobatics | Animal Handling | Arcana | Athletics | Deception | History | Insight | Intimidation | Investigation | Medicine | Nature | Perception | Performance | Persuasion | Religion | Sleight of Hand | Stealth | Survival =>  variable}])
-- **Senses** (Array [Object {name sense( string, required), enum: Blindsight | Darkvision | Tremorsense | Truesight ==> variable}])
-- **Lenguages** (Array , required)
-- **Challenge** (Object{ level: number, points: number})
-- **Accions** (Object{acction: description(string)... })
+- id (auto)
+- name( string, required)
+- description (string , required)
+- race (string, required)
+- aligment (string, required)
+- armorClass ( Object{base: (number), variable:(number)}, required)
+- hitPoints (Object{ points:( number), Dice: (string)}, required)
+- speed (number, required)
+- strength (Object { points: (number), Variable:(number)},required)
+- dexterity (Object { points: (number), Variable:(number)},required)
+- constitution (Object { points: (number), Variable:(number)},required)
+- initiative (Object { points: (number), Variable:(number)},required)
+- wisdom (Object { points: (number), Variable:(number)},required)
+- charisma (Object { points: (number), Variable:(number)},required)
+- skills  (Array [object{name skill(string, required),enum:Acrobatics | Animal Handling | Arcana | Athletics | Deception | History | Insight | Intimidation | Investigation | Medicine | Nature | Perception | Performance | Persuasion | Religion | Sleight of Hand | Stealth | Survival =>  variable}])
+- senses (Array [Object {name sense( string, required), enum: Blindsight | Darkvision | Tremorsense | Truesight ==> variable}])
+- lenguages (Array , required)
+- challenge (Object{ level: number, points: number})
+- accions (Object{acction: description(string)... })
 
 
 

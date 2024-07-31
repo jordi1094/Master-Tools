@@ -1,6 +1,7 @@
-import { Schema, model, Types } from "mongoose";
+import {Schema, model} from 'mongoose'
 
-const { ObjectId} = Types
+const { ObjectId } = Schema.Types
+
 
 const location = new Schema({
     author: {
@@ -23,13 +24,17 @@ const location = new Schema({
     objects: [{
         type: String, // index api D&D 5e SRD API
     }],
-    history: {
+    description: {
         type: String,
         required: true
     },
     nextLocations: [{
         type: ObjectId,
         ref:'Locations'
+    }],
+    missions: [{
+        type: ObjectId,
+        ref: 'Mision'
     }]
 })
 

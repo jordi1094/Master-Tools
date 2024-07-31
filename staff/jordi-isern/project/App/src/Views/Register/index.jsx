@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import View from '../../components/Library/View'
 import Heading from '../../components/core/Heading'
 import FormWithFeedback from '../../components/Library/FormWithFeedback'
@@ -8,7 +9,7 @@ import Select from '../../components/core/Select'
 import {Link, Navigate} from 'react-router-dom'
 
 import './index.css'
-import logic from '../../../../api/logic'
+import logic from '../../../Logic'
 
 
 function Register () {
@@ -22,12 +23,12 @@ function Register () {
         const form = event.target
 
         const name = form.name.value
-        const surname = form.surname.vale
+        const surname = form.surname.value
         const email = form.email.value
         const username = form.username.value
         const role = form.role.value
         const password = form.password.value
-        const passwordRepeat = form.passwordRepeat.value
+        const passwordRepeat = form.repeatPassword.value
 
         try{
             logic.registerUser(name, surname, email, username, role, password, passwordRepeat)
@@ -56,7 +57,7 @@ function Register () {
             <Select id= 'role' placeholder='Select your role' options={['Master', 'Player']}></Select>
             {/* //TODO change type password to test with the buton  */}
             <FieldPassword id= 'password' placeholder= 'Password'>Password</FieldPassword>
-            <FieldPassword id= 'RepeatPasword' placeholder= 'Repeat assword'>Reperat password</FieldPassword>
+            <FieldPassword id= 'repeatPassword' placeholder= 'Repeat assword'>Reperat password</FieldPassword>
             <Button type = 'submit' className = 'submitButton'> Register Now</Button>
         </FormWithFeedback>
         <Link to='/login'>Registered?</Link>

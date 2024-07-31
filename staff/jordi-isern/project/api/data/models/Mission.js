@@ -1,6 +1,7 @@
-import { Schema, model, Types } from "mongoose";
+import {Schema, model} from 'mongoose'
 
-const { ObjectId} = Types
+const { ObjectId } = Schema.Types
+
 
 const mission = new Schema({
     author: {
@@ -20,13 +21,13 @@ const mission = new Schema({
         type: String,
         required: true
     },
-    StartLocation: {
+    startLocation: {
         type: ObjectId,
         ref: 'Ubication'
     },
-    objectives:[{
+    checkList:[{
         type: {
-            objective: {
+            task: {
                 type: String,
                 required: true
             },

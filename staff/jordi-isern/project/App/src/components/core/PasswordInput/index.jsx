@@ -3,9 +3,9 @@ import Image from '../Image'
 import eyeIcon from '../../../icons/eye.svg'
 
 
-function PasswordInput ({id,type,placeholder, className}) {
+function PasswordInput ({id,placeholder, className}) {
     return <div className='InputContainer'>
-        <input className={`Form ${className ? className: ''}`} type= 'password' placeholder={placeholder}></input>
+        <input className={`Form ${className ? className: ''}`}id= {id}  type= 'password' placeholder={placeholder}></input>
         <Image src={eyeIcon}></Image>
     </div>
 }

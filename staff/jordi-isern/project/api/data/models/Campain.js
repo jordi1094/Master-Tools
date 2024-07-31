@@ -1,6 +1,7 @@
-import {Schema, model, Types} from 'mongoose'
+import {Schema, model} from 'mongoose'
 
-const { ObjectId} = Types
+const { ObjectId } = Schema.Types
+
 
 const campain = new Schema({
     author: {
@@ -27,11 +28,7 @@ const campain = new Schema({
     StartLocation: {
         type: ObjectId,
         ref: 'Location'
-    },
-    missions: [{
-        type: ObjectId,
-        ref: 'Mision'
-    }]
+    }
 })
 
 const Campain = model('Campain', campain)
