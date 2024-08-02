@@ -10,7 +10,7 @@ const registerUser = ( name, surname, email, username, role, password, passwordR
   validate.username(username);
   validate.password(password);
   validate.passwordMatch(password, passwordRepeat);
-  // TODO validate Rol
+ validate.role(role)
 
   return User.findOne({ $or: [{ email }, { username }] })
     .catch((error) => {

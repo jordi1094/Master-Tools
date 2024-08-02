@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 import View from '../../components/Library/View'
 import Heading from '../../components/core/Heading'
 import FormWithFeedback from '../../components/Library/FormWithFeedback'
@@ -8,7 +9,6 @@ import Button from '../../components/core/Button'
 import Select from '../../components/core/Select'
 import {Link, Navigate} from 'react-router-dom'
 
-import './index.css'
 import logic from '../../../Logic'
 
 
@@ -16,6 +16,8 @@ function Register () {
     console.log( 'Register -> render')
 
     const [message, setMessage] = useState('')
+
+    const navigate = useNavigate()
 
     const handleRegisterSubmit = event => {
         event.preventDefault()
@@ -32,23 +34,23 @@ function Register () {
 
         try{
             logic.registerUser(name, surname, email, username, role, password, passwordRepeat)
-                .then(() => {<Navigate to = '/login'/> })
+                .then(() => navigate('/login'))
                 .catch(error => {
                     console.log(error)
 
-                    setMessage(error.message)
+                    alert(error.message)
                 })
         }catch (error) {
             console.error(error)
 
-            setMessage(error.message)
+            alert(error.message)
         }
     }
 
 
     return( 
-        <View className={'Register'}>
-        <FormWithFeedback onSubmit={handleRegisterSubmit}>
+        <View className='bg-[url(../../public/images/background.jpg)] bg-cover h-[100vh] flex items-center justify-center flex-col'>
+        <FormWithFeedback onSubmit={handleRegisterSubmit} className='bg-gradient-to-b from-blueBackgroundBox p-3 h-[40vh] pt-0 rounded-lg flex flex-col items-center justify-between gap-y-3'>
             <Heading level={2}>Register</Heading>
             <Field id = 'name' placeholder= 'Name'>Name</Field>
             <Field id = 'surname' placeholder= 'Surname'>Surname</Field>
@@ -58,7 +60,7 @@ function Register () {
             {/* //TODO change type password to test with the buton  */}
             <FieldPassword id= 'password' placeholder= 'Password'>Password</FieldPassword>
             <FieldPassword id= 'repeatPassword' placeholder= 'Repeat assword'>Reperat password</FieldPassword>
-            <Button type = 'submit' className = 'submitButton'> Register Now</Button>
+            <Button type = 'submit' className = 'text-white bg-[--blueBackgroundBox] rounded-md mt-4 hover:scale-y-105 active:scale-y-100 px-3 w-[100%]'> Register Now</Button>
         </FormWithFeedback>
         <Link to='/login'>Registered?</Link>
 

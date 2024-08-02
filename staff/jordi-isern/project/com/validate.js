@@ -57,6 +57,19 @@ function validateText(text, explain ='text', maxLength = Infinity){
 function validateURL (url, explain = 'url') {
     if (typeof url !== 'string' || !url.startsWith('http')) {throw new ContentError(`${explain} is not valid`)}
 }
+
+function validateImage (url) {
+    if (typeof url !== 'string') {throw new ContentError(`${explain} is not valid`)}
+}
+
+function validateRole(role){
+    if(typeof role !== 'string' ){throw new ContentError('The Role data is not correct')}
+    // TODO if(role !== 'Master' ||4 role !== 'Player'){ throw new ContentError('The Role data is not correct 2')}
+}
+
+function validateAray(array, explain = 'array'){
+    if(!Array.isArray(array)){throw new ContentError(`${explain} is not an array`)}
+}
 const validate = {
     username: validateUsername,
     password: validatePasword,
@@ -66,6 +79,9 @@ const validate = {
     id: validateID,
     email: validateEmail,
     text: validateText,
-    url: validateURL
+    url: validateURL,
+    role: validateRole,
+    image: validateImage,
+    array: validateAray
 }
 export default validate

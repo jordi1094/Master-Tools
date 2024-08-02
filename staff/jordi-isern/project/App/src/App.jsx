@@ -2,8 +2,9 @@ import React from 'react'
 import Home from './Views/Home'
 import Register from './Views/Register'
 import Login from './Views/Login'
+import Campain from './Views/Campain'
 
-import {Routes, Route, useNavigate, Navigate} from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom'
 
 import './App.css'
 
@@ -14,6 +15,7 @@ function App() {
     <Route path='/*' element= {<Home/>} />
     <Route path='/register' element = {<Register/>} />
     <Route path='/login' element = {<Login/>} />
+    <Route path= '/campain' element= {<Campain/>}/>
   </Routes>)
 }
 
