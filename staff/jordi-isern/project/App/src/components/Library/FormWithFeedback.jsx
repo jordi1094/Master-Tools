@@ -1,4 +1,4 @@
-import Text from '../../core/text'
+import Text from '../core/text'
 
 function FormWithFeedback( {className, onSubmit,children, message, level = 'error'}) {
     return <>

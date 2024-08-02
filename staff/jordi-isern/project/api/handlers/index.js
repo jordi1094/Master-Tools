@@ -1,9 +1,9 @@
 import registerUserHandler from './registerUserHandler.js'
-// import authenticateUserHandler from '../logic/authenticateUserHandler.js'
+import authenticateUserHandler from './authenticateUserHandler.js'
 
 const routeHandler = {
     registerUserHandler,
-    // authenticateUserHandler
+    authenticateUserHandler
 }
 
 export default routeHandler

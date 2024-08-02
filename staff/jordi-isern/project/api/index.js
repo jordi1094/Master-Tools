@@ -7,6 +7,8 @@ import jwt from './util/jasonwebtoken-promised.js'
 
 import routeHandler from './handlers/index.js'
 
+import getElfRace from './dndApi/index.js'
+
 const { MONGODB_URL, PORT} = process.env
 
 mongoose.connect(MONGODB_URL)
@@ -23,7 +25,9 @@ mongoose.connect(MONGODB_URL)
 
         api.post('/users', jsonBodyParser, routeHandler.registerUserHandler)
 
-        // api.post('users/auth', jsonBodyParser, routeHandler.authenticateUserHandler)
+        api.post('/users/auth', jsonBodyParser, routeHandler.authenticateUserHandler)
+
+        // api.get('/test', (req, res) => getElfRace().then(race => {res.send(race)}))
 
         api.listen(PORT,() => console.log(`API running on PORT ${PORT}`))
     })

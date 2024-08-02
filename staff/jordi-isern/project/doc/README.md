@@ -29,6 +29,7 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
         - [HitPoint](#hitpoint)
         - [DeathSaves](#deathsaves)
         - [Money](#money)
+        - [Skils](#skils)
       - [Npc](#npc)
       - [Enemy](#enemy)
   - [Future Skills](#future-skills)
@@ -96,7 +97,7 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
     - View location details
     - View missions List
     - view Notes list
-    - view nest locations
+    - view next locations
     
 
 
@@ -157,7 +158,7 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
 - id(String,auto)
 - author(User.id)
 - name(string, required)
-- mainUbication (object{Ubication}, required)
+- mainUbication (Location.id, required)
 - minRecomendedLevel (nunmber, required)
 - background (string, required)
 - objective (string, required)
@@ -181,7 +182,7 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
 - race ( string, required, enum: Dragonborn | Dwarf | Elf | Gnome | Half-Elf | Half-Orc | Halfling | Human | Tiefling )
 - class (string, required, enum: Barbarian | Bard | Cleric | Druid | Fighter | Sorcerer | Wizard | Monk | Paladin | Rogue | Ranger | Warlock). 
 - level( number, required, default :0) 
-- background ( string, required, enum:Acolyte | Charlatan | Criminal | Entertainer | Folk Hero | Guild Artisan | Hermit | Noble | Outlander | Sage | Sailor | Soldier | Urchin) 
+- background ( string, required, enum: Acolyte | Charlatan | Criminal | Entertainer | Folk Hero | Guild Artisan | Hermit | Noble | Outlander | Sage | Sailor | Soldier | Urchin) 
 - aligment (string, required, enum: Lawful Good | Neutral Good | Chaotic Good | Lawful Neutral | True Neutral | Chaotic Neutral | Lawful Evil | Neutral Evil | Chaotic Evil) 
 - expiriencePoints (number, required, default: 0) 
 - inspiration (boolean, required, default: false) 
@@ -197,7 +198,7 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
 - inteligence ({Score(number, required), modifier(number, required)}) 
 - wisdom ({Score(number, required), modifier(number, required)}) 
 - charisma ({Score(number, required), modifier(number, required)}) 
-- skills(Skill, required) // NO SE COMO rellenarlo
+- skills(Skills, required) // NO SE COMO rellenarlo
 - sense (Sense)
 - equipment ( objects Array, Required) 
 - weapons ( array , required) 
@@ -214,7 +215,7 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
 
 ##### Sense
   - sense (String, required)
-  - modifier (Number, required)
+  - description(String, required)
 
 ##### HitPoint
   - maxHitPoints(number, required)
@@ -228,51 +229,51 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
 ##### Money
 - [{coin:(string), quantity:(number)}]
 
+##### Skils
+- acrobatics: number
+- ...
+
 #### Npc
 
-
-- id (auto)
-- name ( string, required)
-- description (string , required)
-- race  (string, required)
-- aligment (string, required)
-- armorClass ( Object{base: (number), variable:(number)}, required)
-  hHitPoints (Object{ points:( number), Dice: (string)}, required)
-- speed (number, required)
-- strength (Object { points: (number), Variable:(number)},required)
-- dexterity (Object { points: (number), Variable:(number)},required)
-- constitution (Object { points: (number), Variable:(number)},required)
-- initiative (Object { points: (number), Variable:(number)},required)
-- wisdom (Object { points: (number), Variable:(number)},required)
-- charisma (Object { points: (number), Variable:(number)},required)
+- id (String)
+- author(User.Id)
+- image (img) 
+- description(String, required)
+- sice(number) 
+- name (string, required) 
+- race ( string, required, enum: Dragonborn | Dwarf | Elf | Gnome | Half-Elf | Half-Orc | Halfling | Human | Tiefling )
+- aligment (string, required, enum: Lawful Good | Neutral Good | Chaotic Good | Lawful Neutral | True Neutral | Chaotic Neutral | Lawful Evil | Neutral Evil | Chaotic Evil) 
+- armorClass (object{ base: number , variable:(number)}, required ) 
+- speed (number, required) 
+- strength ({Score(number, required), modifier(number, required)}) 
+- dexterity ({Score(number, required), modifier(number, required)}) 
+- constitution ({Score(number, required), modifier(number, required)}) 
+- inteligence ({Score(number, required), modifier(number, required)}) 
+- wisdom ({Score(number, required), modifier(number, required)}) 
+- charisma ({Score(number, required), modifier(number, required)})
 - skills  (Array [object{name skill(string, required),enum:Acrobatics | Animal Handling | Arcana | Athletics | Deception | History | Insight | Intimidation | Investigation | Medicine | Nature | Perception | Performance | Persuasion | Religion | Sleight of Hand | Stealth | Survival =>  variable}])
-- senses (Array [Object {name sense( string, required), enum: Blindsight | Darkvision | Tremorsense | Truesight ==> variable}])
-- lenguages (Array , required)
-- challenge (Object{ level: number, points: number})
-- accions (Object{acction: description(string)... })
-
+- sense (Sense)
 
 #### Enemy
 
-- id (auto)
-- name( string, required)
-- description (string , required)
-- race (string, required)
-- aligment (string, required)
-- armorClass ( Object{base: (number), variable:(number)}, required)
-- hitPoints (Object{ points:( number), Dice: (string)}, required)
-- speed (number, required)
-- strength (Object { points: (number), Variable:(number)},required)
-- dexterity (Object { points: (number), Variable:(number)},required)
-- constitution (Object { points: (number), Variable:(number)},required)
-- initiative (Object { points: (number), Variable:(number)},required)
-- wisdom (Object { points: (number), Variable:(number)},required)
-- charisma (Object { points: (number), Variable:(number)},required)
+- id (String)
+- author(User.Id)
+- image (img) 
+- description(String, required)
+- sice(number) 
+- name (string, required) 
+- race ( string, required, enum: Dragonborn | Dwarf | Elf | Gnome | Half-Elf | Half-Orc | Halfling | Human | Tiefling )
+- aligment (string, required, enum: Lawful Good | Neutral Good | Chaotic Good | Lawful Neutral | True Neutral | Chaotic Neutral | Lawful Evil | Neutral Evil | Chaotic Evil) 
+- armorClass (object{ base: number , variable:(number)}, required ) 
+- speed (number, required) 
+- - strength ({Score(number, required), modifier(number, required)}) 
+- dexterity ({Score(number, required), modifier(number, required)}) 
+- constitution ({Score(number, required), modifier(number, required)}) 
+- inteligence ({Score(number, required), modifier(number, required)}) 
+- wisdom ({Score(number, required), modifier(number, required)}) 
+- charisma ({Score(number, required), modifier(number, required)})
 - skills  (Array [object{name skill(string, required),enum:Acrobatics | Animal Handling | Arcana | Athletics | Deception | History | Insight | Intimidation | Investigation | Medicine | Nature | Perception | Performance | Persuasion | Religion | Sleight of Hand | Stealth | Survival =>  variable}])
-- senses (Array [Object {name sense( string, required), enum: Blindsight | Darkvision | Tremorsense | Truesight ==> variable}])
-- lenguages (Array , required)
-- challenge (Object{ level: number, points: number})
-- accions (Object{acction: description(string)... })
+- sense (Sense)
 
 
 

@@ -1,4 +1,5 @@
 import {Schema, model} from 'mongoose'
+import Task from './Task.js'
 
 const { ObjectId } = Schema.Types
 
@@ -25,19 +26,9 @@ const mission = new Schema({
         type: ObjectId,
         ref: 'Ubication'
     },
-    checkList:[{
-        type: {
-            task: {
-                type: String,
-                required: true
-            },
-            estatus: {
-                type: Boolean
-            }
-        }
-    }]
+    checkList:[Task]
 })
 
-const Mission = model('Mision', mission)
+const Mission = model('Mission', mission)
 
 export default Mission
