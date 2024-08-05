@@ -6,7 +6,9 @@ const Task = new Schema({
         required: true
     },
     status: {
-        type: Boolean
+        type: Boolean,
+        required: true,
+        default: false
     }
 })
 

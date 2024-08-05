@@ -2,7 +2,7 @@ import React from 'react'
 import Home from './Views/Home'
 import Register from './Views/Register'
 import Login from './Views/Login'
-import Campain from './Views/Campain'
+import Campaign from './Views/Campaign'
 
 import {Routes, Route} from 'react-router-dom'
 
@@ -15,7 +15,7 @@ function App() {
     <Route path='/*' element= {<Home/>} />
     <Route path='/register' element = {<Register/>} />
     <Route path='/login' element = {<Login/>} />
-    <Route path= '/campain' element= {<Campain/>}/>
+    <Route path= '/campaign' element= {<Campaign/>}/>
   </Routes>)
 }
 

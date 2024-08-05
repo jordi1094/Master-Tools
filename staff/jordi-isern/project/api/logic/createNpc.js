@@ -2,7 +2,7 @@ import { Npc,  User } from "../data/models/index.js";
 import { SystemError, NotFoundError} from "com/errors.js";
 import validate from "com/validate.js";
 
-const createNpc = (userId, image, name, description) => {
+const createNpc = (userId, name, description, image) => {
     validate.id(userId, 'userId')
     validate.image(image)
     validate.name(name, 'name')

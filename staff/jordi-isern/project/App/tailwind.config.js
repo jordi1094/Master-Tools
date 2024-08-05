@@ -11,7 +11,7 @@ module.exports = {
           'blueBackgroundBox':'var(--blueBackgroundBox)',
           'black1': 'var(--black)',
           'red1': 'var(--red)',
-          'translucidBlue': 'var(--translucidBlue)'
+          'translucidBlue': 'var(--translucidBlue)',
       }
     },
   },

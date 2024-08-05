@@ -8,12 +8,25 @@ const requestOptions = {
   redirect: "follow"
 };
 
-const getElfRace = () => {
+const getMonsterByIndex = (index) => {
 
-return fetch("https://www.dnd5eapi.co/api/races/elf", requestOptions)
-  .then((response) => response.json())
-//   .then((result) => console.log(result))
+return fetch(`https://www.dnd5eapi.co/api/monsters/${index}`, requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+
+}
+
+const getObjectByIndex = (index) => {
+  return fetch("https://www.dnd5eapi.co/api/equipment/dagger", requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
   .catch((error) => console.error(error));
 }
 
-export default getElfRace
+dndApi = {
+  getMonsterByIndex,
+  getObjectByIndex
+}
+
+export default dndApi

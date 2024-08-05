@@ -2,7 +2,7 @@ import { Character, User } from "../data/models/index.js";
 import { SystemError, NotFoundError} from "com/errors.js";
 import validate from "com/validate.js";
 
-const createCharacter = (userId, image, name) => {
+const createCharacter = (userId, name, image) => {
     validate.id(userId, 'userId')
     validate.image(image)
     validate.name(name, 'name')
