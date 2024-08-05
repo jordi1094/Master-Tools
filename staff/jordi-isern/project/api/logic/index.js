@@ -4,6 +4,7 @@ import createCharacter from './createCharacter.js'
 import createNpc from './createNpc.js'
 import createLocation from './createLocation.js'
 import createMission from './createMission.js'
+import createCampaign from './createCampaign.js'
 
 const logic = {
     registerUser,
@@ -12,6 +13,7 @@ const logic = {
     createNpc,
     createLocation,
     createMission,
+    createCampaign
 }
 
 export default logic

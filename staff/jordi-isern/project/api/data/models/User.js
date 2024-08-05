@@ -33,9 +33,9 @@ const user = new Schema({
             type: ObjectId,
             ref: 'Character'
     }],
-    campains: [{
+    campaigns: [{
             type: ObjectId,
-            ref: 'Campain'
+            ref: 'Campaign'
     }]
 })
 

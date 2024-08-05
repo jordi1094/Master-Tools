@@ -1,9 +1,8 @@
 # Dnd master complement
 
 
-DnD Master Tools is an aplication that will give you all the necessary tools to create you own Campaing and have all the necessary informatión when you are playing. With this app you will do your sesion more dinamic and adaptable to the players' improvisations.
+DnD Master Tools is an aplication that will give you all the necessary tools to create you own campaigng and have all the necessary informatión when you are playing. With this app you will do your sesion more dinamic and adaptable to the players' improvisations.
 
-<!-- ![](https://media.giphy.com/media/3oEjHFzI1y4erDQ4kE/giphy.gif?cid=790b7611d8kr4at5b4kvqvrpkr8eq70hdd2uy6so6trzmnpe&ep=v1_gifs_search&rid=giphy.gif&ct=g) -->
 
 ![](https://media.giphy.com/media/l2QE7HxEjbju1aUIU/giphy.gif?cid=ecf05e47fyli5k5zdxucyrr4jku7rug7o1jowl987iqdy76r&ep=v1_gifs_search&rid=giphy.gif&ct=g)
 
@@ -31,14 +30,13 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
         - [Money](#money)
         - [Skils](#skils)
       - [Npc](#npc)
-      - [Enemy](#enemy)
-  - [Future Skills](#future-skills)
+  - [Roadmap](#roadmap)
 
 ## How to Use
 
 ## Skills
 
-- Generate Campains for Dnd games
+- Generate campaigns for Dnd games
 - Generate DnD charactes.
 - Have all the info from the status of the game ass mision and objectives
 - Fast acces to the characters,npc or enemys skills.
@@ -147,11 +145,11 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
 - id (String, auto)
 - author(User.id)
 - npcs ([Npc.id], required)
-- enemies([Enemy.id], required)
-- objects([string(Dnd.index)], required)
-- description(String)
+- enemies([string(Dnd.index)], required)
+- objects([string(Dnd.index)],required)
+- description(String, required)
 - misions([Mission.id],required)
-- nextLocations([Location.id])
+- nextLocations([Location.id],required)
 
 #### Missions
 
@@ -231,7 +229,24 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
 
 ##### Skils
 - acrobatics: number
-- ...
+- animalHandling: number
+- arcana: number
+- athletics: number
+- deception: number
+- history: number
+- insight: number
+- intimidation: number
+- investigation: number
+- medicine: number
+- nature: number
+- perception: number
+- performance: number
+- persuasion: number
+- religion: number
+- sleigthOfHand: number
+- stealth: number
+- survival: number
+
 
 #### Npc
 
@@ -254,36 +269,13 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
 - skills  (Array [object{name skill(string, required),enum:Acrobatics | Animal Handling | Arcana | Athletics | Deception | History | Insight | Intimidation | Investigation | Medicine | Nature | Perception | Performance | Persuasion | Religion | Sleight of Hand | Stealth | Survival =>  variable}])
 - sense (Sense)
 
-#### Enemy
 
-- id (String)
-- author(User.Id)
-- image (img) 
-- description(String, required)
-- sice(number) 
-- name (string, required) 
-- race ( string, required, enum: Dragonborn | Dwarf | Elf | Gnome | Half-Elf | Half-Orc | Halfling | Human | Tiefling )
-- aligment (string, required, enum: Lawful Good | Neutral Good | Chaotic Good | Lawful Neutral | True Neutral | Chaotic Neutral | Lawful Evil | Neutral Evil | Chaotic Evil) 
-- armorClass (object{ base: number , variable:(number)}, required ) 
-- speed (number, required) 
-- - strength ({Score(number, required), modifier(number, required)}) 
-- dexterity ({Score(number, required), modifier(number, required)}) 
-- constitution ({Score(number, required), modifier(number, required)}) 
-- inteligence ({Score(number, required), modifier(number, required)}) 
-- wisdom ({Score(number, required), modifier(number, required)}) 
-- charisma ({Score(number, required), modifier(number, required)})
-- skills  (Array [object{name skill(string, required),enum:Acrobatics | Animal Handling | Arcana | Athletics | Deception | History | Insight | Intimidation | Investigation | Medicine | Nature | Perception | Performance | Persuasion | Religion | Sleight of Hand | Stealth | Survival =>  variable}])
-- sense (Sense)
+## Roadmap
 
-
-
-
-## Future Skills
-
-- Share and import Campain
+- Share and import campaign
 - share and import characters
 - Generate Maps
 - Tv app to see the maps
-- Generate Charactes and Campain images with IA like bing Image generator or midjourney (premium)
+- Generate Charactes and campaign images with IA like bing Image generator or midjourney (premium)
 - Generate Background and descriptins with ChatGpt (premium) 
 - Nornative search engine

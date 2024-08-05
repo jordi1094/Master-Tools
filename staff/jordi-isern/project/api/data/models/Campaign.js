@@ -3,7 +3,7 @@ import {Schema, model} from 'mongoose'
 const { ObjectId } = Schema.Types
 
 
-const campain = new Schema({
+const campaign = new Schema({
     author: {
         type: ObjectId,
         required: true,
@@ -25,12 +25,16 @@ const campain = new Schema({
         type: String,
         required: true
     },
-    StartLocation: {
+    startLocation: {
         type: ObjectId,
         ref: 'Location'
+    },
+    image: {
+        type: String
     }
+    
 })
 
-const Campain = model('Campain', campain)
+const Campaign = model('campaign', campaign)
 
-export default Campain
+export default Campaign

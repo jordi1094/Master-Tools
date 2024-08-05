@@ -18,8 +18,7 @@ const location = new Schema({
         ref: 'Npc'
     }],
     enemies:[{
-        type: ObjectId,
-        ref: 'Enemy'
+        type: String,// index api D&D 5e SRD API
     }],
     objects: [{
         type: String, // index api D&D 5e SRD API
