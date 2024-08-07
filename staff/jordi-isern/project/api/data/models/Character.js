@@ -55,7 +55,7 @@ const character = new Schema({
         type: Number,
         required:true
     },
-    armorClas:{
+    armorClass:{
         type: Number,
         required: true
     },

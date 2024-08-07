@@ -9,24 +9,25 @@ import CrossIcon from '../../../icons/cross-svgrepo-com.svg'
 import Image from '../../../components/core/Image'
 import Draggable from 'react-draggable';
 
-function CampaignDetails() {
+function CampaignDetails({onClickClose}) {
 
 
     return (
       <Draggable
         axis="both"
         handle=".handle"
-        defaultPosition={{x: 0, y: 0}}
-        position={null}
-        grid={[50, 50]}
+        defaultPosition={{x: 0, y: 100}}
+        bounds= 'body'
 
         >
-            <div className='bg-white/60 rounded-xl w-[60vw] p-4 md:resize' >
+            <div className='bg-white/60 rounded-xl w-[50vw] p-4 md:resize absolute' >
             <div className=' flex justify-between'>
                 <div className='handle cursor-move'> 
                     <img className='h-[3vh]  pointer-events-none' src={DragHandleIcon}></img>
                 </div>
-                <Image className='h-[3vh] cursor-pointer hover:scale-110' src = {CrossIcon}></Image>
+                <Button onClick={onClickClose}>
+                <Image className='h-[3vh] cursor-pointer hover:scale-110 pointer-events-none'  src = {CrossIcon}></Image>
+                </Button>
             </div>
             <Heading level='1' className='underline text-center text-black'>Title</Heading>
             <View className='border-b-[1px] border-black pb-3'>
