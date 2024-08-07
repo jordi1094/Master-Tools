@@ -11,11 +11,11 @@ function Header (){
         <Link to= '/home'>
             <Heading level={1} className='Tittle'>Master Tools</Heading>
         </Link>
-        <Button>Select</Button>
-        <Button>New</Button>
-        <Button>
+        {/* <Button>Select</Button> */}
+        <Link to='/createCampaign' className='text-gold1 visited:text-gold1'>New</Link>
+        {/* <Button>
             <Image src= {userIcon}></Image>
-        </Button>
+        </Button> */}
     </header>
 }
 

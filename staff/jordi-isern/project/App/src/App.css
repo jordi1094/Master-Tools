@@ -52,3 +52,13 @@
         visited:text-purple-600
     }
 }
+
+@layer base {
+    textarea{
+        @apply
+        bg-white
+        rounded-md
+        p-1
+        
+    }
+}
