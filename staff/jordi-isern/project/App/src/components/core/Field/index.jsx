@@ -1,10 +1,9 @@
-import Input from '../Input'
 import Label from '../Label'
 
-function Field({id, type, placeholder, className}) {
-    return <div className={`Field ${className}`}>
-        <Label htmlFor={id}></Label>
-        <Input id={id} type={type} placeholder={placeholder}/>
+function Field({id, type, placeholder, className, classNameLabel, classNameInput, children}) {
+    return <div className={className}>
+        <Label htmlFor={id} className= {classNameLabel}>{children}</Label>
+        <input id={id} type={type} placeholder={placeholder} className={classNameInput} />
     </div>
 }
 
