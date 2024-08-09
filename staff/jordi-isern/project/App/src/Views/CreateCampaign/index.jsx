@@ -18,27 +18,26 @@ function CreateCampaign() {
         <View className= 'bg-[url(../../public/images/backgroundBlue.jpg)]  bg-cover bg-center h-screen flex flex-col items-center pt-[10vh]'>
             <h1>Create Campaign</h1>
             <Form classname='flex flex-col gap-4 px-[10vw] py-[2vh] w-[70vw]' >
-                <div className='flex'>
-                    
-                    <label for='title'>
+                <div className='flex mt-7'>
+                    <label htmlFor='title'>
                         <h5   className='text-xl mr-3'>Title</h5>
                     </label>
                     <input className='w-full h-[3vh] rounded-md bg-white/50 text-black'></input>
                 </div>
-                <div className='w-[70vw] drop-shadow-sm'>
-                    <label for= 'background'>
+                <div className='w-[70vw] drop-shadow-sm my-7'>
+                    <label htmlFor= 'background'>
                         <h5  className='mb-2 text-xl '>Background</h5>
                     </label>
                     <textarea name='background' defaultValue='Write here!'  autoComplete='off' autoCapitalize='sentences' className='h-[10vh] bg-white/50 text-black resize-none outline-none w-full'></textarea>
                 </div>
                 <div className='w-[70vw]'>
-                    <label for='objective'>
+                    <label htmlFor='objective'>
                         <h5 className='mb-2 text-xl '>Objective</h5>
                     </label>
                     <textarea name='objective' defaultValue='Write here!'  autoComplete='off' autoCapitalize='sentences' className='h-[10vh] bg-white/50 text-black resize-none outline-none w-full'></textarea>
                 </div>
                 <div>
-                    <div className='flex justify-between mt-5 align-middle'>
+                    <div className='justify-between mt-5 align-middle'>
                         <h5 className='mb-2 text-xl drop-shadow-sm'>Characters</h5>
                         <Button onClick={onClickAdd} type='button' className=' bg-gold1 rounded-md w-auto px-2 hover:scale-105 active:scale-100 text-black text-sm h-5' >Add Character</Button>
                         {/* TODO añadir listado de characters */}
