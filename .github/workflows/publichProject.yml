@@ -36,10 +36,10 @@ jobs:
           node-version: 20
           cache: 'npm'
       - name: Install dependencies
-        working-directory: ./staff/jordi-isern/project
+        working-directory: ./staff/jordi-isern/project/App
         run: npm ci
       - name: Build
-        working-directory: ./staff/jordi-isern/project
+        working-directory: ./staff/jordi-isern/project/App
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -47,7 +47,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload dist folder
-          path: './staff/jordi-isern/project/dist'
+          path: './staff/jordi-isern/project/App/dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
