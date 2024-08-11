@@ -43,7 +43,7 @@ const character = new Schema({
         type: String,
         required: true
     },    
-    expiriencePoint:{
+    expiriencePoints:{
         type: Number,
         required: true
     },
@@ -181,7 +181,8 @@ const character = new Schema({
     hitPoints:{
         HitPoints
     },
-    deathSaves:{DeathSaves},
+    deathSaves:{DeathSaves
+    },
     featuresAndTraits:{
         type: String
     },

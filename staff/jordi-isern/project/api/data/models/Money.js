@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 
 const Money = new Schema({
     type: {
-        coppper: {
+        copper: {
             type: Number,
             default: 0
         },
