@@ -1,14 +1,48 @@
 import Field from "../../../components/core/Field"
 
-function CharacterInfoPanel({className}) {
+
+function CharacterInfoPanel({className, register}) {
     return(
         <div className={className}>
-            <Field id='Level' className='flex' classNameInput='w-10 rounded-md ml-2 mr-4 text-black text-center'>Level</Field>
-            <Field id='EXP.' className='flex' classNameInput="w-10 rounded-md ml-2 text-black text-center">EXP.</Field>
-            <Field id='Aligment' className='flex' classNameInput="w-full rounded-md ml-2 justify-end text-black text-center">Aligment</Field>
-            <Field id='Class' className='flex' classNameInput="w-full rounded-md ml-2 justify-end text-black text-center">Class</Field>
-            <Field id='Race' className='flex' classNameInput="w-full rounded-md ml-2 justify-end text-black text-center">Race</Field>
-            <Field id='Background' className='flex' classNameInput="w-full rounded-md ml-2 justify-end text-black text-center">Background</Field>
+            <Field id='level' type='number' className='flex' classNameInput='w-10 rounded-md ml-2 mr-4 text-black text-center' formHook={register('level',{
+                required:{
+                    value: true,
+                    message: 'level is required'
+                }, max:{
+                    value:20,
+                    message:'lever can\'t be bigget than 20'
+                }
+            })}>Level</Field>
+            <Field id='exp' type='number' className='flex' classNameInput="w-10 rounded-md ml-2 text-black text-center" formHook={register('exp',{
+                required:{
+                    value:true,
+                    message: ' the EXP. ir required'
+                }
+            })}>EXP.</Field>
+            <Field id='aligment' className='flex' classNameInput="w-full rounded-md ml-2 justify-end text-black text-center" formHook={register('aligment',{
+                required:{
+                    value: true,
+                    message: 'the aligment is required'
+                }
+            })}>Aligment</Field>
+            <Field id='classCharacter' className='flex' classNameInput="w-full rounded-md ml-2 justify-end text-black text-center" formHook={register('classCharacter',{
+                required:{
+                    value: true,
+                    message: ' the class is required'
+                }
+            })}>Class</Field>
+            <Field id='race' className='flex' classNameInput="w-full rounded-md ml-2 justify-end text-black text-center" formHook={register('race',{
+                required:{
+                    value: true,
+                    message: 'the race is required'
+                }
+            })}>Race</Field>
+            <Field id='background' className='flex' classNameInput="w-full rounded-md ml-2 justify-end text-black text-center" formHook={register('background',{
+                required:{
+                    value: true,
+                    message: 'the background is required'
+                }
+            })}>Background</Field>
     </div>
     )
 }

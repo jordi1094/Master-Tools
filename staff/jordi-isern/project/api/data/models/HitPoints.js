@@ -9,6 +9,10 @@ const HitPoints = new Schema({
         type: Number,
         required:true 
     },
+    temporalHitPoints: {
+        type: Number,
+        required:true 
+    },
     dice: {
         type: String,
         required: true

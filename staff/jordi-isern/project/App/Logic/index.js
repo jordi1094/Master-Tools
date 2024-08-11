@@ -1,9 +1,11 @@
 import registerUser from "./registerUser"
 import loginUser from "./loginUser"
+import createCharacter from "./createCharacter"
 
 const logic = {
     registerUser,
-    loginUser
+    loginUser,
+    createCharacter
 }
 
 export default logic

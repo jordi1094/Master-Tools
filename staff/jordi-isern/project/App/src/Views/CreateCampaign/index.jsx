@@ -7,6 +7,8 @@ import CharacterForm from './components/CharacterForm'
 
 function CreateCampaign() {
 
+    
+
     const [createCharacter, setCharaterFromState] = useState(false)
     const onClickAdd = (event) => {
         setCharaterFromState(true)}
@@ -28,13 +30,13 @@ function CreateCampaign() {
                     <label htmlFor= 'background'>
                         <h5  className='mb-2 text-xl '>Background</h5>
                     </label>
-                    <textarea name='background' defaultValue='Write here!'  autoComplete='off' autoCapitalize='sentences' className='h-[10vh] bg-white/50 text-black resize-none outline-none w-full'></textarea>
+                    <textarea name='background' id='background' defaultValue='Write here!'  autoComplete='off' autoCapitalize='sentences' className='h-[10vh] bg-white/50 text-black resize-none outline-none w-full'></textarea>
                 </div>
                 <div className='w-[70vw]'>
                     <label htmlFor='objective'>
                         <h5 className='mb-2 text-xl '>Objective</h5>
                     </label>
-                    <textarea name='objective' defaultValue='Write here!'  autoComplete='off' autoCapitalize='sentences' className='h-[10vh] bg-white/50 text-black resize-none outline-none w-full'></textarea>
+                    <textarea name='objective' id='objective' defaultValue='Write here!'  autoComplete='off' autoCapitalize='sentences' className='h-[10vh] bg-white/50 text-black resize-none outline-none w-full'></textarea>
                 </div>
                 <div>
                     <div className='justify-between mt-5 align-middle'>
