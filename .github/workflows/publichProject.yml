@@ -46,11 +46,9 @@ jobs:
         working-directory: ./staff/jordi-isern/project
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-        working-directory: ./staff/jordi-isern/project
         with:
           # Upload dist folder
-          path: './dist'
+          path: './staff/jordi-isern/project/dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        working-directory: ./staff/jordi-isern/project
