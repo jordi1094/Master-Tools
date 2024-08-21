@@ -1,6 +1,6 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const Action = new Schema({
+export const action = new Schema({
     name:{
         type: String,
         required: true
@@ -9,5 +9,7 @@ const Action = new Schema({
         required: true
     }
 })
+
+const Action = model('Action', action)
 
 export default Action

@@ -1,7 +1,9 @@
 import CharacterSchema from "./CharacterSchema";
+import NpcSchema from "./NpcSchema";
 
 const validateZod = {
-    CharacterSchema
+    CharacterSchema,
+    NpcSchema
 }
 
 export default validateZod

@@ -1,22 +1,16 @@
-import { useState } from 'react'
-import {useNavigate} from 'react-router-dom'
-import View from '../../components/Library/View'
-import Heading from '../../components/core/Heading'
-import FormWithFeedback from '../../components/Library/FormWithFeedback'
-import Field from '../../components/core/Field'
-import FieldPassword from '../../components/core/FieldPassword'
-import Button from '../../components/core/Button'
-import Select from '../../components/core/Select'
-import {Link, Navigate} from 'react-router-dom'
-
-import logic from '../../../Logic'
+import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
+import View from "../../components/Library/View"
+import FormWithFeedback from "../../components/Library/FormWithFeedback"
+import Heading from "../../components/core/Heading"
+import Field from "../../components/core/Field"
+import FieldPassword from "../../components/core/FieldPassword"
+import Button from "../../components/core/Button"
+import Select from "../../components/core/Select"
 
 
-function Register () {
+function RegisterForm () {
     console.log( 'Register -> render')
-
-    const [message, setMessage] = useState('')
-
     const navigate = useNavigate()
 
     const handleRegisterSubmit = event => {
@@ -70,4 +64,4 @@ function Register () {
 
 }
 
-export default Register
+export default RegisterForm

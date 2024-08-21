@@ -12,7 +12,7 @@ import {Link} from 'react-router-dom'
 function CampaignMenu ({onclickBook, onClickPage, onClickCheckList}){
 
     return <View className='bg-blueBackgroundBox rounded-t-3xl pt-1 flex gap-7 '>
-        <Link to='/*'>
+        <Link to='/home'>
             <Image src={HomeIcon} className='h-[6vh] pointer-events-none'/>
         </Link>
         <Button onClick={onclickBook}>

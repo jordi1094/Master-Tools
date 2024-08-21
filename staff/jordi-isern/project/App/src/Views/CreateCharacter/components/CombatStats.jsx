@@ -1,11 +1,9 @@
-import {useForm} from 'react-hook-form'
 import Field from "../../../components/core/Field"
 
-function CombatStats (className) {
+function CombatStats ({register,className}) {
 
-    const {register} = useForm()
     return (
-        <div className=' col-span-2 row-span-2 bg-slate-700/60 w-full rounded-md grid grid-cols-4 p-2'>
+        <div className={className}>
             <Field id='armorClass' type='number' className='flex flex-col justify-center items-center'  classNameInput='w-[2vw] rounded-md text-black text-center' formHook={register('armorClass',{
                 required:{
                     value: true,
@@ -13,10 +11,13 @@ function CombatStats (className) {
                 },max:{
                     value: 40,
                     message: 'the armor Class can\'t be bigger than 40'
+                },min:{
+                    value:0,
+                    message:'the armor class can\'t be lower than 0'
                 }
                 
             })}>Armor class</Field>
-            <Field id='iniciative' type='number' className="flex flex-col justify-center items-center" classNameInput='w-[2vw] rounded-md text-black text-center'formHook={register('iniciativa',{
+            <Field id='iniciative' type='number' className="flex flex-col justify-center items-center" classNameInput='w-[2vw] rounded-md text-black text-center'formHook={register('iniciative',{
                 required:{
                     value: true,
                     message: 'armorClass is required'

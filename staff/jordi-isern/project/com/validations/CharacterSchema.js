@@ -3,6 +3,7 @@ import {z} from 'zod'
 const CharacterSchema = z.object({
     acrobatics: z.number().min(0).max(30),
     alignment: z.string(),
+    image: z.string().url(),
     animalHandling: z.number().min(0).max(30),
     arcana: z.number().min(0).max(30),
     armorClass: z.number().min(0).max(30),

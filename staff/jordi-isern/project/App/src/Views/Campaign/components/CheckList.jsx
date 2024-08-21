@@ -1,4 +1,3 @@
-
 import Button from '../../../components/core/Button'
 import Heading from '../../../components/core/Heading'
 import View from '../../../components/Library/View'

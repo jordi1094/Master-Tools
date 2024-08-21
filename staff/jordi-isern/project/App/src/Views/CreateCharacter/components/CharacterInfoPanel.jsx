@@ -19,7 +19,7 @@ function CharacterInfoPanel({className, register}) {
                     message: ' the EXP. ir required'
                 }
             })}>EXP.</Field>
-            <Field id='aligment' className='flex' classNameInput="w-full rounded-md ml-2 justify-end text-black text-center" formHook={register('aligment',{
+            <Field id='alignment' className='flex' classNameInput="w-full rounded-md ml-2 justify-end text-black text-center" formHook={register('alignment',{
                 required:{
                     value: true,
                     message: 'the aligment is required'

@@ -1,8 +1,9 @@
 import {Schema, model} from 'mongoose'
-import HitPoints from './HitPoints.js'
-import Skills from './Skills.js'
-import Sense from './Sense.js'
-import Action from './Action.js'
+import {hitPoints} from './HitPoints.js'
+import {skills} from './Skills.js'
+import {sense} from './Sense.js'
+import {action} from './Action.js'
+import { mainSkill } from './MainSkill.js'
 
 const { ObjectId } = Schema.Types
 
@@ -28,100 +29,40 @@ const npc = new Schema({
         type: String,
         required: true
     },
-    aligment:{
+    alignment:{
         type: String,
         required: true
     },
-    armorClas:{
+    armorClass:{
         type: Number,
         required: true
     },
-    hitPoint: {HitPoints},
+    hitPoint: {hitPoints},
     speed:{
         type:Number,
         required: true
     },
-    strength:{
-        type:{
-            StrengthScore:{
-                type: Number,
-                required: true
-            },
-            StrengthModifier:{
-                type: Number,
-                required: true
-            }
-        }
+    strength:{mainSkill},
+    dexterity:{mainSkill},
+    constitution:{mainSkill},
+    iniciative:{mainSkill},
+    wishdom:{mainSkill},
+    charisma:{mainSkill},
+    skill:{
+        name:{type: String},
+        modifier:{type: Number}
     },
-    dexterity:{
-        type:{
-            dexterityScore:{
-                type: Number,
-                required: true
-            },
-            dexterityModifier:{
-                type: Number,
-                required: true
-            }
-        }
-    },
-    constitution:{
-        type:{
-            constitutionScore:{
-                type: Number,
-                required: true
-            },
-            constitutionModifier:{
-                type: Number,
-                required: true
-            }
-        }
-    },
-    iniciative:{
-        type:{
-            iniciativeScore:{
-                type: Number,
-                required: true
-            },
-            iniciativeModifier:{
-                type: Number,
-                required: true
-            }
-        }
-    },
-    wishdom:{
-        type:{
-            wishdomScore:{
-                type: Number,
-                required: true
-            },
-            wishdomModifier:{
-                type: Number,
-                required: true
-            }
-        }
-    },
-    charisma:{
-        type:{
-            charismaScore:{
-                type: Number,
-                required: true
-            },
-            charismaModifier:{
-                type: Number,
-                required: true
-            }
-        }
-    },
-    skills:{Skills},
-    senses:[Sense],
+    senses:[{
+        type:String
+    }],
     lenguages:{
         type: String
     },
-    challengeRatin:{
-        type: Number
+    challengeRating:{
+        type: Number,
+        required: true
     },
-    acctions: [Action]
+    acctions: [action]
 })
 
 const Npc = model('Npc', npc)

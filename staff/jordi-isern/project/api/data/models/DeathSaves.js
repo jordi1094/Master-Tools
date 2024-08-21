@@ -1,32 +1,30 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const  DeathSaves = new Schema({
-    modifiers:{
-        strength:{
-                    type: Number,
-                    required: true
-    
-        },
-        dexterity:{
-                    type: Number,
-                    required: true
-        },
-        constitution:{
-                    type: Number,
-                    required: true
-        },
-        iniciative:{
-                    type: Number,
-                    required: true
-        },
-        wishdom:{
-                    type: Number,
-                    required: true
-        },
-        charisma:{
-                    type: Number,
-                    required: true
-        },
+export const  deathSaves = new Schema({
+    strength:{
+                type: Number,
+                required: true
+
+    },
+    dexterity:{
+                type: Number,
+                required: true
+    },
+    constitution:{
+                type: Number,
+                required: true
+    },
+    iniciative:{
+                type: Number,
+                required: true
+    },
+    wishdom:{
+                type: Number,
+                required: true
+    },
+    charisma:{
+                type: Number,
+                required: true
     },
     deathSavesSucceses:{
         type: Number,
@@ -41,5 +39,7 @@ const  DeathSaves = new Schema({
         required: true
     }
 })
+
+const DeathSaves= model('DeathSaves', deathSaves)
 
 export default DeathSaves

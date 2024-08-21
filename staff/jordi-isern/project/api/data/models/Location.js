@@ -9,19 +9,18 @@ const location = new Schema({
         required: true,
         ref:'User'
     },
-    title:{
+    name:{
         type: String,
         required: true
     },
-    npcs: [{
-        type: ObjectId,
-        ref: 'Npc'
-    }],
     enemies:[{
-        type: String,// index api D&D 5e SRD API
+        type:{
+            name: String,
+            image: String
+        }
     }],
     objects: [{
-        type: String, // index api D&D 5e SRD API
+        type: String
     }],
     description: {
         type: String,
@@ -30,10 +29,6 @@ const location = new Schema({
     nextLocations: [{
         type: ObjectId,
         ref:'Locations'
-    }],
-    missions: [{
-        type: ObjectId,
-        ref: 'Mision'
     }]
 })
 

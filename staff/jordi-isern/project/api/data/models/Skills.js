@@ -1,6 +1,6 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const Skills = new Schema({
+export const skills = new Schema({
     acrobatics: {
         type: Number,
     },
@@ -56,5 +56,7 @@ const Skills = new Schema({
         type: Number,
     },
 });
+
+const Skills = model('Skills', skills)
 
 export default Skills;

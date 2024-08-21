@@ -1,56 +1,144 @@
 import { useState } from 'react'
+import {useForm} from 'react-hook-form'
+import { useNavigate, useParams } from 'react-router-dom'
 import View from '../../components/Library/View'
 import Form from '../../components/core/Form'
-import Field from '../../components/core/Field'
+import TextAreaField from '../../components/core/TextAreaField'
 import Button from '../../components/core/Button'
-import CharacterForm from './components/CharacterForm'
+import Image from '../../components/core/Image'
+import CharacterForm from '../CreateCharacter'
+import CharacterResume from './components/CharacterResume'
+import LocationForm from './components/LocationForm'
+import Field from '../../components/core/Field'
+import CrossIcon from '../../icons/cross-svgrepo-com.svg'
+
 
 function CreateCampaign() {
+    const {register, handleSubmit, formState:{errors}} = useForm({
+        shouldFocusError: false,
+        validateCriteriaMode: "all"
+    })
+    const navigate = useNavigate()
 
+    const onClickClose = () => navigate('/home')
+    const {id} = useParams()
+
+    const [charactersList, setCharacters] = useState([])
+
+    const [characterIDList, setCharactersID] = useState([])
+
+    const [createCharacter, setCharaterFormState] = useState(false)
+
+    const [createLocation, setLocationFormState] = useState(false)
+
+    const onClickAddCharacter = () => {setCharaterFormState(true)}
+    const onClickSaveAndCancelCharacter = () => setCharaterFormState(false)
+
+    const onClickAddLocation = () => {setLocationFormState(true)}
+    const onClickSaveAndCancelLocation = () => setLocationFormState(false)
+
+    const onCharacterCreated = (character) => {
+        setCharaterFormState(false)
+        setCharacters(prevCharacters => [...prevCharacters, character])
+        setCharactersID(prevCharactersId => [...prevCharactersId, character._id])
+    }
+    const onLocationCreated = (location) => {
+        setLocationFormState(false)
+        set(prevLocations => [...prevLocations, location])
+        setLocationID(prevLocationsId => [...prevLocationsId, location._id])
+    }
     
-
-    const [createCharacter, setCharaterFromState] = useState(false)
-    const onClickAdd = (event) => {
-        setCharaterFromState(true)}
-    const onClickSaveAndCancel = () => setCharaterFromState(false)
-
-
+    const onSubmit = handleSubmit((campaingData) => {
+        logic.editCampaing(campaingData)
+    })
 
     return(
         <View className= 'bg-[url(../../public/images/backgroundBlue.jpg)]  bg-cover bg-center h-screen flex flex-col items-center pt-[10vh]'>
-            <h1>Create Campaign</h1>
-            <Form classname='flex flex-col gap-4 px-[10vw] py-[2vh] w-[70vw]' >
-                <div className='flex mt-7'>
-                    <label htmlFor='title'>
-                        <h5   className='text-xl mr-3'>Title</h5>
-                    </label>
-                    <input className='w-full h-[3vh] rounded-md bg-white/50 text-black'></input>
-                </div>
-                <div className='w-[70vw] drop-shadow-sm my-7'>
-                    <label htmlFor= 'background'>
-                        <h5  className='mb-2 text-xl '>Background</h5>
-                    </label>
-                    <textarea name='background' id='background' defaultValue='Write here!'  autoComplete='off' autoCapitalize='sentences' className='h-[10vh] bg-white/50 text-black resize-none outline-none w-full'></textarea>
-                </div>
-                <div className='w-[70vw]'>
-                    <label htmlFor='objective'>
-                        <h5 className='mb-2 text-xl '>Objective</h5>
-                    </label>
-                    <textarea name='objective' id='objective' defaultValue='Write here!'  autoComplete='off' autoCapitalize='sentences' className='h-[10vh] bg-white/50 text-black resize-none outline-none w-full'></textarea>
-                </div>
+            <div className="flex items-center w-full">
+                <h1 className="text-center flex-grow">Create Campaign</h1>
+                <Button onClick={onClickClose} className='bg-gold1 rounded-md h-7 w-7 flex justify-center items-center p-0 ml-auto mr-4'>
+                    <Image src={CrossIcon} className='pointer-events-none h-6 m-0'/>
+                </Button>
+            </div>
+
+            <Form classname='flex flex-col py-[2vh] px-[7vw]' >
+                <Field id='title' className='mt-7' classNameInput='w-full h-[3vh] rounded-md' formHook={register('title',{
+                    required:{
+                        value: true,
+                        message:'Title is required'
+                    }, minLength:{
+                        value:2,
+                        message: 'The title have to be longer than 2 characters'
+                    }
+                })}>
+                        <h5   className='text-2xl mr-3 font-extrabold'>Title</h5>
+                </Field>
+                <TextAreaField id='background' className='w-[70vw] drop-shadow-sm mt-7  bg-slate-700/60 rounded-md p-2' classNameInput='w-full h-[10vh] resize-none' formHook={register('background',{
+                    required:{
+                        value:true,
+                        message:'Background is required'
+                    }
+                })}>
+                        <h5  className='mb-2 text-xl font-bold'>Background</h5>
+                </TextAreaField>
+                <TextAreaField id='objective' className='w-[70vw] drop-shadow-sm mt-2  bg-slate-700/60 rounded-md p-2' classNameInput='resize-none w-full h-[10vh]' formHook={register('objective',{
+                    required:{
+                        value: true,
+                        message:'Objective is required'
+                    }
+                })}>
+                        <h5 className='mb-2 text-xl font-bold'>Objective</h5>
+                </TextAreaField>
                 <div>
-                    <div className='justify-between mt-5 align-middle'>
-                        <h5 className='mb-2 text-xl drop-shadow-sm'>Characters</h5>
-                        <Button onClick={onClickAdd} type='button' className=' bg-gold1 rounded-md w-auto px-2 hover:scale-105 active:scale-100 text-black text-sm h-5' >Add Character</Button>
-                        {/* TODO añadir listado de characters */}
-                    </div>
+                    <Field id='image' type='url' className=' bg-slate-700/60 rounded-md p-2 mt-2' placeholder='Please enter the link to an image.' classNameInput='rounded w-full px-2'  formHook={register('image',{
+                            required:{
+                                value:true,
+                                message: 'Image is required'
+                            },pattern: /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
+                        })}>
+                        <h5 className='text-xl font-bold mb-2'> Image</h5>
+                    </Field>
                 </div>
+                <div className=' bg-slate-700/60 rounded-md p-2 mt-2'>
+                    <div className='justify-between mt-3 align-middle'>
+                        <h5 className='mb-2 text-xl font-bold'>Characters</h5>
+                        <Button onClick={onClickAddCharacter} type='button' className=' bg-gold1 rounded-md w-auto px-2 hover:scale-105 active:scale-100 text-black text-sm h-5' >Add Character</Button>
+                    </div>
+                {charactersList.length >0 && <div className='bg-white/50 rounded-md p-1 mt-2 col'>
+                <div className='grid grid-cols-4   border-b-2 border-black/40'>
+                    <h3 className='text-black font-bold text-center'>Name</h3>
+                    <h3 className='text-black font-bold text-center'>Raze</h3>
+                    <h3 className='text-black font-bold text-center'>Class</h3>
+                    <h3 className='text-black font-bold text-center'>Level</h3>
+                </div>
+                {charactersList.map((character, index)=><CharacterResume key={index}  name={character.name} race={character.race} level={character.level} characterClass ={ character.class}/>)}
+                </div>}
+                <div className='justify-between mt-5 align-middle'>
+                        <h5 className='mb-2 text-xl font-bold'>Location</h5>
+                        <Button onClick={onClickAddLocation} type='button' className=' bg-gold1 rounded-md w-auto px-2 hover:scale-105 active:scale-100 text-black text-sm h-5' >Add Location</Button>
+                    </div>
+
+                </div>
+                <div className=' col-span-4 w-full'>
+                    {Object.keys(errors).length > 0 && (
+                        <div  className=' bg-red-50 rounded-md w-full px-3 py-2'>
+                            <h3 className='text-red-900 font-bold'>Errors:</h3>
+                            <ul className='grid grid-cols-3 gap-x-5'>
+                                
+                                {Object.values(errors).map((error, index)=> {
+                                    return(<li key ={index} className='text-red-600'>- {error.message}</li>
+                                )})}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+
                 <div className='flex justify-center mt-6'>
-                    <Button type = 'submit' className='bg-gold1 rounded-md h-[4vh] w-full px-3 hover:scale-105 active:scale-100  text-black text-l'>Create Campaign</Button>
+                    <Button type = 'submit' className='bg-gold1 rounded-md h-[4vh] w-full px-3 hover:scale-y-105 active:scale-100  text-black text-l'>Save Campaign</Button>
                 </div>
             </Form>
-            {createCharacter && <CharacterForm closeForm ={ onClickSaveAndCancel}/>}
-
+            {createCharacter && <CharacterForm closeForm ={ onClickSaveAndCancelCharacter} onCharacterCreated={onCharacterCreated} campaignId={id}/>}
+            {createLocation && <LocationForm closeForm ={ onClickSaveAndCancelLocation} onLocationCreated={onLocationCreated}/>}
         </View>
     )
 }
