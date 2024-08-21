@@ -1,6 +1,6 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const Money = new Schema({
+export const money = new Schema({
     type: {
         copper: {
             type: Number,
@@ -24,5 +24,7 @@ const Money = new Schema({
         }
     }
 })
+
+const Money = model('Money', money)
 
 export default Money

@@ -5,21 +5,16 @@ import Field from '../../components/core/Field'
 import FieldPassword from '../../components/core/FieldPassword'
 import Button from '../../components/core/Button'
 import {Link} from 'react-router-dom'
-
-import logic from '../../../Logic'
-import { useNavigate } from 'react-router-dom'
+import logic from '../../logic'
 
 
 
-function Login (onUserloggedIn) {
+function Login ({onUserLogedIn}) {
     console.log( 'Login -> render')
 
-    const navigate = useNavigate()
 
     const handleLoginSubmit = event => {
         event.preventDefault()
-        
-        
 
         const form = event.target
     
@@ -28,10 +23,10 @@ function Login (onUserloggedIn) {
     
         try{
             logic.loginUser(username, password)
-                .then(() => navigate('/'))
+                .then(() => {
+                    onUserLogedIn()
+            })
                 .catch(error => {
-                    console.log(error)
-
                     alert(error.setMessage)
                 })
         }catch (error) {
@@ -43,9 +38,9 @@ function Login (onUserloggedIn) {
 
     return( 
         <View className='bg-[url(../../public/images/background.jpg)] bg-cover bg-center h-[100vh] flex items-center justify-center flex-col'>
-        <FormWithFeedback className= 'bg-gradient-to-b from-blueBackgroundBox p-3 pt-0 rounded-lg flex flex-col items-center gap-y-3' on onSubmit={handleLoginSubmit}>
+        <FormWithFeedback className= 'bg-gradient-to-b from-blueBackgroundBox p-3 pt-0 rounded-lg flex flex-col items-center gap-y-3' onSubmit={handleLoginSubmit}>
             <Heading level={2}>Login</Heading>
-            <Field id = 'username' placeholder= 'Username'>Username</Field>
+            <Field id = 'username' placeholder= 'Username' className='flex gap-2 h-6 justify-between w-full' classNameInput='w-full rounded-md px-2 text-gold1'>Username</Field>
 
             {/* //TODO change type password to test with the buton  */}
             <FieldPassword id= 'password' placeholder= 'Password'>Password</FieldPassword>

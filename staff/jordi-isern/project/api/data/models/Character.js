@@ -1,16 +1,23 @@
 import {Schema, model} from 'mongoose'
-import Skills from './Skills.js'
-import Sense from './Sense.js'
-import HitPoints from './HitPoints.js'
-import DeathSaves from './DeathSaves.js'
-import Money from './Money.js'
+import {skills} from './Skills.js'
+import {sense} from './Sense.js'
+import {hitPoints} from './HitPoints.js'
+import {deathSaves} from './DeathSaves.js'
+import {money} from './Money.js'
+import {mainSkill} from './MainSkill.js'
 const { ObjectId } = Schema.Types
 
 
 const character = new Schema({
     author: {
         type: ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required:true
+    },
+    campaing:{
+        type: ObjectId,
+        ref: 'Campaing',
+        required: true
     },
     image: {
         type: String
@@ -20,7 +27,7 @@ const character = new Schema({
         type: String,
         required: true
     },
-    sice:{
+    size:{
         type: String
     },
     race:{
@@ -35,11 +42,11 @@ const character = new Schema({
         type: Number,
         requir : true
     }, 
-    backgound:{
+    background:{
         type: String,
         required: true
     },   
-    aligment:{
+    alignment:{
         type: String,
         required: true
     },    
@@ -67,101 +74,25 @@ const character = new Schema({
         type:Number,
         required: true
     },
-    strength:{
-        type:{
-            score:{
-                type: Number,
-                required: true
-            },
-            modifier:{
-                type: Number,
-                required: true
-            }
-        }
+    strength: mainSkill,
+    dexterity: mainSkill,
+    constitution: mainSkill,
+    iniciativeSkill: mainSkill,
+    wishdom: mainSkill,
+    charisma: mainSkill,   
+    skills: skills,
+    senses: [sense],
+    equipment:{
+        type: String,
+        required: true
     },
-    dexterity:{
-        type:{
-            score:{
-                type: Number,
-                required: true
-            },
-            modifier:{
-                type: Number,
-                required: true
-            }
-        }
+    weapons: [{type: String}],
+    attacksAndSpellcasting:{
+        type: String,
+        required: true
+
     },
-    constitution:{
-        type:{
-            score:{
-                type: Number,
-                required: true
-            },
-            modifier:{
-                type: Number,
-                required: true
-            }
-        }
-    },
-    iniciative:{
-        type:{
-            score:{
-                type: Number,
-                required: true
-            },
-            modifier:{
-                type: Number,
-                required: true
-            }
-        }
-    },
-    wishdom:{
-        type:{
-            score:{
-                type: Number,
-                required: true
-            },
-            modifier:{
-                type: Number,
-                required: true
-            }
-        }
-    },
-    charisma:{
-        type:{
-            score:{
-                type: Number,
-                required: true
-            },
-            modifier:{
-                type: Number,
-                required: true
-            }
-        }
-    },   
-    skills:{
-        type: Skills
-    },
-    senses:[Sense],
-    equipment: [{
-        type:{
-            type: String,
-            required: true
-        }
-    }],
-    weapons: [{
-        type:{
-            type: String,
-            required: true
-        }
-    }],
-    attacsAndSpellcasting:{
-        type:{
-            type: String,
-            required: true
-        }
-    },
-    money:{Money},
+    money:money,
     personalityTraits:{
         type: String,
         required: true
@@ -178,11 +109,8 @@ const character = new Schema({
         type: String,
         required: true
     },
-    hitPoints:{
-        HitPoints
-    },
-    deathSaves:{DeathSaves
-    },
+    hitPoints:hitPoints,
+    deathSaves:deathSaves,
     featuresAndTraits:{
         type: String
     },

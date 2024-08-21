@@ -1,4 +1,4 @@
-import Label from "../../../components/core/Label"
+import Label from "../core/Label"
 
 function DoubleInput({id1,id2, type, placeholder1,placeholder2, className, classNameLabel, classNameInput, children, formHook1, formHook2}) {
     return <div className={className}>

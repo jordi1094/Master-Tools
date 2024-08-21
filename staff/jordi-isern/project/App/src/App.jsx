@@ -1,25 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {Routes, Route, Navigate } from 'react-router-dom'
 import Home from './Views/Home'
-import Register from './Views/Register'
+import RegisterForm from './Views/RegisterForm'
 import Login from './Views/Login'
 import Campaign from './Views/Campaign'
 import CreateCampaign from './Views/CreateCampaign'
-
-import {Routes, Route} from 'react-router-dom'
-
+import CreateCharacter from './Views/CreateCharacter'
+import logic from './logic'
 import './App.css'
+
+
 
 function App() {
   console.log('App -> virtual dom')
 
-  return (<Routes>
-    <Route path='/*' element= {<Home/>} />
-    <Route path='/register' element = {<Register/>} />
-    <Route path='/login' element = {<Login/>} />
-    <Route path= '/campaign' element= {<Campaign/>}/>
-    <Route path='/createCampaign' element={<CreateCampaign/>}/>
+  const [state, setState] = useState('')
 
-  </Routes>)
+  const onUserLogedIn = () =>{
+    setState('loggin done')
+
+  }
+
+  return (
+      <Routes>
+        <Route path='/register' element={logic.isUserLoggedIn() ? <Navigate to='/home' /> : <RegisterForm />} />
+        <Route path='/login' element={logic.isUserLoggedIn() ? <Navigate to='/home' /> : <Login onUserLogedIn={onUserLogedIn}/>} />
+        <Route path='/campaign' element={logic.isUserLoggedIn() ? <Campaign /> : <Navigate to='/login' />} />
+        <Route path='/createCampaign/:id' element={logic.isUserLoggedIn() ? <CreateCampaign /> : <Navigate to='/login' />} />
+        <Route path='/home' element={logic.isUserLoggedIn() ? <Home /> : <Navigate to='/login' />} />
+      </Routes>
+
+  )  
 }
 
 export default App

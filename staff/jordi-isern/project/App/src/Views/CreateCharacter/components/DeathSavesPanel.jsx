@@ -1,9 +1,7 @@
-import {useForm} from 'react-hook-form'
 import Field from "../../../components/core/Field"
 
 
-function DeathSavesPanel ({className}) {
-    const {register} = useForm()
+function DeathSavesPanel ({className, register}) {
 
     return(
     <div className={className}>
@@ -39,7 +37,12 @@ function DeathSavesPanel ({className}) {
                     message: 'the wishdom in death death saves is required'
                 }
             })}>Wishdom</Field>
-            <Field id='charismaDeathSave' className='flex justify-between' classNameInput='w-[2vw] ml-1 rounded-md text-black text-center'>Charisma</Field>
+            <Field id='charismaDeathSave' className='flex justify-between' classNameInput='w-[2vw] ml-1 rounded-md text-black text-center' formHook={register('charismaDeathSave',{
+                required:{
+                    value: true,
+                    message: 'the charisma in death death saves is required'
+                }
+            })}>Charisma</Field>
         </div>
         <div className=" flex flex-col gap-2 mt-5 justify-center ">
             <Field id='deathSavesSucceses'type='number' placeholder='0, 1, 2,or 3' className='grid grid-cols-2 ' classNameInput='w-[3.2vw] rounded-md text-center placeholder:text-xs text-black' formHook={register('deathSavesSucceses',{

@@ -14,14 +14,15 @@ function sign(payload, secret, option) {
     })
 }
 
-function verify(token,secret) {
-    return new Promise ((resolve, reject) => {
-        jwt.verify(token,secret,(error, payload) =>{
+function verify(token, secret) {
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, secret, (error, payload) =>{
             if(error) {
                 reject(error)
+
                 return
             }
-            reject(payload)
+            resolve(payload)
         })
     })
 }

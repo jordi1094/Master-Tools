@@ -4,7 +4,8 @@ import createCampaignHandler from './createCampaignHandler.js'
 import createCharacterHandler from './createCharacterHandler.js'
 import createLocationHandler from './createLocationHandler.js'
 import createMissionHandler from './createMissionHandler.js'
-import createNpcHandler from './createNpcHamdler.js'
+import createNpcHandler from './createNpcHandler.js'
+import getCampaignHandler from './getCampaignHandler.js'
 
 const routeHandler = {
     registerUserHandler,
@@ -13,7 +14,8 @@ const routeHandler = {
     createCharacterHandler,
     createLocationHandler,
     createMissionHandler,
-    createNpcHandler
+    createNpcHandler,
+    getCampaignHandler
 }
 
 export default routeHandler

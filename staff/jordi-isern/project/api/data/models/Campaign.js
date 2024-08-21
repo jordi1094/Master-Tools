@@ -13,10 +13,6 @@ const campaign = new Schema({
         type: String,
         required: true
     },
-    characters: [{
-        type: ObjectId,
-        ref:'Character'
-    }],
     background:{
         type: String,
         required: true

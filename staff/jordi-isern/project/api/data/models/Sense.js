@@ -1,6 +1,6 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const Sense = new Schema({
+export const sense = new Schema({
     sense:{
         type: String,
         required: true
@@ -10,5 +10,7 @@ const Sense = new Schema({
         required:true
     }
 })
+
+const Sense = model('Sense', sense)
 
 export default Sense

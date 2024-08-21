@@ -1,7 +1,7 @@
-import { Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 
-const HitPoints = new Schema({
-    maxHitpoints:{
+export const hitPoints = new Schema({
+    maxHitPoints:{
         type: Number,
         required: true
     },
@@ -15,8 +15,9 @@ const HitPoints = new Schema({
     },
     dice: {
         type: String,
-        required: true
     }
 })
+
+const HitPoints = model('HitPoints', hitPoints)
 
 export default HitPoints

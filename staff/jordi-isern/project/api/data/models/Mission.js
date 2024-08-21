@@ -1,5 +1,5 @@
 import {Schema, model} from 'mongoose'
-import Task from './Task.js'
+import {task} from './Task.js'
 
 const { ObjectId } = Schema.Types
 
@@ -26,7 +26,7 @@ const mission = new Schema({
         type: ObjectId,
         ref: 'Ubication'
     },
-    checkList:[Task]
+    checkList:[task]
 })
 
 const Mission = model('Mission', mission)
