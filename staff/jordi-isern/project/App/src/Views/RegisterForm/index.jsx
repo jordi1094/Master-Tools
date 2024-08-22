@@ -7,6 +7,7 @@ import Field from "../../components/core/Field"
 import FieldPassword from "../../components/core/FieldPassword"
 import Button from "../../components/core/Button"
 import Select from "../../components/core/Select"
+import logic from '../../logic'
 
 
 function RegisterForm () {
