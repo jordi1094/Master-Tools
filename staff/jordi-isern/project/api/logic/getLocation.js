@@ -8,10 +8,14 @@ const getLocation = (userId, locationId) => {
     validate.id(campaignId,'campaignId')
 
     return User.findById(userId).select('_id').lean()
-        .catch(error => {throw new NotFoundError(error.message)})
+        .catch(error => {throw new SystemError(error.message)})
         .then(user => {
-            Location.findById(locationId).select('-__v -author').lean()
-                .catch(location => {
+            if(!user){
+                throw new NotFoundError(' User not Found')
+            }
+            return Location.findById(locationId).select('-__v -author').lean()
+                .catch(error => { throw new SystemError(error.message)})
+                .then(location => {
                     location.id = location._id.toString()
 
                     delete location._id
