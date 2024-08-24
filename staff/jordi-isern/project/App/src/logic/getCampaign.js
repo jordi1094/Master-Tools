@@ -1,11 +1,10 @@
 import error, {SystemError} from 'com/errors'
 
-const getCampaign = () => {
+const getCampaign = (targetCampaign) => {
     try {
-        return fetch(`${import.meta.env.VITE_API_URL}/campaigns`,{
-            method: 'GET',
+        return fetch(`${import.meta.env.VITE_API_URL}/campaigns/${targetCampaign}`,{
             headers:{
-                Authorization:`Beatet ${sessionStorage.token}`,
+                Authorization:`Bearer ${sessionStorage.token}`
             }
         })
         .catch((error) => {

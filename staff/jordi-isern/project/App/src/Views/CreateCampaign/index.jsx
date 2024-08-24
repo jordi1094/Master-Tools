@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import {useForm} from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import View from '../../components/Library/View'
@@ -19,13 +19,21 @@ function CreateCampaign() {
         shouldFocusError: false,
         validateCriteriaMode: "all"
     })
+    const [campaign, setCampaign] = useState('')
 
-    logic.getCampaign()
-        .then(campaign => console.log(campaign))
+    const {id} = useParams()
+
+    useEffect(()=> {
+        logic.getCampaign(id)
+            .then(campaign => {
+                setCampaign(campaign)
+                // TODO Add set characters with get caracters 
+                // TODO add set location with get location
+            })},[])
+
     const navigate = useNavigate()
 
     const onClickClose = () => navigate('/home')
-    const {id} = useParams()
 
     const [charactersList, setCharacters] = useState([])
 
@@ -33,27 +41,20 @@ function CreateCampaign() {
 
     const [createCharacter, setCharaterFormState] = useState(false)
 
-    const [createLocation, setLocationFormState] = useState(false)
-
     const onClickAddCharacter = () => {setCharaterFormState(true)}
     const onClickSaveAndCancelCharacter = () => setCharaterFormState(false)
 
-    const onClickAddLocation = () => {setLocationFormState(true)}
-    const onClickSaveAndCancelLocation = () => setLocationFormState(false)
+    const onClickAddLocation = () => {}
 
     const onCharacterCreated = (character) => {
         setCharaterFormState(false)
         setCharacters(prevCharacters => [...prevCharacters, character])
         setCharactersID(prevCharactersId => [...prevCharactersId, character._id])
     }
-    const onLocationCreated = (location) => {
-        setLocationFormState(false)
-        set(prevLocations => [...prevLocations, location])
-        setLocationID(prevLocationsId => [...prevLocationsId, location._id])
-    }
+
     
     const onSubmit = handleSubmit((campaingData) => {
-        logic.editCampaing(campaingData)
+        logic.saveCampaing(campaingData, characterIDList, )
     })
 
     return(
@@ -67,7 +68,7 @@ function CreateCampaign() {
                 </div>
 
                 <Form classname='flex flex-col py-[2vh] px-[7vw]' >
-                    <Field id='title' className='mt-7' classNameInput='w-full h-[3vh] rounded-md' formHook={register('title',{
+                    <Field id='title' className='mt-7' classNameInput='w-full h-[3vh] rounded-md' value={campaign.title}  formHook={register('title',{
                         required:{
                             value: true,
                             message:'Title is required'
@@ -78,7 +79,7 @@ function CreateCampaign() {
                     })}>
                             <h5   className='text-2xl mr-3 font-extrabold'>Title</h5>
                     </Field>
-                    <TextAreaField id='background' className='w-[70vw] drop-shadow-sm mt-7  bg-slate-700/60 rounded-md p-2' classNameInput='w-full h-[10vh] resize-none' formHook={register('background',{
+                    <TextAreaField id='background' className='w-[70vw] drop-shadow-sm mt-7  bg-slate-700/60 rounded-md p-2' value={campaign.background} classNameInput='w-full h-[10vh] resize-none' formHook={register('background',{
                         required:{
                             value:true,
                             message:'Background is required'
@@ -86,7 +87,7 @@ function CreateCampaign() {
                     })}>
                             <h5  className='mb-2 text-xl font-bold'>Background</h5>
                     </TextAreaField>
-                    <TextAreaField id='objective' className='w-[70vw] drop-shadow-sm mt-2  bg-slate-700/60 rounded-md p-2' classNameInput='resize-none w-full h-[10vh]' formHook={register('objective',{
+                    <TextAreaField id='objective' className='w-[70vw] drop-shadow-sm mt-2  bg-slate-700/60 rounded-md p-2' value={campaign.objective} classNameInput='resize-none w-full h-[10vh]' formHook={register('objective',{
                         required:{
                             value: true,
                             message:'Objective is required'
@@ -95,7 +96,7 @@ function CreateCampaign() {
                             <h5 className='mb-2 text-xl font-bold'>Objective</h5>
                     </TextAreaField>
                     <div>
-                        <Field id='image' type='url' className=' bg-slate-700/60 rounded-md p-2 mt-2' placeholder='Please enter the link to an image.' classNameInput='rounded w-full px-2'  formHook={register('image',{
+                        <Field id='image' type='url' className=' bg-slate-700/60 rounded-md p-2 mt-2' value={campaign.image} placeholder='Please enter the link to an image.' classNameInput='rounded w-full px-2'  formHook={register('image',{
                                 required:{
                                     value:true,
                                     message: 'Image is required'
@@ -143,7 +144,6 @@ function CreateCampaign() {
                     </div>
                 </Form>
                 {createCharacter && <CharacterForm closeForm ={ onClickSaveAndCancelCharacter} onCharacterCreated={onCharacterCreated} campaignId={id}/>}
-                {createLocation && <LocationForm closeForm ={ onClickSaveAndCancelLocation} onLocationCreated={onLocationCreated}/>}
             
             </div>
         </View>

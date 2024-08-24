@@ -10,7 +10,7 @@ const getCampaign = (req,res) => {
         
         logic.getCampaign(targetCampaign)
             .then( campaign => {
-                res.status(201)
+                res.status(200)
                 res.json(campaign)
             })
             .catch(error => handleErrorResponse(error , res))

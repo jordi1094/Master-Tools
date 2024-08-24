@@ -1,9 +1,11 @@
-import CharacterSchema from "./CharacterSchema";
-import NpcSchema from "./NpcSchema";
+import CharacterSchema from "./CharacterSchema.js";
+import NpcSchema from "./NpcSchema.js";
+import LocationSchema from "./LocationSchema.js";
 
 const validateZod = {
     CharacterSchema,
-    NpcSchema
+    NpcSchema,
+    LocationSchema
 }
 
 export default validateZod
