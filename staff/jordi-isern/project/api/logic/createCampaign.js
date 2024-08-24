@@ -3,7 +3,8 @@ import { SystemError, NotFoundError } from "com/errors.js";
 import validate from "com/validate.js";
 
 
-const createCampaign = (userId, title, characters, background, objective) => {
+const createCampaign = (userId) => {
+    validate.id(userId, 'userId')
 
     return User.findById(userId).lean()
         .catch(error => {throw new SystemError(error.message)})
@@ -14,10 +15,6 @@ const createCampaign = (userId, title, characters, background, objective) => {
 
             const campaign = {
                 author: userId,
-                title: title,
-                characters: characters,
-                background: background,
-                objective: objective
             }
             return Campaign.create(campaign)
                 .catch(error => {throw new SystemError(error.message)})

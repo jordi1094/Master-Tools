@@ -6,8 +6,8 @@
   "scripts": {
     "start": "nodemon index.js",
     "inspect": "node --inspect-brk .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test-coverage": "c8 --experimental-monocart --reporter=html --reporter=test mocha logic/*-spect.js"
+    "test": "mocha logic/*.spec.js",
+    "test-inspect":"mocha --inspect-brk logic/*.spec.js"
   },
   "author": "",
   "license": "ISC",

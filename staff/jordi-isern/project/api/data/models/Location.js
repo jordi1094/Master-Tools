@@ -13,12 +13,7 @@ const location = new Schema({
         type: String,
         required: true
     },
-    enemies:[{
-        type:{
-            name: String,
-            image: String
-        }
-    }],
+    enemies:[{type: String}],
     objects: [{
         type: String
     }],
@@ -28,10 +23,10 @@ const location = new Schema({
     },
     nextLocations: [{
         type: ObjectId,
-        ref:'Locations'
+        ref:'Location'
     }]
 })
 
-const Ubication = model('Locations', location)
+const Location = model('Location', location)
 
-export default Ubication
+export default Location

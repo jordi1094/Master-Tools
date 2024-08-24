@@ -1,7 +1,7 @@
 import errors,{SystemError} from 'com/errors'
 import validateZod from 'com/validations'
 
-const createCharacter = (characterData, campaingId) => {
+const createCharacter = (characterData) => {
     
     try{
         validateZod.CharacterSchema.parse(characterData)
