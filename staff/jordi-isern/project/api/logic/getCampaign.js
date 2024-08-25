@@ -4,10 +4,11 @@ import validate from "com/validate.js"
 
 const getCampaign = (userId, campaignId) => {
     validate.id(campaignId,'campaignId')
+    validate.id(userId, 'userId')
 
 
     return User.findById(userId).select('_id').lean()
-        .catch(error => {throw new NotFoundError(error.message)})
+        .catch(error => {throw new SystemError(error.message)})
         .then(user => {
             Campaign.findById(campaignId).select('-__v -author').lean()
                 .catch(error => {throw new SystemError(error.message)})

@@ -8,6 +8,9 @@ import createCampaign from './createCampaign.js'
 import getCampaign from './getCampaign.js'
 import createLocation from './createLocation.js'
 import getLocation from './getLocation.js'
+import getLocations from './getLocations.js'
+
+
 const logic = {
     registerUser,
     authenticateUser,
@@ -18,7 +21,8 @@ const logic = {
     createCampaign,
     getCampaign,
     createLocation,
-    getLocation
+    getLocation,
+    getLocations
 }
 
 export default logic

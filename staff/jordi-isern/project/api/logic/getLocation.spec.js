@@ -36,18 +36,21 @@ describe('getLocation', () => {
                         ]
                     }
                     Location.create(testLocationData)
-                        .then((locationToFind) => {
-                            getLocation(locationToFind._id)
-                                .then(location => {
-                                    expect(location).to.exist
-                                    expect(location._id.toString()).to.equal(locationToFind._id.toString())
-                                    expect(location.author).to.equal(testLocationData.author)
-                                    expect(location.name).to.equal(testLocationData.name)
-                                    expect(location.enemies).to.equal(testLocationData.enemies)
-                                    expect(location.objects).to.equal(testLocationData.objects)
-                                    expect(location.description).to.equal(testLocationData.description)
-                                    expect(location.nextLocations).to.equal(testLocationData.nextLocations)
-                                })
+                    .then((locationToFind) => {
+                        getLocation(locationToFind._id).toString()
+                            .catch(error =>{ console.log(error)
+                                return
+                            })
+                            .then(location => {
+                                expect(location).to.exist
+                                expect(location._id.toString()).to.equal(locationToFind._id.toString())
+                                expect(location.author).to.equal(testLocationData.author)
+                                expect(location.name).to.equal('hola')
+                                expect(location.enemies).to.equal(testLocationData.enemies)
+                                expect(location.objects).to.equal(testLocationData.objects)
+                                expect(location.description).to.equal(testLocationData.description)
+                                expect(location.nextLocations).to.equal(testLocationData.nextLocations)
+                            })
                         })
                 })
     })
@@ -106,5 +109,5 @@ describe('getLocation', () => {
                 })
     })
 
-
+    after(() => Promise.all([User.deleteMany(), Location.deleteMany]).then(() => mongoose.disconnect()))
 })

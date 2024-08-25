@@ -3,21 +3,21 @@ import { NotFoundError,SystemError } from "com/errors.js";
 import validate from "com/validate.js";
 
 
-const getLocation = (userId, locationsId) => {
+const getLocations = (userId, locationsId) => {
     validate.id(userId, 'userId')
 
-    return User.findById(userId).select('_id').lean()
+    return User.findById(userId).lean()
         .catch(error => {throw new SystemError(error.message)})
         .then(user => {
             if (!user){
                 throw new NotFoundError('User not found')
             }
 
-            return Location.find({ _id:{ $in :locationsId}}).select('-__v -author').lean()
-                .catch(error => {new SystemError(error.message)})
+            return Location.find({ _id:{ $in :locationsId}}).select('-__v').lean()
+                .catch(error => { throw new SystemError(error.message)})
                 .then(locations => {
                     locations.forEach((location) => {
-                        location.id = location._id
+                        location.id = location._id.toString()
                         delete location._id
                     })
                     return locations
@@ -25,4 +25,4 @@ const getLocation = (userId, locationsId) => {
         })
 }
 
-export default getLocation
+export default getLocations
