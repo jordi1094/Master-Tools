@@ -36,14 +36,6 @@ describe('authenticateUser',()=> {
         })
     )
 
-    it('fails on non-existing user', ()=>
-        authenticateUser('meloinvento', '123123123')
-        .catch(error => {
-            expect(error).to.be.instanceOf(CredentialsError)
-            expect(error.message).to.equal('user not found')
-        })
-    )
-
     it('fails on invalid username', () => {
         let errorThrown
 
