@@ -2,6 +2,7 @@ import { User } from "../data/models/index.js";
 import { DuplicityError, SystemError } from "com/errors.js";
 import validate from "com/validate.js";
 import bcrypt from 'bcryptjs'
+import { campaign } from "../data/models/Campaign.js";
 
 const registerUser = ( name, surname, email, username, role, password, passwordRepeat) => {
   validate.name(name, "name");

@@ -11,6 +11,7 @@ const { MONGODB_URL_TEST } = process.env
 const { ObjectId } = Types
 
 debugger
+
 describe('createCharacter', () => {
     before(() => mongoose.connect(MONGODB_URL_TEST)
         .then(() => Promise.all([Character.deleteMany(), User.deleteMany(), Campaign.deleteMany()]))

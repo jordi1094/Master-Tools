@@ -5,7 +5,7 @@ import validate from "com/validate.js";
 
 const getLocation = (userId, locationId) => {
     validate.id(userId, 'userId')
-    validate.id(campaignId,'campaignId')
+    validate.id(locationId,'locationId')
 
     return User.findById(userId).select('_id').lean()
         .catch(error => {throw new SystemError(error.message)})
