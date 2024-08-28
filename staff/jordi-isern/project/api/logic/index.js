@@ -9,7 +9,11 @@ import getCampaign from './getCampaign.js'
 import createLocation from './createLocation.js'
 import getLocation from './getLocation.js'
 import getLocations from './getLocations.js'
-
+import getCampaigns from './getCampaings.js'
+import getCharacters from './getCharacters.js'
+import getCharacter from './getCharacter.js'
+import getNpc from './getNpc.js'
+import getNpcs from './getNpcs.js'
 
 const logic = {
     registerUser,
@@ -20,9 +24,14 @@ const logic = {
     createMission,
     createCampaign,
     getCampaign,
+    getCampaigns,
     createLocation,
     getLocation,
-    getLocations
+    getLocations,
+    getCharacters,
+    getCharacter,
+    getNpc,
+    getNpcs
 }
 
 export default logic

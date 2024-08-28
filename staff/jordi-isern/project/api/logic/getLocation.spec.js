@@ -20,12 +20,16 @@ describe('getLocation', () => {
 
     beforeEach(()=> Promise.all([User.deleteMany(), Location.deleteMany()]))
 
-    it('succes on find Location',() => {
-        bcrypt.hash('123123123', 8)
-            .then  (hash => User.create({name: 'Mac', surname: 'Book', email: 'mac@book.com', username: 'macbook', role:'master', password: hash }))
+    it('succes on find Location', () => {
+        return bcrypt.hash('123123123', 8)
+            .then  (hash => User.create({
+                name: 'Mac', surname: 'Book', email: 'mac@book.com', username: 'macbook', role:'master', password: hash 
+            }))
                 .then(user => {
-                    testLocationData= {
-                        author: user._id.toString(),
+                    const userId = user._id.toString()
+                    
+                    const testLocationData = {
+                        author: userId,
                         name: "Ancient Ruins",
                         enemies: ["Goblin", "Orc", "Troll"],
                         objects: ["Ancient Sword", "Potion of Healing", "Mysterious Artifact"],
@@ -35,21 +39,16 @@ describe('getLocation', () => {
                             new ObjectId().toString()
                         ]
                     }
-                    Location.create(testLocationData)
+                    return Location.create(testLocationData)
                     .then((locationToFind) => {
-                        getLocation(locationToFind._id).toString()
-                            .catch(error =>{ console.log(error)
-                                return
-                            })
+                        return getLocation(userId ,locationToFind._id.toString())
                             .then(location => {
                                 expect(location).to.exist
-                                expect(location._id.toString()).to.equal(locationToFind._id.toString())
-                                expect(location.author).to.equal(testLocationData.author)
-                                expect(location.name).to.equal('hola')
-                                expect(location.enemies).to.equal(testLocationData.enemies)
-                                expect(location.objects).to.equal(testLocationData.objects)
+                                expect(location.id.toString()).to.equal(locationToFind._id.toString())
+                                expect(location.name).to.equal(testLocationData.name)
+                                expect(location.enemies).to.deep.equal(testLocationData.enemies)
                                 expect(location.description).to.equal(testLocationData.description)
-                                expect(location.nextLocations).to.equal(testLocationData.nextLocations)
+                                expect(location.nextLocations.map(id => id.toString())).to.deep.equal(testLocationData.nextLocations);
                             })
                         })
                 })
@@ -70,13 +69,41 @@ describe('getLocation', () => {
                             new ObjectId().toString()
                         ]
                     }
-                    Location.create(testLocationData)
+                    return Location.create(testLocationData)
                         .then((locationToFind) => {
-                            getLocation(locationToFind._id)
+                            return getLocation(locationToFind._id)
                                 .catch(error => errorThrown = error)
                                 .finally(() => {
                                     expect(errorThrown).to.be.an.instanceOf(NotFoundError)
                                     expect(errorThrown.message).to.equal('User not found')
+                                })
+                        })
+                })
+    })
+
+    it('fails on non-correct userId',() => {
+        let errorThrown
+        bcrypt.hash('123123123', 8)
+            .then  (hash => User.create({name: 'Mac', surname: 'Book', email: 'mac@book.com', username: 'macbook', role:'master', password: hash }))
+                .then(user => {
+                    testLocationData= {
+                        author: new ObjectId().toString(),
+                        name: "Ancient Ruins",
+                        enemies: ["Goblin", "Orc", "Troll"],
+                        objects: ["Ancient Sword", "Potion of Healing", "Mysterious Artifact"],
+                        description: "An ancient ruin filled with dangerous creatures and hidden treasures.",
+                        nextLocations: [
+                            new ObjectId().toString(),
+                            new ObjectId().toString()
+                        ]
+                    }
+                    return Location.create(new ObjectId().toString(),testLocationData)
+                        .then((locationToFind) => {
+                            return getLocation(locationToFind._id)
+                                .catch(error => errorThrown = error)
+                                .finally(() => {
+                                    expect(errorThrown).to.be.an.instanceOf(ContentError)
+                                    expect(errorThrown.message).to.equal('UserId not correct')
                                 })
                         })
                 })
@@ -97,9 +124,9 @@ describe('getLocation', () => {
                             new ObjectId().toString()
                         ]
                     }
-                    Location.create(testLocationData)
+                    return Location.create(testLocationData)
                         .then((locationToFind) => {
-                            getLocation(new ObjectId().toString())
+                            return getLocation(new ObjectId().toString())
                                 .catch(error => errorThrown = error)
                                 .finally(() => {
                                     expect(errorThrown).to.be.an.instanceOf(NotFoundError)
@@ -111,3 +138,4 @@ describe('getLocation', () => {
 
     after(() => Promise.all([User.deleteMany(), Location.deleteMany]).then(() => mongoose.disconnect()))
 })
+

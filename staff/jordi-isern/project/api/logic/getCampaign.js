@@ -1,25 +1,30 @@
-import { Campaign, User } from "../data/models/index.js"
-import { NotFoundError, SystemError } from "com/errors.js"
-import validate from "com/validate.js"
+import { Campaign, User } from "../data/models/index.js";
+import { NotFoundError, SystemError } from "com/errors.js";
+import validate from "com/validate.js";
 
 const getCampaign = (userId, campaignId) => {
-    validate.id(campaignId,'campaignId')
-    validate.id(userId, 'userId')
-
+    validate.id(campaignId, 'campaignId');
+    validate.id(userId, 'userId');
 
     return User.findById(userId).select('_id').lean()
-        .catch(error => {throw new SystemError(error.message)})
+        .catch(error => {
+            throw new SystemError(error.message);
+        })
         .then(user => {
-            Campaign.findById(campaignId).select('-__v -author').lean()
-                .catch(error => {throw new SystemError(error.message)})
-                .then(campaign => {
-                    campaign.id = campaign._id.toString()
+            if (!user) {
+                throw new NotFoundError('User not found');
+            }
+            return Campaign.findById(campaignId).select('-__v -author').lean()
+        })
+        .then(campaign => {
+            if (!campaign) {
+                throw new NotFoundError('Campaign not found')
+            }
+            campaign.id = campaign._id.toString()
+            delete campaign._id
 
-                    delete campaign._id
-                    
-                    return campaign
-                })
+            return campaign
         })
 }
 
-export default getCampaign
+export default getCampaign;

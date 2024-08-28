@@ -16,6 +16,9 @@ const getLocations = (userId, locationsId) => {
             return Location.find({ _id:{ $in :locationsId}}).select('-__v').lean()
                 .catch(error => { throw new SystemError(error.message)})
                 .then(locations => {
+                    if(locations.length !== locationsId.length){
+                        throw new NotFoundError('One or more location not found')
+                    }
                     locations.forEach((location) => {
                         location.id = location._id.toString()
                         delete location._id
