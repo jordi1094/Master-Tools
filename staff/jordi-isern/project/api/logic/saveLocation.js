@@ -12,7 +12,7 @@ const saveLocation = (locationId, locationData) => {
         throw new ContentError(`Invalid location data: ${error.erros.map(e => e.message).join(', ')}`)
     }
 
-    return locationId.findById(locationId).lean()
+    return Location.findById(locationId).lean()
         .catch(error => {throw new SystemError(error.message)})
         .then(location => {
             if(!location){
