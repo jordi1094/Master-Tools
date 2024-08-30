@@ -14,6 +14,7 @@ import getCharacters from './getCharacters.js'
 import getCharacter from './getCharacter.js'
 import getNpc from './getNpc.js'
 import getNpcs from './getNpcs.js'
+import saveCampaign from './saveCampaign.js'
 
 const logic = {
     registerUser,
@@ -31,7 +32,8 @@ const logic = {
     getCharacters,
     getCharacter,
     getNpc,
-    getNpcs
+    getNpcs,
+    saveCampaign
 }
 
 export default logic
