@@ -4,7 +4,7 @@ import handleErrorResponse from '../helper/handleErrorResponse.js'
 
 const{JWT_SECRET} = process.env
 
-const getCampaign = (req,res) => {
+const getCampaignHandler = (req,res) => {
     try{
         const {targetCampaign} = req.params
         
@@ -20,4 +20,4 @@ const getCampaign = (req,res) => {
     
 }
 
-export default getCampaign
+export default getCampaignHandler

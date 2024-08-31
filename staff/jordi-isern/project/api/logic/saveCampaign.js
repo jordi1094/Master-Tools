@@ -2,7 +2,6 @@ import { Campaign, User } from "../data/models/index.js";
 import { SystemError, NotFoundError, MatchError, ContentError} from "com/errors.js";
 import validate from "com/validate.js";
 import validateZod from "com/validations/index.js"
-import { campaign } from "../data/models/Campaign.js";
 
 
 const saveCampaign = (campaignId, newCampaignData) => {
@@ -11,13 +10,15 @@ const saveCampaign = (campaignId, newCampaignData) => {
     try{
         validateZod.CampaignSchema.parse(newCampaignData)
     }catch(error) {
-        throw new ContentError(`Invalid Campaign data: ${error.erros.map(e=> e.message).join(', ')}`)
+        throw new ContentError(`Invalid Campaign data: ${error.errors.map(e=> e.message).join(', ')}`)
     }
 
-    return Campaign.findById(campaignId).lean()
+    
+
+    return Campaign.findById(campaignId)
         .catch(error => {throw new SystemError(error.message)})
-        .then(campaign => {
-            if(!campaign){
+        .then(campaignToEdit => {
+            if(!campaignToEdit){
                 throw( new NotFoundError('campaign not found'))
             }
 
@@ -30,7 +31,7 @@ const saveCampaign = (campaignId, newCampaignData) => {
                 image
             }
 
-            return Campaign.findByIdAndUpdate(campaignId, campaignData)
+            return Campaign.findByIdAndUpdate(campaignToEdit._id.toString(), campaignData,{new: true})
             .catch(error => {throw new SystemError(error.message)})
             .then((campaign) => {return campaign})
         })

@@ -21,18 +21,18 @@ const logic = {
     authenticateUser,
     createCharacter,
     createNpc,
-    saveLocation,
     createMission,
     createCampaign,
     getCampaign,
-    getCampaigns,
     createLocation,
+    getCampaigns,
     getLocation,
     getLocations,
     getCharacters,
     getCharacter,
     getNpc,
     getNpcs,
+    saveLocation,
     saveCampaign
 }
 

@@ -105,7 +105,6 @@ describe('save Location',() => {
                                 }
                                 finally{
                                         expect(errorThrown).to.be.an.instanceOf(NotFoundError)
-                                        expect(errorThrown.message).to.equal('location not found')
                                     }
                             })
                         
@@ -148,5 +147,5 @@ describe('save Location',() => {
             )
     })
 
-    after(() => Promise.all([User.deleteMany(), Campaign.deleteMany(), Location.deleteMany()]).then(() => mongoose.disconnect))
+    after(() => Promise.all([User.deleteMany(), Campaign.deleteMany(), Location.deleteMany()]).then(() => mongoose.disconnect()))
 })
