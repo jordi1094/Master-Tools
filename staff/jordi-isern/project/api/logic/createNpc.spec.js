@@ -246,5 +246,5 @@ describe('createNpc', () => {
 
 
 
-    after(() => Promise.all([User.deleteMany(), Location.deleteMany(), Npc.deleteMany()]))
+    after(() => Promise.all([User.deleteMany(), Location.deleteMany(), Npc.deleteMany()]).then(() => mongoose.disconnect()))
 })

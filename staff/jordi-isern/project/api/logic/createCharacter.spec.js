@@ -368,5 +368,5 @@ describe('createCharacter', () => {
             )
     })
 
-    after(() => Promise.all([User.deleteMany(), Campaign.deleteMany(), Character.deleteMany()]).then(() => mongoose.disconnect))
+    after(() => Promise.all([User.deleteMany(), Campaign.deleteMany(), Character.deleteMany()]).then(() => mongoose.disconnect()))
 })

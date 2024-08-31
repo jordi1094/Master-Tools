@@ -3,6 +3,7 @@ import { SystemError, NotFoundError, ContentError} from "com/errors.js";
 
 import validate from "com/validate.js";
 import NpcSchema from "com/validations/NpcSchema.js";
+import mongoose from "mongoose";
 
 const createNpc = (userId, npcData) => {
     validate.id(userId, 'userId')

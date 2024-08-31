@@ -3,10 +3,9 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 import { expect } from 'chai'
 import { Types } from 'mongoose'
-import { User,Campaign, Location } from '../data/models/index.js'
+import { User,Campaign} from '../data/models/index.js'
 import saveCampaign from './saveCampaign.js'
 import { ContentError, MatchError, NotFoundError } from 'com/errors.js'
-import { campaign } from '../data/models/Campaign.js'
 
 const { MONGODB_URL_TEST } = process.env
 const { ObjectId } = Types
@@ -15,19 +14,73 @@ debugger
 
 describe('saveCampaing', () => {
     before (() => mongoose.connect(MONGODB_URL_TEST)
-        .then(() => Promise.all(Campaign.deleteMany(), User.deleteMany()))
+        .then(() => Promise.all([Campaign.deleteMany()]))
     )
-    beforeEach(() => Promise.all(Campaign.deleteMany(), User.deleteMany()))
+    beforeEach(() => Promise.all([Campaign.deleteMany()]))
 
-    instanceof('should successfully edit the campaing', () => {
-        return bcrypt.hash('123123123', 8)
-            .then(hash => User.create({name: 'John', surname: 'Doe', email: 'john@doe.com', username: 'johndoe', role: 'master', password: hash })
-                .then (user => Campaign.create ({author: user._id.toString()}))
-            )
-
-
+    it('should successfully edit the campaing', () => {
+        return Campaign.create ({author: new ObjectId().toString()})
+                    .then(campaignToEdit => {
+                        const newCampaignData = {
+                            title: "Rescue the Princess",
+                            background: "The kingdom is in turmoil as the princess has been captured by a dragon.",
+                            objective: "Infiltrate the dragon's lair and rescue the princess without being detected.",
+                            startLocation: new Types.ObjectId().toString(),
+                            image: "https://example.com/image.png" 
+                        }
+                        return saveCampaign(campaignToEdit._id.toString(), newCampaignData)
+                            .then(campaign => {
+                                expect(campaign).to.exist
+                                expect(campaign.author.toString()).to.equal(campaignToEdit.author.toString())
+                                expect(campaign.title).to.equal(newCampaignData.title)
+                                expect(campaign.background).to.equal(newCampaignData.background)
+                                expect(campaign.objective).to.equal(newCampaignData.objective)
+                                expect(campaign.startLocation.toString()).to.equal(newCampaignData.startLocation)
+                            })
+                    })
     })
 
+    it('fails on non-exssisting campaign', () => {
+            let errorThrown
+                return (user => Campaign.create ({author: user._id.toString()})
+                    .then(campaignToEdit => {
+                        const newCampaignData = {
+                            title: "Rescue the Princess",
+                            background: "The kingdom is in turmoil as the princess has been captured by a dragon.",
+                            objective: "Infiltrate the dragon's lair and rescue the princess without being detected.",
+                            startLocation: new Types.ObjectId().toString(),
+                            image: "https://example.com/image.png" 
+                        }
+                        return saveCampaign(new ObjectId().toString(), newCampaignData)
+                            .catch(error => {errorThrown = error})
+                            .finally(() => {
+                                expect(errorThrown).to.be.an.instanceOf(NotFoundError)
+                                expect(errorThrown.message).to.equal('location not found')
+                            })
+                    })
+                )    
+    })
 
+    it('fails on incorrect new campaign data', () => {
+        let errorThrown
+        const newCampaignData = {
+            title: "Rescue the Princess",
+            background: "The kingdom is in turmoil as the princess has been captured by a dragon.",
+            objective: "Infiltrate the dragon's lair and rescue the princess without being detected.",
+            startLocation: 43215423,
+            image: "https://example.com/image.png"
+        }
+        return Campaign.create({ author: new ObjectId().toString() })
+            .then(campaignToEdit => {
+                try{ saveCampaign(campaignToEdit._id.toString(), newCampaignData)
+                }catch(error) {
+                        errorThrown = error
+                }finally{
+                    expect(errorThrown).to.be.an.instanceOf(ContentError)
+                }
+                
+            })
+    })
 
+    after(() => Campaign.deleteMany())
 })

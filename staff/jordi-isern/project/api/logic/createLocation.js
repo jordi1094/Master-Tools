@@ -5,7 +5,7 @@ import validate from "com/validate.js";
 const createLocation = (userId) => {
     validate.id(userId, 'userId')
 
-    return User.findById (userId).lean()
+    return User.findById (userId).select('_id').lean()
         .catch(error => {throw new SystemError(error.message)})
         .then(user => {
             if(!user){
