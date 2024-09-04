@@ -7,7 +7,7 @@ const getCampaign = (targetCampaign) => {
                 Authorization:`Bearer ${sessionStorage.token}`
             }
         })
-        .catch((error) => {
+        .catch(() => {
             throw new SystemError('server error')})
         .then(response => {
             if(response.status === 200) {
@@ -16,7 +16,7 @@ const getCampaign = (targetCampaign) => {
                 .then(campaign => campaign)
             }
             return response.json()
-            .catch ((error) => {throw new SystemError('server error')})
+            .catch (() => {throw new SystemError('server error')})
             .then(body => {
                 const {error , message} = body
                 const constructor = error[error]

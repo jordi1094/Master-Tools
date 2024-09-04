@@ -2,7 +2,6 @@ import { Campaign, User } from "../data/models/index.js";
 import { SystemError, NotFoundError } from "com/errors.js"; 
 import validate from "com/validate.js";
 
-
 const createCampaign = (userId) => {
     validate.id(userId, 'userId')
 

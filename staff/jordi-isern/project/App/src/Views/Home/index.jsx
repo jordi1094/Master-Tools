@@ -3,7 +3,6 @@ import logic from '../../logic'
 import Header from "../../components/Library/Header"
 import View from "../../components/Library/View"
 import HistoryButton from "../../components/Library/HistoryButton"
-import { campaign } from '../../../../api/data/models/Campaign'
 
 
 

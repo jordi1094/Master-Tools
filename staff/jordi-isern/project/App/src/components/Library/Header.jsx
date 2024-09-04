@@ -12,7 +12,7 @@ function Header (){
     const handleOnClickNew = (event) => {
         event.preventDefault()
         logic.createCampaing()
-        .then(campaign => {navigate(`/createCampaign/${campaign._id}`)})
+        .then(campaign => {navigate(`/createCampaign/${campaign._id.toString()}`)})
     }
 
 

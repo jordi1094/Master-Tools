@@ -17,7 +17,7 @@ const getCharacterHandler = (req, res) => {
             logic.getCharacter(userId, characterId)
             .then(character => {
                 res.status(200)
-                res.jason(character)
+                res.json(character)
             }).catch(error => handleErrorResponse(error, res))
         }catch(error){
             handleErrorResponse(error, res)

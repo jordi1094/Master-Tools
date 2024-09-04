@@ -1,19 +1,23 @@
-import { useForm } from "react-hook-form";
-import Field from "../../../components/core/Field";
-import Button from "../../../components/core/Button";
-import Form from "../../../components/core/Form";
-import Image from "../../../components/core/Image";
+import { useState, useEffect } from "react"
+import { useForm } from "react-hook-form"
+import Field from "../../../components/core/Field"
+import Button from "../../../components/core/Button"
+import Form from "../../../components/core/Form"
+import Image from "../../../components/core/Image"
 import CrossIcon from '../../../icons/cross-svgrepo-com.svg'
-import TextAreaField from "../../../components/core/TextAreaField";
-import { useState } from "react";
-import NpcResume from "./NpcResume";
-import NpcForm from "../../CreateNpc";
-import logic from "../../../logic";
-import EnemiesSearch from "../../../components/Library/EnemiesSearch";
+import TextAreaField from "../../../components/core/TextAreaField"
+import NpcResume from "./NpcResume"
+import NpcForm from "../../CreateNpc"
+import logic from "../../../logic"
+import EnemiesSearch from "../../../components/Library/EnemiesSearch"
+import { useParams,useNavigate } from "react-router-dom"
 
-function LocationForm({ closeForm, onLocationCreated }) {
+
+function LocationForm() {
+    const {locationId} = useParams()
+    const {id: campaignId} = useParams()
+
     const [npcList, setNpc] = useState([])
-    const [npcIDList, setNpcID] = useState([])
 
     const [enemiesList, setEnemy] = useState([])
     const [enemiesIndexList, setEnemiesIndex] = useState([])
@@ -23,6 +27,14 @@ function LocationForm({ closeForm, onLocationCreated }) {
     const onClickAddNpc = () => { setNpcFormState(true) }
     const onClickCloseNpcForm = () => { setNpcFormState(false) }
 
+    const navigate = useNavigate()
+
+    const closeForm = (event) => {
+        event.preventDefault()
+        console.log('hola')
+        navigate(`/createCampaign/${campaignId}`)
+    }
+
 
     const { register, handleSubmit, formState:{errors} } = useForm({
         shouldFocusError: false,
@@ -31,15 +43,17 @@ function LocationForm({ closeForm, onLocationCreated }) {
     const onNpcCreated = npc => {
         setNpcFormState(false)
         setNpc(prevNpcs => [...prevNpcs, npc])
-        setNpcID(prevNpcId => [...prevNpcId, npc._id])
     }
 
 
-    const onSubmit = handleSubmit((locationData) => {
+
+    const onSubmit = handleSubmit((newLocationData) => {
         try {
-            logic.cretaLocation(locationData)
-                .then((location) => {
-                    onLocationCreated(location)
+            newLocationData.enemies = enemiesList
+            newLocationData.objects = newLocationData.objects.split(',')
+            logic.saveLocation(locationId, newLocationData)
+                .then(() => {
+                    navigate(`/createCampaign/${campaignId}`)
                 })
         } catch (error) {
             console.error(error)
@@ -114,7 +128,7 @@ function LocationForm({ closeForm, onLocationCreated }) {
                     <Button type='submmit' className='col-span-4 w-full h-auto rounded-md hover:scale-y-110 mb-[15vh] bg-gold1 text-black'> Save location</Button>
 
                 </Form>
-                {createNpc && <NpcForm closeForm={onClickCloseNpcForm} onNpcCreated={onNpcCreated} />}
+                {createNpc && <NpcForm closeForm={onClickCloseNpcForm} onNpcCreated={onNpcCreated} locationId= {locationId} />}
             </div>
         </div>
     )

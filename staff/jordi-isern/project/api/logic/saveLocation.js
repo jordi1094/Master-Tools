@@ -23,13 +23,13 @@ const saveLocation = async (locationId, newLocationData) => {
         throw new NotFoundError('location not found')
     }
 
-    const { name, description, enemiesIndexList, objectsList, nextLocationsIdList, campaign } = newLocationData
+    const { name, description, enemiesIndexList, object, nextLocationsIdList, campaign } = newLocationData
 
     location.name = name
     location.description = description
     location.enemies = enemiesIndexList
     location.nextLocations = nextLocationsIdList
-    location.objects = objectsList
+    location.object = object
     location.campaign = campaign
 
     try {
