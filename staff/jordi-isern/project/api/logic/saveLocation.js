@@ -1,37 +1,42 @@
-import { Location, User } from "../data/models/index.js";
-import { SystemError, NotFoundError, MatchError, ContentError} from "com/errors.js";
-import validate from "com/validate.js";
+import { Location } from "../data/models/index.js"
+import { SystemError, NotFoundError, ContentError } from "com/errors.js"
+import validate from "com/validate.js"
 import validateZod from "com/validations/index.js"
 
-const saveLocation = (locationId, locationData) => {
+const saveLocation = async (locationId, newLocationData) => {
     validate.id(locationId, 'locationId')
 
-    try{
+    try {
         validateZod.LocationSchema.parse(newLocationData)
-    }catch(error){
-        throw new ContentError(`Invalid location data: ${error.erros.map(e => e.message).join(', ')}`)
+    } catch (error) {
+        throw new ContentError(`Invalid location data: ${error.errors.map(e => e.message).join(', ')}`)
     }
 
-    return Location.findById(locationId).lean()
-        .catch(error => {throw new SystemError(error.message)})
-        .then(location => {
-            if(!location){
-                throw (new NotFoundError('location not found'))
-            }
+    let location
+    try {
+        location = await Location.findById(locationId)
+    } catch (error) {
+        throw new SystemError(error.message)
+    }
 
-            const {name, description, enemiesIndexList, objectsList, nextLocationsIdList, campaign} = newLocationData
-            const locationData = {
-                name,
-                description,
-                enemies: enemiesIndexList,
-                objects: objectsList,
-                nextLocations: nextLocationsIdList,
-                campaign
-            }
-            return Location.findByIdAndUpdate(locationId, locationData)
-            .catch(error => {throw new SystemError(error.message)})
-            .then((location) => {return location })
-        })
+    if (!location) {
+        throw new NotFoundError('location not found')
+    }
+
+    const { name, description, enemiesIndexList, objectsList, nextLocationsIdList, campaign } = newLocationData
+
+    location.name = name
+    location.description = description
+    location.enemies = enemiesIndexList
+    location.nextLocations = nextLocationsIdList
+    location.objects = objectsList
+    location.campaign = campaign
+
+    try {
+        return await location.save()
+    } catch (error) {
+        throw new SystemError(error.message)
+    }
 }
 
 export default saveLocation

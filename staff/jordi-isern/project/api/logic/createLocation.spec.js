@@ -21,13 +21,14 @@ describe('createLocation', () => {
     beforeEach(() => Promise.all([Location.deleteMany(), User.deleteMany()]))
 
     it('success create location', () => {
-        bcrypt.hash ('123123123', 8)
+        return bcrypt.hash ('123123123', 8)
             .then(hash => User.create({name: 'Mac', surname: 'Book', email: 'mac@book.com', username: 'macbook', role:'master', password: hash}))
-                .then((user) => createLocation(user.Id) )
+                .then((user) => {createLocation(user._id.toString())
                     .then((location) => {
                         expect(location).to.exist
-                        expect(location.author.toString()).to.be.equal(user.id.toString())
+                        expect(location.author.toString()).to.be.equal(user._id.toString())
                     })
+                })
     })
 
     it('fails on non-existing user', () => {

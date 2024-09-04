@@ -25,4 +25,4 @@ const getLocationHandler = (req,res) => {
     })
 }
 
-export default createLocationHandler
+export default getLocationHandler
