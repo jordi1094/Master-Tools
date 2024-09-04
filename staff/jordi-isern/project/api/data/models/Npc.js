@@ -62,7 +62,11 @@ const npc = new Schema({
         type: Number,
         required: true
     },
-    acctions: [action]
+    acctions: [action],
+    location:[{
+        type: ObjectId,
+        ref: 'Location'
+    }]
 })
 
 const Npc = model('Npc', npc)

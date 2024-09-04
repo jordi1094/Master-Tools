@@ -7,6 +7,8 @@ import getFullMonterList from "./getFullMontersList"
 import createCampaing from "./createCampaing"
 import getCampaign from './getCampaign'
 import getCampaigns from "./getCampaigns"
+import createLocation from "./createLocation"
+import saveLocation from "./saveLocation"
 
 const logic = {
     isUserLoggedIn,
@@ -17,7 +19,9 @@ const logic = {
     getFullMonterList,
     createCampaing,
     getCampaign,
-    getCampaigns
+    getCampaigns,
+    createLocation,
+    saveLocation
     }
 
 export default logic

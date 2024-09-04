@@ -27,7 +27,6 @@ function CreateCampaign() {
         logic.getCampaign(id)
             .then(campaign => {
                 setCampaign(campaign)
-                // TODO add set location with get location
             })},[])
 
     const navigate = useNavigate()
@@ -43,7 +42,12 @@ function CreateCampaign() {
     const onClickAddCharacter = () => {setCharaterFormState(true)}
     const onClickSaveAndCancelCharacter = () => setCharaterFormState(false)
 
-    const onClickAddLocation = () => {}
+    const onClickAddLocation = (event) => {
+        event.preventDefault()
+
+        logic.createLocation()
+        .then(location => navigate(`/createCampaign/${id}/location/${location._id.toString()}`))
+    }
 
     const onCharacterCreated = (character) => {
         setCharaterFormState(false)
@@ -53,7 +57,7 @@ function CreateCampaign() {
 
     
     const onSubmit = handleSubmit((campaingData) => {
-        logic.saveCampaing(campaingData, characterIDList, )
+        logic.saveCampaing(campaingData, characterIDList)
     })
 
     return(
@@ -120,6 +124,7 @@ function CreateCampaign() {
                     </div>}
                     <div className='justify-between mt-5 align-middle'>
                             <h5 className='mb-2 text-xl font-bold'>Location</h5>
+                            {/* //TODO make apear location name and quit the add location button when the location is created */}
                             <Button onClick={onClickAddLocation} type='button' className=' bg-gold1 rounded-md w-auto px-2 hover:scale-105 active:scale-100 text-black text-sm h-5' >Add Location</Button>
                         </div>
 

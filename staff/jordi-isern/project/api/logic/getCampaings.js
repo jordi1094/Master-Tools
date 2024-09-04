@@ -1,7 +1,6 @@
 import { Campaign, User } from "../data/models/index.js"
 import { NotFoundError, SystemError } from "com/errors.js"
 import validate from "com/validate.js"
-import { campaign } from "../data/models/Campaign.js"
 
 const getCampaigns = (userId) => {
     validate.id(userId,' userId')
@@ -13,9 +12,11 @@ const getCampaigns = (userId) => {
                 throw new NotFoundError('User not Found')
             }
 
-            const campaignsIdList = user.campaigns
+            return Campaign.find({author: user._id.toString()})
+            .catch(error => {throw new SystemError(error.message)})
+            .then(campaignsIdList => { 
 
-            return Campaign.find({_id:{$in:campaignsIdList}}).select('-__v').lean()
+                return Campaign.find({_id:{$in:campaignsIdList}}).select('-__v').lean()
                 .catch(error => {throw new SystemError(error.message)})
                 .then(campaigns => {
                     if(campaigns.length !== campaignsIdList.length){
@@ -23,11 +24,12 @@ const getCampaigns = (userId) => {
                     }
                     campaigns.forEach(campaign => {
                         campaign.id = campaign._id.toString()
-
+                        
                         delete campaign._id
                     })
                     return campaigns
                 })
+            })
         })
 }
 

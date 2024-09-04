@@ -21,7 +21,7 @@ const createNpc = (userId, npcData) => {
                 throw (new NotFoundError('user not found'))
             }
 
-            const { actionDescription1, actionDescription2, actionDescription3, actionName1, actionName2, actionName3, alignment, armorClass, challengeRating, charismaModifier, charismaScore, constitutionModifier, constitutionScore, currentHitPoints, description, dexterityModifier, dexterityScore, image, initiativeModifier, initiativeScore, lenguages, maxHitPoints, name, race, senses,skillName, skillModifier, speed, strengthModifier, strengthScore, temporalHitPoints, wisdomModifier, wisdomScore } = npcData
+            const { actionDescription1, actionDescription2, actionDescription3, actionName1, actionName2, actionName3, alignment, armorClass, challengeRating, charismaModifier, charismaScore, constitutionModifier, constitutionScore, currentHitPoints, description, dexterityModifier, dexterityScore, image, initiativeModifier, initiativeScore, lenguages, maxHitPoints, name, race, senses,skillName, skillModifier, speed, strengthModifier, strengthScore, temporalHitPoints, wisdomModifier, wisdomScore, location } = npcData
 
             const npc = {
                 author: userId,
@@ -43,7 +43,8 @@ const createNpc = (userId, npcData) => {
                 senses: senses,
                 skill:{name: skillName, modifier: skillModifier},
                 lenguages: lenguages,
-                actions: [{name: actionName1, description:actionDescription1},{name: actionName2, description: actionDescription2},{name:actionName3, description:actionDescription3}]
+                actions: [{name: actionName1, description:actionDescription1},{name: actionName2, description: actionDescription2},{name:actionName3, description:actionDescription3}],
+                location: [location]
             }
             
             return Npc.create(npc)

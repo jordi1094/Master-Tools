@@ -13,7 +13,7 @@ const getCampaigns = () => {
         })
         .then(response => {
             if(response.status  === 200) {
-                return response.jason()
+                return response.json()
                 .catch(error => {throw new SystemError('server error')})
                 .then(campaigns => campaigns)
             }

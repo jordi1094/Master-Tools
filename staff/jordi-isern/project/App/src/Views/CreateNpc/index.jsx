@@ -12,13 +12,14 @@ import React from "react"
 import CharacterStatsPanel from '../../components/Library/CharacterStatsPanel'
 import ActionInput from '../../components/Library/ActionInput'
 
-function NpcForm ({closeForm ,onNpcCreated}){
+function NpcForm ({closeForm ,onNpcCreated, locationId}){
     const {register, handleSubmit, formState:{errors}} = useForm({
         shouldFocusError: false,
         validateCriteriaMode: "all"
       })
 
      const onSubmit = handleSubmit((npcData) =>{
+        npcData.location = locationId
         npcData.armorClass = Number(npcData.armorClass)
         npcData.challengeRating = Number(npcData.challengeRating)
         npcData.speed = Number(npcData.speed)

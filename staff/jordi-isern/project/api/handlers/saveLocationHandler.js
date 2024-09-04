@@ -6,11 +6,12 @@ import saveLocation from '../logic/saveLocation.js';
 const {JWT_SECRET} = process.env
 
 const saveLocationsHandler = (req, res) => {
-        const {locationId, newLocationData} = req.body
+        const newLocationData = req.body
+        const {targetLocation} = req.params
 
         try{
-            logic.saveLocation(locationId, newLocationData)
-            .then(() => res.status(201).send())
+            logic.saveLocation(targetLocation, newLocationData)
+            .then(() => res.status(204).send())
             .catch(error => {
                 handleErrorResponse(error, res)
             })

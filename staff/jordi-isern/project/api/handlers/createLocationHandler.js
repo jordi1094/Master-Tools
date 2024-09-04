@@ -1,18 +1,31 @@
-import logic from "../logic/index.js";
-
+import logic from "../logic/index.js"
+import jwt from '../util/jasonwebtoken-promised.js'
 import handleErrorResponse from "../helper/handleErrorResponse.js";
 
-const createLocationHandler = ( req , res) => {
-    const {userId, title, description, npcs, enemies, objects, nextLocation, missions} = req.body
+const{JWT_SECRET} = process.env
 
-    try{
-        logic.createLocation(userId, title, description, npcs, enemies, objects, nextLocation, missions)
-            .then(()=> res.status(201).send())
-            .catch(error => {
-                handleErrorResponse(error, res)
-            })
-    }catch(error){
-        handleErrorResponse(error,res)
+const createLocationHandler = ( req , res) => {
+    try {
+        const token= req.headers.authorization.slice(7)
+        jwt.verify(token, JWT_SECRET)
+        .then(payload => {
+            const{sub:userId} = payload
+            
+            try{
+                logic.createLocation(userId)
+                .then((location)=>{
+                    res.status(201)
+                    res.json(location)
+                })
+                .catch(error => {
+                    handleErrorResponse(error, res)
+                })
+            }catch(error){
+                handleErrorResponse(error,res)
+            }
+        })
+    } catch (error) {
+        handleErrorResponse(error, res)
     }
 }
 
