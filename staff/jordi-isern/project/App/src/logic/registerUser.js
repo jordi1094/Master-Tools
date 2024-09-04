@@ -4,7 +4,7 @@ import validate  from 'com/validate'
 
 const registerUser = (name, surname, email,username, role, password, passwordRepeat) => {
     validate.name(name)
-    validate.name(surname)
+    validate.name(surname, 'surname')
     validate.email(email)
     validate.username(username)
     validate.password(password)

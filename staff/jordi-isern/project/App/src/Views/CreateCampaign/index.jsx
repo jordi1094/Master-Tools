@@ -27,7 +27,6 @@ function CreateCampaign() {
         logic.getCampaign(id)
             .then(campaign => {
                 setCampaign(campaign)
-                // TODO Add set characters with get caracters 
                 // TODO add set location with get location
             })},[])
 

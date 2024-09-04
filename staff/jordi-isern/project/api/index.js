@@ -36,6 +36,8 @@ mongoose.connect(MONGODB_URL)
         api.post('/npcs', jsonBodyParser, routeHandler.createNpcHandler)
 
         api.get('/campaigns/:targetCampaign', routeHandler.getCampaignHandler)
+
+        api.get('/campaigns', jsonBodyParser, routeHandler.getCampaigsnHandler)
         
 
         api.listen(PORT,() => console.log(`API running on PORT ${PORT}`))

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">74.07% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>30/54</span>
+                <span class='fraction'>40/54</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.86% </span>
+                <span class="strong">89.65% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>22/29</span>
+                <span class='fraction'>26/29</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">74.07% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>30/54</span>
+                <span class='fraction'>40/54</span>
             </div>
         
             
@@ -242,14 +242,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -276,14 +276,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -305,15 +305,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -338,15 +338,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -388,22 +388,22 @@ describe('save Location',() =&gt; {
     it('should successfully edit the location',() =&gt; {
         return bcrypt.hash('123123123', 8)
             .then(hash =&gt; User.create({name: 'John', surname: 'Doe', email: 'john@doe.com', username: 'johndoe', role: 'master', password: hash })
-                .then(user =&gt; Campaign.create({author:user.id})
+                .then(user =&gt; Campaign.create({author:user._id.toString()})
                     .then(campaign =&gt; {
-                        Location.create({author: user.Id})
-                            .then(<span class="fstat-no" title="function not covered" >locationToEdit =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                                const locationData = {</span>
+                        Location.create({author: user._id.toString()})
+                            .then(locationToEdit =&gt; {
+                                const locationData = {
                                     name: "Mysterious Forest",
                                     enemies: ["Goblin", "Troll"],
                                     objects: ["Ancient Sword", "Mystic Potion"],
                                     description: "A dark and dense forest filled with unknown dangers and hidden treasures.",
                                     nextLocations: [new ObjectId.toString(), new ObjectId.toString()]
                                 }
-<span class="cstat-no" title="statement not covered" >                                return saveLocation(locationToEdit.id, locationData)</span>
+                                return saveLocation(locationToEdit._id.toString(), locationData)
                                     .then(<span class="fstat-no" title="function not covered" >location =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                                        expect(location).to.exist</span>
-<span class="cstat-no" title="statement not covered" >                                        expect(location.author).to.equal(user.Id)</span>
-<span class="cstat-no" title="statement not covered" >                                        expect(location.name).to.equal(locationData.name)</span>
+<span class="cstat-no" title="statement not covered" >                                        expect(location.author).to.equal(user._id.toString())</span>
+<span class="cstat-no" title="statement not covered" >                                        expect(location.name).to.equal('FAIL')</span>
 <span class="cstat-no" title="statement not covered" >                                        expect(location.enemies).to.equal(locationData.enemies)</span>
 <span class="cstat-no" title="statement not covered" >                                        expect(location.objects).to.equal(locationData.objects)</span>
 <span class="cstat-no" title="statement not covered" >                                        expect(location.description).to.equal(locationData.description)</span>
@@ -422,18 +422,18 @@ describe('save Location',() =&gt; {
         let errorThrown
         return bcrypt.hash('123123123', 8)
             .then(hash =&gt; User.create({name: 'John', surname: 'Doe', email: 'john@doe.com', username: 'johndoe', role: 'master', password: hash })
-                .then(user =&gt; Campaign.create({author:user.id})
+                .then(user =&gt; Campaign.create({author:user._id.toString()})
                     .then(campaign =&gt; {
-                        Location.create({author: user.Id})
-                            .then(<span class="fstat-no" title="function not covered" >locationToEdit =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                                const locationData = {</span>
+                        Location.create({author: user._id.toString()})
+                            .then(locationToEdit =&gt; {
+                                const locationData = {
                                     name: "Mysterious Forest",
                                     enemies: ["Goblin", "Troll"],
                                     objects: ["Ancient Sword", "Mystic Potion"],
                                     description: "A dark and dense forest filled with unknown dangers and hidden treasures.",
                                     nextLocations: [new ObjectId.toString(), new ObjectId.toString()]
                                 }
-<span class="cstat-no" title="statement not covered" >                                return saveLocation(new ObjectId.toString(), locationData)</span>
+                                return saveLocation(new ObjectId.toString(), locationData)
                                     .catch(<span class="fstat-no" title="function not covered" >error =&gt; {<span class="cstat-no" title="statement not covered" ></span>errorThrown = error}</span>)
                                     .finally(<span class="fstat-no" title="function not covered" >() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                                        expect(errorThrown).to.be.an.instanceOf(NotFoundError)</span>
@@ -451,19 +451,19 @@ describe('save Location',() =&gt; {
         let errorThrown
         return bcrypt.hash('123123123', 8)
             .then(hash =&gt; User.create({name: 'John', surname: 'Doe', email: 'john@doe.com', username: 'johndoe', role: 'master', password: hash })
-                .then(user =&gt; Campaign.create({author:user.id})
+                .then(user =&gt; Campaign.create({author:user._id.toString()})
                     .then(campaign =&gt; {
-                        Location.create({author: user.Id})
-                            .then(<span class="fstat-no" title="function not covered" >locationToEdit =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                                const locationData = {</span>
+                        Location.create({author: user._id.toString()})
+                            .then(locationToEdit =&gt; {
+                                const locationData = {
                                     name: "Mysterious Forest",
                                     enemies: ["Goblin", "Troll"],
                                     objects: ["Ancient Sword", "Mystic Potion"],
                                     description: "A dark and dense forest filled with unknown dangers and hidden treasures.",
                                     nextLocations: [new ObjectId.toString(), new ObjectId.toString()]
                                 }
-<span class="cstat-no" title="statement not covered" >                                try{</span>
-<span class="cstat-no" title="statement not covered" >                                    saveLocation(12343, locationData)</span>
+                                try{
+                                    saveLocation(12343, locationData)
                                 }
                                 catch(error){
 <span class="cstat-no" title="statement not covered" >                                    errorThrown = error</span>
@@ -484,19 +484,19 @@ describe('save Location',() =&gt; {
         let errorThrown
         return bcrypt.hash('123123123', 8)
             .then(hash =&gt; User.create({name: 'John', surname: 'Doe', email: 'john@doe.com', username: 'johndoe', role: 'master', password: hash })
-                .then(user =&gt; Campaign.create({author:user.id})
+                .then(user =&gt; Campaign.create({author:user._id.toString()})
                     .then(campaign =&gt; {
-                        Location.create({author: user.Id})
-                            .then(<span class="fstat-no" title="function not covered" >locationToEdit =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                                const locationData = {</span>
+                        Location.create({author: user._id.toString()})
+                            .then(locationToEdit =&gt; {
+                                const locationData = {
                                     name: 12343,
                                     enemies: ["Goblin", "Troll"],
                                     objects: ["Ancient Sword", "Mystic Potion"],
                                     description: "A dark and dense forest filled with unknown dangers and hidden treasures.",
                                     nextLocations: [new ObjectId.toString(), new ObjectId.toString()]
                                 }
-<span class="cstat-no" title="statement not covered" >                                try{</span>
-<span class="cstat-no" title="statement not covered" >                                    saveLocation(user.id, locationData)</span>
+                                try{
+                                    saveLocation(user.id, locationData)
                                 }
                                 catch(error){
 <span class="cstat-no" title="statement not covered" >                                    errorThrown = error</span>
@@ -520,7 +520,7 @@ describe('save Location',() =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-30T16:44:52.284Z
+                at 2024-09-03T17:04:40.027Z
             </div>
         <script src="../prettify.js"></script>
         <script>

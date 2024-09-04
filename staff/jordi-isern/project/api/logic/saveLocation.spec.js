@@ -23,9 +23,9 @@ describe('save Location',() => {
     it('should successfully edit the location',() => {
         return bcrypt.hash('123123123', 8)
             .then(hash => User.create({name: 'John', surname: 'Doe', email: 'john@doe.com', username: 'johndoe', role: 'master', password: hash })
-                .then(user => Campaign.create({author:user.id})
+                .then(user => Campaign.create({author:user._id.toString()})
                     .then(campaign => {
-                        Location.create({author: user.Id})
+                        Location.create({author: user._id.toString()})
                             .then(locationToEdit => {
                                 const locationData = {
                                     name: "Mysterious Forest",
@@ -34,10 +34,10 @@ describe('save Location',() => {
                                     description: "A dark and dense forest filled with unknown dangers and hidden treasures.",
                                     nextLocations: [new ObjectId.toString(), new ObjectId.toString()]
                                 }
-                                return saveLocation(locationToEdit.id, locationData)
+                                return saveLocation(locationToEdit._id.toString(), locationData)
                                     .then(location => {
                                         expect(location).to.exist
-                                        expect(location.author).to.equal(user.Id)
+                                        expect(location.author).to.equal(user._id.toString())
                                         expect(location.name).to.equal(locationData.name)
                                         expect(location.enemies).to.equal(locationData.enemies)
                                         expect(location.objects).to.equal(locationData.objects)
@@ -57,9 +57,9 @@ describe('save Location',() => {
         let errorThrown
         return bcrypt.hash('123123123', 8)
             .then(hash => User.create({name: 'John', surname: 'Doe', email: 'john@doe.com', username: 'johndoe', role: 'master', password: hash })
-                .then(user => Campaign.create({author:user.id})
+                .then(user => Campaign.create({author:user._id.toString()})
                     .then(campaign => {
-                        Location.create({author: user.Id})
+                        Location.create({author: user._id.toString()})
                             .then(locationToEdit => {
                                 const locationData = {
                                     name: "Mysterious Forest",
@@ -86,9 +86,9 @@ describe('save Location',() => {
         let errorThrown
         return bcrypt.hash('123123123', 8)
             .then(hash => User.create({name: 'John', surname: 'Doe', email: 'john@doe.com', username: 'johndoe', role: 'master', password: hash })
-                .then(user => Campaign.create({author:user.id})
+                .then(user => Campaign.create({author:user._id.toString()})
                     .then(campaign => {
-                        Location.create({author: user.Id})
+                        Location.create({author: user._id.toString()})
                             .then(locationToEdit => {
                                 const locationData = {
                                     name: "Mysterious Forest",
@@ -119,9 +119,9 @@ describe('save Location',() => {
         let errorThrown
         return bcrypt.hash('123123123', 8)
             .then(hash => User.create({name: 'John', surname: 'Doe', email: 'john@doe.com', username: 'johndoe', role: 'master', password: hash })
-                .then(user => Campaign.create({author:user.id})
+                .then(user => Campaign.create({author:user._id.toString()})
                     .then(campaign => {
-                        Location.create({author: user.Id})
+                        Location.create({author: user._id.toString()})
                             .then(locationToEdit => {
                                 const locationData = {
                                     name: 12343,

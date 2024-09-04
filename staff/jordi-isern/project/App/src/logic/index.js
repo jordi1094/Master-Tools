@@ -6,6 +6,7 @@ import createNpc from "./createNpc"
 import getFullMonterList from "./getFullMontersList"
 import createCampaing from "./createCampaing"
 import getCampaign from './getCampaign'
+import getCampaigns from "./getCampaigns"
 
 const logic = {
     isUserLoggedIn,
@@ -15,7 +16,8 @@ const logic = {
     createNpc,
     getFullMonterList,
     createCampaing,
-    getCampaign
-}
+    getCampaign,
+    getCampaigns
+    }
 
 export default logic

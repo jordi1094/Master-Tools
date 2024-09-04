@@ -10,16 +10,14 @@ const location = new Schema({
         ref:'User'
     },
     name:{
-        type: String,
-        required: true
+        type: String
     },
     enemies:[{type: String}],
     objects: [{
         type: String
     }],
     description: {
-        type: String,
-        required: true
+        type: String
     },
     nextLocations: [{
         type: ObjectId,

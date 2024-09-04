@@ -52,7 +52,7 @@ function RegisterForm () {
             <Field id = 'email' placeholder= 'Email'>Email</Field>
             <Field id = 'username' placeholder= 'Username'>Username</Field>
             <Select id= 'role' placeholder='Select your role' options={['Master', 'Player']}></Select>
-            {/* //TODO change type password to test with the buton  */}
+            {/* //TODO change type password to text with the buton  */}
             <FieldPassword id= 'password' placeholder= 'Password'>Password</FieldPassword>
             <FieldPassword id= 'repeatPassword' placeholder= 'Repeat assword'>Reperat password</FieldPassword>
             <Button type = 'submit' className = 'text-white bg-[--blueBackgroundBox] rounded-md mt-4 hover:scale-y-105 active:scale-y-100 px-3 w-[100%]'> Register Now</Button>
