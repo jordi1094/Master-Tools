@@ -10,9 +10,9 @@ const getLocationHandler = (req,res) => {
     .then(payload => {
         const {sub:userId} = payload
 
-        const locationId = req.body
+        const {targetLocation} = req.params
     try{
-        logic.getLocation(userId, locationId)
+        logic.getLocation(userId, targetLocation)
             .then((location) => {
                 res.status(200)
                 res.json (location)

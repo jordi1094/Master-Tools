@@ -1,8 +1,6 @@
 import'dotenv/config'
 import logic from "../logic/index.js";
-import jwt from '../util/jasonwebtoken-promised.js'
 import handleErrorResponse from "../helper/handleErrorResponse.js";
-import saveLocation from '../logic/saveLocation.js';
 const {JWT_SECRET} = process.env
 
 const saveLocationsHandler = (req, res) => {
@@ -11,7 +9,10 @@ const saveLocationsHandler = (req, res) => {
 
         try{
             logic.saveLocation(targetLocation, newLocationData)
-            .then(() => res.status(204).send())
+            .then((location) => {
+                res.status(200)
+                res.json(location)
+            })
             .catch(error => {
                 handleErrorResponse(error, res)
             })

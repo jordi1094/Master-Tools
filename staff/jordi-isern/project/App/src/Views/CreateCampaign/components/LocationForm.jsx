@@ -31,7 +31,6 @@ function LocationForm() {
 
     const closeForm = (event) => {
         event.preventDefault()
-        console.log('hola')
         navigate(`/createCampaign/${campaignId}`)
     }
 
@@ -51,6 +50,7 @@ function LocationForm() {
         try {
             newLocationData.enemies = enemiesList
             newLocationData.objects = newLocationData.objects.split(',')
+            newLocationData.campaign = campaignId
             logic.saveLocation(locationId, newLocationData)
                 .then(() => {
                     navigate(`/createCampaign/${campaignId}`)
