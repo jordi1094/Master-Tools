@@ -41,7 +41,11 @@ mongoose.connect(MONGODB_URL)
 
         api.get('/campaigns', routeHandler.getCampaigsnHandler)
 
+        api.get('/locations/:targetLocation', routeHandler.getLocationHandler)
+
         api.patch('/locations/:targetLocation', jsonBodyParser, routeHandler.saveLocationHandler)
+
+        api.patch('/campaigns/:targetCampaign', jsonBodyParser, routeHandler.saveCampaignHandler)
         
 
         api.listen(PORT,() => console.log(`API running on PORT ${PORT}`))

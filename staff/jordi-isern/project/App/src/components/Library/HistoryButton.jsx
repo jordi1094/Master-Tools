@@ -5,13 +5,13 @@ import View from './View'
 
 
 
-function HistoryButton ({src, Title }){
-    return <Button className={'bg-white/20 p-3 rounded-lg h-max'}>
-        <View className={'HistoryButtonBackground'}>
-            <Image src={src} className= 'border-[1px] border-[--black]rounded-lg'></Image>
-            <Heading level={4} className='font-size: x-large'>{Title}</Heading>
+function HistoryButton ({src, Title, onClick }){
+    return <div onClick={onClick} className={'bg-white/20 p-3 rounded-lg h-max cursor-pointer'}>
+        <View className={'HistoryButtonBackground '}>
+            <Image src={src} className= 'm-auto border-[1px] border-[--black]rounded-lg'></Image>
+            <Heading level={4} className='text-2xl'>{Title}</Heading>
         </View>
-    </Button>
+    </div>
 }
 
 export default HistoryButton

@@ -1,5 +1,4 @@
 import error , {SystemError} from 'com/errors'
-import { Campaign } from '../../../api/data/models'
 
 const getCampaigns = () => {
     try{
@@ -8,17 +7,17 @@ const getCampaigns = () => {
                 Authorization:`Bearer ${sessionStorage.token}`
             }
         })
-        .catch(error => {
+        .catch(() => {
             throw new SystemError('server error')
         })
         .then(response => {
             if(response.status  === 200) {
                 return response.json()
-                .catch(error => {throw new SystemError('server error')})
+                .catch(() => {throw new SystemError('server error')})
                 .then(campaigns => campaigns)
             }
             return response.json()
-            .catch( error => { throw new SystemError('server error')})
+            .catch( () => { throw new SystemError('server error')})
             .then(body => {
                 const { error , message} = body
                 const constructor = error[error]
@@ -26,7 +25,7 @@ const getCampaigns = () => {
             })
         })
     }catch(error) {
-        console.error (error.erros)
+        console.error (error.errors)
         return
     }
 }

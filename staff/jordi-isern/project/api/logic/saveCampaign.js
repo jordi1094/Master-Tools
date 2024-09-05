@@ -22,18 +22,18 @@ const saveCampaign = (campaignId, newCampaignData) => {
                 throw( new NotFoundError('campaign not found'))
             }
 
-            const {title, background, objective, startLocation, image} = newCampaignData
-            const campaignData = {
-                title,
-                background,
-                objective,
-                startLocation,
-                image
-            }
+            const {title, background, objective, image} = newCampaignData
+            
+            campaignToEdit.title= title
+            campaignToEdit.background= background
+            campaignToEdit.objective = objective
+            campaignToEdit.image = image
 
-            return Campaign.findByIdAndUpdate(campaignToEdit._id.toString(), campaignData,{new: true})
+
+
+            return campaignToEdit.save()
+            .then()
             .catch(error => {throw new SystemError(error.message)})
-            .then((campaign) => {return campaign})
         })
 }
 

@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route path='/register' element={logic.isUserLoggedIn() ? <Navigate to='/home' /> : <RegisterForm />} />
         <Route path='/login' element={logic.isUserLoggedIn() ? <Navigate to='/home' /> : <Login onUserLogedIn={onUserLogedIn}/>} />
-        <Route path='/campaign' element={logic.isUserLoggedIn() ? <Campaign /> : <Navigate to='/login' />} />
+        <Route path='/campaign/:id' element={logic.isUserLoggedIn() ? <Campaign /> : <Navigate to='/login' />} />
         <Route path='/createCampaign/:id' element={logic.isUserLoggedIn() ? <CreateCampaign /> : <Navigate to='/login' />} />
         <Route path='/createCampaign/:id/location/:locationId' element= {logic.isUserLoggedIn() ? <LocationForm/> : <Navigate to='/login'/>}/>
         <Route path='/home' element={logic.isUserLoggedIn() ? <Home /> : <Navigate to='/login' />} />

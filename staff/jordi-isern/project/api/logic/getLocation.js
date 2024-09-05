@@ -16,6 +16,9 @@ const getLocation = (userId, locationId) => {
             return Location.findById(locationId).select('-__v -author').lean()
                 .catch(error => { throw new SystemError(error.message)})
                 .then(location => {
+                    if(!location){
+                        throw new NotFoundError('Location not found')
+                    }
                     location.id = location._id.toString()
 
                     delete location._id

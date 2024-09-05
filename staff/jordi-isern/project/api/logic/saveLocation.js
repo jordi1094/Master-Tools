@@ -1,7 +1,8 @@
-import { Location } from "../data/models/index.js"
+import { Campaign, Location } from "../data/models/index.js"
 import { SystemError, NotFoundError, ContentError } from "com/errors.js"
 import validate from "com/validate.js"
 import validateZod from "com/validations/index.js"
+import { campaign } from "../data/models/Campaign.js"
 
 const saveLocation = async (locationId, newLocationData) => {
     validate.id(locationId, 'locationId')
@@ -19,21 +20,41 @@ const saveLocation = async (locationId, newLocationData) => {
         throw new SystemError(error.message)
     }
 
+    if(newLocationData.campaign){
+    let campaign
+    try{
+        campaign = await Campaign.findById(newLocationData.campaign)
+        
+        campaign.startLocation = locationId
+
+        const campaignSaved = await campaign.save()
+    }catch(error){
+        throw new SystemError(error.message)
+    }}
+
     if (!location) {
         throw new NotFoundError('location not found')
     }
 
-    const { name, description, enemiesIndexList, object, nextLocationsIdList, campaign } = newLocationData
+    if(!campaign){
+        throw new NotFoundError('campaign not found')
+    }
+
+    const { name, description, enemies, object, nextLocationsIdList, campaign:campaignId} = newLocationData
 
     location.name = name
     location.description = description
-    location.enemies = enemiesIndexList
+    location.enemies = enemies
     location.nextLocations = nextLocationsIdList
     location.object = object
-    location.campaign = campaign
+
 
     try {
-        return await location.save()
+        const locationSaved = await location.save()
+
+        locationSaved.id = locationSaved._id.toString()
+        delete locationSaved._id
+        return locationSaved
     } catch (error) {
         throw new SystemError(error.message)
     }

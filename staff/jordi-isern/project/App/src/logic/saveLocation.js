@@ -12,8 +12,10 @@ const saveLocation = (id, newLocationData) => {
         })
         .catch(()=> {throw new SystemError('server error')})
         .then(response => {
-            if(response.status === 204){
-                return
+            if(response.status === 200){
+                return response.json()
+                .catch(() => {throw new SystemError('server error')})
+                .then(location => location)
             }
             return response.json()
                 .catch(() => {throw new SystemError('server error')})
@@ -24,7 +26,7 @@ const saveLocation = (id, newLocationData) => {
                 })
         })
     }catch (error){
-        connsole.error(error.errors)
+        console.error(error.errors)
         return
     }
 }

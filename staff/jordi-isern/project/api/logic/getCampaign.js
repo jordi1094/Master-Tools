@@ -7,15 +7,14 @@ const getCampaign = (userId, campaignId) => {
     validate.id(userId, 'userId');
 
     return User.findById(userId).select('_id').lean()
-        .catch(error => {
-            throw new SystemError(error.message);
-        })
+        .catch(error => { throw new SystemError(error.message)})
         .then(user => {
             if (!user) {
                 throw new NotFoundError('User not found');
             }
             return Campaign.findById(campaignId).select('-__v -author').lean()
         })
+        .catch(error => {throw new SystemError(error.message)})
         .then(campaign => {
             if (!campaign) {
                 throw new NotFoundError('Campaign not found')
