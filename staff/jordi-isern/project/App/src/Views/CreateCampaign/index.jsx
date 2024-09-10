@@ -23,7 +23,6 @@ function CreateCampaign() {
     const navigate = useNavigate()
     const onClickClose = () => navigate('/home')
     const [charactersList, setCharacters] = useState([])
-    const [characterIDList, setCharactersID] = useState([])
     const [createCharacter, setCharaterFormState] = useState(false)
     const [startLocation, setLocation] = useState({})
     
@@ -38,18 +37,30 @@ function CreateCampaign() {
                     })
                 })
                 .catch(error => {console.log(error)})
-            },[])
+            
+        logic.getCharacters(id)
+            .then(characters => {
+                setCharacters(characters)
+            })
+            .catch(error => console.log(error))
+    },[])
 
 
     const onClickAddCharacter = () => {setCharaterFormState(true)}
     const onClickSaveAndCancelCharacter = () => setCharaterFormState(false)
 
-    const onClickAddLocation = (event) => {
-        event.preventDefault()
-
-        logic.createLocation()
-        .then(location => navigate(`/createCampaign/${id}/location/${location._id.toString()}`))
-    }
+    const onClickAddLocation = handleSubmit((newCampaingData) => {
+        try{
+            logic.saveCampaign(id, newCampaingData)
+            .then(
+                logic.createLocation()
+                .then(location => navigate(`/createCampaign/${id}/location/${location._id.toString()}`))
+                .catch(error => {console.log(error)})
+            ).catch(error => {console.log(error)})
+        }catch(error){
+            console.log(error)
+        }        
+    })
 
     const onCharacterCreated = (character) => {
         setCharaterFormState(false)
@@ -71,14 +82,14 @@ function CreateCampaign() {
         <View className= 'bg-[url(../../public/images/backgroundBlue.jpg)] fixed bg-cover bg-center h-screen w-screen '>
             <div className='aboslute top-0 w-full h-full overflow-y-auto  flex flex-col items-center '>
                 <div className="flex items-center w-full">
-                    <h1 className="text-center flex-grow">Create Campaign</h1>
+                    <h1 className="text-center flex-grow">Campaign</h1>
                     <Button onClick={onClickClose} className='bg-gold1 rounded-md h-7 w-7 flex justify-center items-center p-0 ml-auto mr-4'>
                         <Image src={CrossIcon} className='pointer-events-none h-6 m-0'/>
                     </Button>
                 </div>
 
                 <Form onSubmit={onSubmit} classname='flex flex-col py-[2vh] px-[7vw]' >
-                    <Field id='title' className='mt-7' classNameInput='w-full h-[3vh] rounded-md' value={savedCampaignData.title}  formHook={register('title',{
+                    <Field id='title' className='mt-7' classNameInput='w-full h-[3vh] p-2 text-black rounded-md' value={savedCampaignData.title}  formHook={register('title',{
                         required:{
                             value: true,
                             message:'Title is required'
@@ -89,7 +100,7 @@ function CreateCampaign() {
                     })}>
                             <h5   className='text-2xl mr-3 font-extrabold'>Title</h5>
                     </Field>
-                    <TextAreaField id='background' className='w-[70vw] drop-shadow-sm mt-7  bg-slate-700/60 rounded-md p-2' value={savedCampaignData.background} classNameInput='w-full h-[10vh] resize-none' formHook={register('background',{
+                    <TextAreaField id='background' className='w-[70vw] drop-shadow-sm text-black mt-7  bg-slate-700/60 rounded-md p-2' value={savedCampaignData.background} classNameInput='w-full h-[10vh] resize-none' formHook={register('background',{
                         required:{
                             value:true,
                             message:'Background is required'
@@ -97,7 +108,7 @@ function CreateCampaign() {
                     })}>
                             <h5  className='mb-2 text-xl font-bold'>Background</h5>
                     </TextAreaField>
-                    <TextAreaField id='objective' className='w-[70vw] drop-shadow-sm mt-2  bg-slate-700/60 rounded-md p-2' value={savedCampaignData.objective} classNameInput='resize-none w-full h-[10vh]' formHook={register('objective',{
+                    <TextAreaField id='objective' className='w-[70vw] drop-shadow-sm mt-2  text-black bg-slate-700/60 rounded-md p-2' value={savedCampaignData.objective} classNameInput='resize-none w-full h-[10vh]' formHook={register('objective',{
                         required:{
                             value: true,
                             message:'Objective is required'
@@ -106,7 +117,7 @@ function CreateCampaign() {
                             <h5 className='mb-2 text-xl font-bold'>Objective</h5>
                     </TextAreaField>
                     <div>
-                        <Field id='image' type='url' className=' bg-slate-700/60 rounded-md p-2 mt-2' value={savedCampaignData.image} placeholder='Please enter the link to an image.' classNameInput='rounded w-full px-2'  formHook={register('image',{
+                        <Field id='image' type='url' className=' bg-slate-700/60 rounded-md p-2 mt-2' value={savedCampaignData.image} placeholder='Please enter the link to an image.' classNameInput='rounded text-black w-full px-2'  formHook={register('image',{
                                 required:{
                                     value:true,
                                     message: 'Image is required'

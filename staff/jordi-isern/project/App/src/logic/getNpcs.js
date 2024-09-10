@@ -1,8 +1,8 @@
-import error, {SystemError} from 'com/errors'
+import error, {SystemError} from  'com/errors'
 
-const getCampaign = (targetCampaign) => {
+const getNpcs = (locationId) => {
     try {
-        return fetch(`${import.meta.env.VITE_API_URL}/campaigns/${targetCampaign}`,{
+        return fetch(`${import.meta.env.VITE_API_URL}/npcs/${locationId}`,{
             headers:{
                 Authorization:`Bearer ${sessionStorage.token}`
             }
@@ -12,21 +12,20 @@ const getCampaign = (targetCampaign) => {
         .then(response => {
             if(response.status === 200) {
                 return response.json()
-                .catch(()=>{ throw new SystemError('server error')})
-                .then(campaign => campaign)
+                .catch(()=> {throw new SystemError('server error')})
+                .then(npcs => npcs)
             }
             return response.json()
-            .catch (() => {throw new SystemError('server error')})
+            .catch(()=> {throw new SystemError('server error')})
             .then(body => {
-                const {error , message} = body
+                const {error, message} = body
                 const constructor = error[error]
                 throw new constructor(message)
             })
-        })   
-    }catch(error){
+        })
+    } catch (error) {
         console.error(error.errors)
         return
     }
 }
-
-export default getCampaign
+export default getNpcs

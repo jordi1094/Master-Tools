@@ -19,13 +19,14 @@ const createCharacter = (userId, characterData) => {
                     throw (new NotFoundError('user not found'))
                 }
 
-                const {acrobatics, alignment, animalHandling, arcana, armorClass, athletics, attacksAndSpellcasting, background, bonds, campaignId, charismaDeathSave, charismaModifier, charismaScore, classCharacter, constitutionDeathSave, constitutionModifier, constitutionScore, cooper, currentHitPoints, deathSavesFailures, deathSavesSucceses, deception, dexterityDeathSave, dexterityModifier, dexterityScore, electrum, equipment, exp, featuresAndTraits, flaws, gold, history, hitDice, ideals, iniciative, iniciativeDeathSave, initiativeModifier, initiativeScore, insight, inspiration, intimidation, investigation, level, maxHitPoints, medicine, name, nature, otherProeficiencesAndLanguages, perception, performance, personalityTraits, persuasion, platinium, proficiencyBonus, race, religion, silver, sleightOfHand, speed, stealth, strengthDeathSave, strengthModifier, strengthScore, survival, temporalHitPoints, wisdomModifier, wisdomScore, wishdomDeathSave} = characterData
+                const {acrobatics, alignment, animalHandling, arcana, armorClass, athletics, attacksAndSpellcasting, background, bonds, campaignId, charismaDeathSave, charismaModifier, charismaScore, classCharacter, constitutionDeathSave, constitutionModifier, constitutionScore, cooper, currentHitPoints, deathSavesFailures, deathSavesSucceses, deception, dexterityDeathSave, dexterityModifier, dexterityScore, electrum, equipment, exp, featuresAndTraits, flaws, gold, history, hitDice, ideals, image, iniciative, iniciativeDeathSave, initiativeModifier, initiativeScore, insight, inspiration, intimidation, investigation, level, maxHitPoints, medicine, name, nature, otherProeficiencesAndLanguages, perception, performance, personalityTraits, persuasion, platinium, proficiencyBonus, race, religion, silver, sleightOfHand, speed, stealth, strengthDeathSave, strengthModifier, strengthScore, survival, temporalHitPoints, wisdomModifier, wisdomScore, wishdomDeathSave} = characterData
                 const character = {
                     author: userId,
                     name,
                     race,
                     class: classCharacter,
                     level,
+                    image,
                     expiriencePoints: exp,
                     background,
                     alignment,

@@ -27,7 +27,6 @@ function Home () {
     }
 
     const onClickCampaign = (campaignId) => {
-        console.log('click')
         navigate(`/campaign/${campaignId}`)
     }
 

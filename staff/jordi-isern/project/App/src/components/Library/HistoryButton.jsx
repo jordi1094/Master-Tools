@@ -6,10 +6,10 @@ import View from './View'
 
 
 function HistoryButton ({src, Title, onClick }){
-    return <div onClick={onClick} className={'bg-white/20 p-3 rounded-lg h-max cursor-pointer'}>
+    return <div onClick={onClick} className={'bg-[#949e9a7b] p-3 rounded-lg h-max cursor-pointer'}>
         <View className={'HistoryButtonBackground '}>
-            <Image src={src} className= 'm-auto border-[1px] border-[--black]rounded-lg'></Image>
-            <Heading level={4} className='text-2xl'>{Title}</Heading>
+            <Image src={src} className= 'm-auto border-[1px] w-72 h-72 object-cover border-[--black]rounded-lg'></Image>
+            <Heading level={4} className='text-2xl text-center'>{Title}</Heading>
         </View>
     </div>
 }

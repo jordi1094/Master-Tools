@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import logic from '../../logic'
 import CharactersBox from "./components/CharactersBox"
 import NpcsBox from "./components/NpcsBox"
 import EnemiesBox from "./components/EnemiesBox"
@@ -10,9 +12,22 @@ import CheckList from "./components/CheckList"
 
 
 function Campaign () {
-    console.log('campaign -> render')
+    const {id} = useParams()
+    const [campaignData, setCampaign] = useState()
+    const [presentLocationId, setLocation] = useState()
 
 
+    useEffect(() => {
+        logic.getCampaign(id)
+            .then(campaign => {
+                setCampaign(campaign)
+                setLocation(campaign.startLocation)
+            })
+//TODO NO se guarda la start location
+            .catch(error => {
+                console.error( error)
+            })
+    },[]) 
 
     const [panelsView, setPanelsView] = useState({
         campaign: false,
@@ -34,15 +49,15 @@ function Campaign () {
 
     return (
         <View className='bg-[url(../../public/images/background.jpg)] bg-cover bg-center h-[100vh] grid grid-flow-col  '>
-            <NpcsBox ></NpcsBox>
+            <NpcsBox locationId={presentLocationId}/>
             <View className='flex flex-col justify-between items-center'>
-                <CharactersBox/>
+                <CharactersBox campaignId = {id}/>
                 {panelsView.campaign && <CampaignDetails  onClickClose = {onClickCloseDetails}/>}
                 {panelsView.mission &&<MissionDetails onClickClose={onClickCloseMission}/>}
                 {panelsView.checkList && <CheckList onClickClose={onClickCloseCheckList}/>}
                 <CampaignMenu onclickBook={onclickBook} onClickPage={onClickPage} onClickCheckList= {onClickCheckList}/>
             </View>
-            <EnemiesBox></EnemiesBox>
+            <EnemiesBox ></EnemiesBox>
       
         </View>
         
