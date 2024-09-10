@@ -8,6 +8,8 @@ import createCampaing from "./createCampaing"
 import getCampaign from './getCampaign'
 import getCampaigns from "./getCampaigns"
 import getLocation from "./getLocation"
+import getCharacters from "./getCharacters"
+import getNpcs from "./getNpcs"
 import createLocation from "./createLocation"
 import saveLocation from "./saveLocation"
 import saveCampaign from "./saveCampaign"
@@ -23,6 +25,8 @@ const logic = {
     getCampaign,
     getCampaigns,
     getLocation,
+    getCharacters,
+    getNpcs,
     createLocation,
     saveLocation,
     saveCampaign

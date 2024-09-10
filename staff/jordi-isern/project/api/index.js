@@ -41,6 +41,10 @@ mongoose.connect(MONGODB_URL)
 
         api.get('/campaigns', routeHandler.getCampaigsnHandler)
 
+        api.get('/characters/:targetCampaign',routeHandler.getCharactersHandler)
+        
+        api.get('/npcs/:targetLocation',routeHandler.getNpcsHandler)
+
         api.get('/locations/:targetLocation', routeHandler.getLocationHandler)
 
         api.patch('/locations/:targetLocation', jsonBodyParser, routeHandler.saveLocationHandler)

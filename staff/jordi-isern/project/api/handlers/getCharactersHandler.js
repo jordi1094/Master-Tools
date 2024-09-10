@@ -12,9 +12,9 @@ const getCharacters = (req, res) => {
     .then(payload => {
         const {sub:userId} = payload
 
-        const charactersId = req.body
+        const {targetCampaign} = req.params
         try{
-            logic.getCharacters(userId, charactersIds)
+            logic.getCharacters(userId, targetCampaign)
                 .then(characters => {
                     res.status(200)
                     res.json(characters)

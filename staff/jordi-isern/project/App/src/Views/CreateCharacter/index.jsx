@@ -111,7 +111,10 @@ function CharacterForm ({closeForm ,onCharacterCreated, campaignId}){
                             required:{
                                 value:true,
                                 message: 'Image is required'
-                            },pattern: /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
+                            },pattern:{
+                                value: /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/,
+                                message: 'Image link is not correct try another one please'
+                            }
                         })}>
                             Image</Field>
                     <Button onClick={closeForm} className='bg-gold1 rounded-md h-7 w-7 flex justify-center items-center p-0 self-center justify-self-end'>
