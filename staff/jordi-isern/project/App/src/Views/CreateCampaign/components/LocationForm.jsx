@@ -48,9 +48,10 @@ function LocationForm() {
 
     const onSubmit = handleSubmit((newLocationData) => {
         try {
-            newLocationData.enemies = enemiesList
+            newLocationData.enemies = enemiesIndexList
             newLocationData.objects = newLocationData.objects.split(',')
             newLocationData.campaign = campaignId
+            newLocationData.nextLocations = []
             logic.saveLocation(locationId, newLocationData)
                 .then(() => {
                     navigate(`/createCampaign/${campaignId}`)

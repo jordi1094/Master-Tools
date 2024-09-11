@@ -17,9 +17,6 @@ const getNpcs = (userId, targetLocation) => {
         return Npc.find({ location:{$in:[targetLocation]}}).select('-__v').lean()
             .catch(error => {{throw new SystemError(error.message)}})
             .then(npcs => {
-                if (npcs.length !== npcsId.length){
-                    throw new NotFoundError('One or more locations not found')
-                }
                 npcs.forEach((npc)=> {
                     npc.id = npc._id.toString()
 

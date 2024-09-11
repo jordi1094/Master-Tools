@@ -8,6 +8,7 @@ import View from "../../components/Library/View"
 import CampaignMenu from "./components/CampainMenu"
 import CampaignDetails from "./components/CampaignDetails"
 import MissionDetails from "./components/MissionDetails"
+import LocationDetails from "./components/LocationDetails"
 import CheckList from "./components/CheckList"
 
 
@@ -23,7 +24,6 @@ function Campaign () {
                 setCampaign(campaign)
                 setLocation(campaign.startLocation)
             })
-//TODO NO se guarda la start location
             .catch(error => {
                 console.error( error)
             })
@@ -47,15 +47,19 @@ function Campaign () {
     const  onClickCheckList = () => setPanelsView({...panelsView,checkList:true})
     const onClickCloseCheckList = () => setPanelsView({...panelsView,checkList:false})     
 
+    const  onClickMap = () => setPanelsView({...panelsView,location:true})
+    const onClickCloseLocation = () => setPanelsView({...panelsView,location:false})     
+
     return (
         <View className='bg-[url(../../public/images/background.jpg)] bg-cover bg-center h-[100vh] grid grid-flow-col  '>
-            <NpcsBox locationId={presentLocationId}/>
+            {presentLocationId && <NpcsBox locationId={presentLocationId} />}
             <View className='flex flex-col justify-between items-center'>
                 <CharactersBox campaignId = {id}/>
-                {panelsView.campaign && <CampaignDetails  onClickClose = {onClickCloseDetails}/>}
+                {panelsView.campaign && <CampaignDetails campaignData={campaignData} onClickClose = {onClickCloseDetails}/>}
                 {panelsView.mission &&<MissionDetails onClickClose={onClickCloseMission}/>}
                 {panelsView.checkList && <CheckList onClickClose={onClickCloseCheckList}/>}
-                <CampaignMenu onclickBook={onclickBook} onClickPage={onClickPage} onClickCheckList= {onClickCheckList}/>
+                {panelsView.location && <LocationDetails locationId={presentLocationId} onClickClose={onClickCloseLocation}/>}
+                <CampaignMenu onclickBook={onclickBook} onClickPage={onClickPage} onClickCheckList= {onClickCheckList} onClickMap={onClickMap}/>
             </View>
             <EnemiesBox ></EnemiesBox>
       

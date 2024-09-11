@@ -7,10 +7,18 @@ import PlusIcon from '../../../icons/plus.svg'
 import DragHandleIcon from'../../../icons/drag-handle-svgrepo-com.svg'
 import CrossIcon from '../../../icons/cross-svgrepo-com.svg'
 import Image from '../../../components/core/Image'
-import Draggable from 'react-draggable';
+import Draggable from 'react-draggable'
+import { useState, useEffect } from 'react'
+import logic from '../../../logic'
 
-function CampaignDetails({onClickClose}) {
+function CampaignDetails({onClickClose, campaignData}) {
+    const [charactersList, setCharacters] = useState([])
 
+    useEffect(() => {
+        logic.getCharacters(campaignData.id)
+        .then(characters => setCharacters(characters))
+        .catch(error => console.log(error))
+    },[])
 
     return (
       <Draggable
@@ -29,22 +37,19 @@ function CampaignDetails({onClickClose}) {
                 <Image className='h-[3vh] cursor-pointer hover:scale-110 pointer-events-none'  src = {CrossIcon}></Image>
                 </Button>
             </div>
-            <Heading level='1' className='underline text-center text-black'>Title</Heading>
+            <Heading level='1' className='underline text-center text-black'>{campaignData.title}</Heading>
             <View className='border-b-[1px] border-black pb-3'>
                 <Heading level='2' className='text-black pb-2'>Background</Heading>
-                <text className='text-black'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Sed luctus mauris vel ipsum facilisis, id tempus velit suscipit. Phasellus et nulla nec eros tempor hendrerit nec non justo. Suspendisse potenti. Mauris pharetra lacus nec tortor dignissim, in tincidunt orci aliquet. Integer sit amet ligula ut lorem auctor consequat. Curabitur fermentum, ligula et convallis euismod, eros purus gravida lorem, in dignissim metus ex vel ligula</text>
+                <text className='text-black'>{campaignData.background}</text>
             </View>
             <View className='border-b-[1px] border-black pb-3'>
                 <Heading level='2' className='text-black pb-2'>Objective</Heading>
-                <text className='text-black'>Fusce id lectus et dui efficitur consectetur. Nulla facilisi. Vestibulum eget arcu in sem tincidunt ultricies ut eget lacus. Integer suscipit urna eu ante volutpat, a laoreet metus facilisis.</text>
+                <text className='text-black'>{campaignData.objective}</text>
             </View>
             <View>
                 <Heading level='2' className='text-black pb-2'>Characters</Heading>
                 <View className='flex items-center gap-4'>
-                    <CharacterImage src={'/images/jugadores/bardo humano.jpeg'} className= 'border-gold1'></CharacterImage>
-                    <CharacterImage src={'/images/jugadores/draconido mago.jpeg' } className= 'border-gold1' ></CharacterImage>
-                    <CharacterImage src={'/images/jugadores/elfa guerrera.jpeg' } className= 'border-gold1' ></CharacterImage>
-                    <CharacterImage src={'/images/jugadores/enano guerreto.jpeg' } className= 'border-gold1' ></CharacterImage>
+                {charactersList.map((character, index) => <CharacterImage key= {index} src={character.image} className='border-gold1' />)}
                     <Button>
                         <Image src= {PlusIcon} className='h-[16vh]'></Image>
                     </Button>
