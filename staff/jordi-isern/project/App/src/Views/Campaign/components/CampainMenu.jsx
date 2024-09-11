@@ -9,7 +9,7 @@ import MapIcon from "../../../icons/map.svg"
 import {Link} from 'react-router-dom'
 
 
-function CampaignMenu ({onclickBook, onClickPage, onClickCheckList}){
+function CampaignMenu ({onclickBook, onClickPage, onClickCheckList, onClickMap}){
 
     return <View className='bg-blueBackgroundBox rounded-t-3xl pt-1 flex gap-7 '>
         <Link to='/home'>
@@ -24,7 +24,7 @@ function CampaignMenu ({onclickBook, onClickPage, onClickCheckList}){
         <Button onClick={onClickCheckList}>
             <Image src={CheckListIcon} className='h-[6vh] pointer-events-none'/>
         </Button>
-        <Button>
+        <Button onClick={onClickMap}>
             <Image src={MapIcon} className='h-[6vh]'/>
         </Button>
     </View>

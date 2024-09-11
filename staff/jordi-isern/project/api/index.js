@@ -42,6 +42,8 @@ mongoose.connect(MONGODB_URL)
         api.get('/campaigns', routeHandler.getCampaigsnHandler)
 
         api.get('/characters/:targetCampaign',routeHandler.getCharactersHandler)
+
+        api.get('/locations/nextlocations/:locationId',routeHandler.getLocationsHandler)
         
         api.get('/npcs/:targetLocation',routeHandler.getNpcsHandler)
 

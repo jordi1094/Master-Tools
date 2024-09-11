@@ -21,6 +21,7 @@ const location = new Schema({
     },
     nextLocations: [{
         type: ObjectId,
+        required:true,
         ref:'Location'
     }]
 })

@@ -7,7 +7,6 @@ function EnemiesSearch ({onAddEnemy}) {
     const [searchTerm, setsearchTerm] = useState('')
     const[ filteredEnemies, setFilteresEnemies] = useState([])
      
-    // TODO use efect si no cargo toda la api
     useEffect(() =>{logic.getFullMonterList()
         .then((fullMonterListApi) => {
             setEnemies(fullMonterListApi.results)
