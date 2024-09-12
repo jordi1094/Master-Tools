@@ -11,6 +11,7 @@ import getLocation from "./getLocation"
 import getCharacters from "./getCharacters"
 import getNpcs from "./getNpcs"
 import getLocations from "./getLocations"
+import getEnemy  from "./getEnemy"
 import createLocation from "./createLocation"
 import saveLocation from "./saveLocation"
 import saveCampaign from "./saveCampaign"
@@ -29,6 +30,7 @@ const logic = {
     getLocations,
     getCharacters,
     getNpcs,
+    getEnemy,
     createLocation,
     saveLocation,
     saveCampaign

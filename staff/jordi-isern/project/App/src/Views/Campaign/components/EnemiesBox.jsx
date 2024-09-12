@@ -1,17 +1,32 @@
 import View from "../../../components/Library/View"
 import CharacterImage from "../../../components/Library/CharacterImage"
+import logic from "../../../logic"
 import { useEffect, useState } from "react"
 
-function EnemiesBox(className, enemiesIndexList){
+function EnemiesBox({locationId, onClickEnemy}){
     const [enemiesList, setEnemies] = useState([])
 
+    useEffect(() => {
+        logic.getLocation(locationId)
+        .then(location => {
+            const enemiesIndexList = location.enemies
+            enemiesIndexList.map((enemyIndex) => {
+                logic.getEnemy(enemyIndex)
+                .then((enemy, index )=>{
+                    setEnemies(prevEnemies => [...prevEnemies, enemy])
+                })
+                .catch(error => console.log(error))
+            })
+        })
+        .catch(error => console.log(error))
+    },[])
+
     return (
-        <View className={`${className} rounded-l-3xl bg-blueBackgroundBox w-[15vh] pl-2 py-5 flex flex-col gap-3 self-center justify-self-end`}>
-            <CharacterImage src={'/images/enemigos/dragon de hielo.jpeg' } className= 'border-red1' ></CharacterImage>
-            <CharacterImage src={'/images/enemigos/goblin.jpeg' }className= 'border-red1' ></CharacterImage>
-            <CharacterImage src={'/images/enemigos/manticora.jpeg' } className= 'border-red1' ></CharacterImage>
-            <CharacterImage src={'/images/enemigos/orco.jpeg' } className= 'border-red1' ></CharacterImage>
-        </View>
+        <View className={`rounded-l-3xl bg-blueBackgroundBox w-[15vh] pl-2 py-5 flex flex-col gap-3 self-center justify-self-end`}>
+            {enemiesList.map((enemy, index) =>{
+                {<CharacterImage key={index} onClick={() => onClickEnemy(`${enemy.index}_${index}`)} src={enemy.image ? `https://www.dnd5eapi.co${enemy.image}` : 'https://us.123rf.com/450wm/arhimicrostok/arhimicrostok1705/arhimicrostok170504136/78019673-user-sign-icon-person-symbol-human-avatar-flat-style.jpg?ver=6'} className= 'border-red1' ></CharacterImage>}
+                })}
+            </View>
     )
 }
 

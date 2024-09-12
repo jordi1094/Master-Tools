@@ -33,11 +33,11 @@ function MisionDetails({onClickClose}) {
                 <div className='h-[35vh] overflow-auto hover:overflow-y-scroll'>
                     <View className='border-b-[1px] border-black pb-3'>
                         <Heading level='2' className='text-black pb-2'>Background</Heading>
-                        <text className='text-black'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Sed luctus mauris vel ipsum facilisis, id tempus velit suscipit. Phasellus et nulla nec eros tempor hendrerit nec non justo. Suspendisse potenti. Mauris pharetra lacus nec tortor dignissim, in tincidunt orci aliquet. Integer sit amet ligula ut lorem auctor consequat. Curabitur fermentum, ligula et convallis euismod, eros purus gravida lorem, in dignissim metus ex vel ligula</text>
+                        <p className='text-black'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Sed luctus mauris vel ipsum facilisis, id tempus velit suscipit. Phasellus et nulla nec eros tempor hendrerit nec non justo. Suspendisse potenti. Mauris pharetra lacus nec tortor dignissim, in tincidunt orci aliquet. Integer sit amet ligula ut lorem auctor consequat. Curabitur fermentum, ligula et convallis euismod, eros purus gravida lorem, in dignissim metus ex vel ligula</p>
                     </View>
                     <View className='border-b-[1px] border-black pb-3'>
                         <Heading level='2' className='text-black pb-2'>Objective</Heading>
-                        <text className='text-black'>Fusce id lectus et dui efficitur consectetur. Nulla facilisi. Vestibulum eget arcu in sem tincidunt ultricies ut eget lacus. Integer suscipit urna eu ante volutpat, a laoreet metus facilisis.</text>
+                        <p className='text-black'>Fusce id lectus et dui efficitur consectetur. Nulla facilisi. Vestibulum eget arcu in sem tincidunt ultricies ut eget lacus. Integer suscipit urna eu ante volutpat, a laoreet metus facilisis.</p>
                     </View>
                 </div>
             </div>

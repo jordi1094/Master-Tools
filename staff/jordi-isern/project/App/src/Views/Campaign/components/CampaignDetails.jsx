@@ -40,11 +40,11 @@ function CampaignDetails({onClickClose, campaignData}) {
             <Heading level='1' className='underline text-center text-black'>{campaignData.title}</Heading>
             <View className='border-b-[1px] border-black pb-3'>
                 <Heading level='2' className='text-black pb-2'>Background</Heading>
-                <text className='text-black'>{campaignData.background}</text>
+                <p className='text-black'>{campaignData.background}</p>
             </View>
             <View className='border-b-[1px] border-black pb-3'>
                 <Heading level='2' className='text-black pb-2'>Objective</Heading>
-                <text className='text-black'>{campaignData.objective}</text>
+                <p className='text-black'>{campaignData.objective}</p>
             </View>
             <View>
                 <Heading level='2' className='text-black pb-2'>Characters</Heading>

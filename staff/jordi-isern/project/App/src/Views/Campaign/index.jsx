@@ -9,6 +9,9 @@ import CampaignMenu from "./components/CampainMenu"
 import CampaignDetails from "./components/CampaignDetails"
 import MissionDetails from "./components/MissionDetails"
 import LocationDetails from "./components/LocationDetails"
+import CharacterDetails from "./components/CharacterDetails"
+import NpcDetails from "./components/NpcDetails"
+import EnemyDetails from "./components/EnemyDetails"
 import CheckList from "./components/CheckList"
 
 
@@ -16,25 +19,81 @@ function Campaign () {
     const {id} = useParams()
     const [campaignData, setCampaign] = useState()
     const [presentLocationId, setLocation] = useState()
+    const [characters, setCharacters] = useState([])
+    const [enemies, setEnemies] = useState([])
+    const [npcs, setNpcs] = useState([])
 
 
+
+    
+    const [panelsView, setPanelsView] = useState({
+        campaign: false,
+        mission: false,
+        checkList: false,
+        location: false
+    })
+    
     useEffect(() => {
         logic.getCampaign(id)
             .then(campaign => {
                 setCampaign(campaign)
                 setLocation(campaign.startLocation)
+                logic.getCharacters(id)
+                .then(charactersRecived => {
+                    setCharacters(charactersRecived)
+                })
+                .catch(error => console.log(error))
+
+                logic.getLocation(campaign.startLocation)
+                    .then(location => {
+                        setEnemies(location.enemies)
+                        logic.getNpcs(campaign.startLocation)
+                        .then(npcsRecived => {
+                            setNpcs(npcsRecived)
+                            const characterPanels = characters.reduce((acc, character) => {
+                                acc[`${character.id}`] = false
+                                return acc
+                            },[])
+                            const npcsPanels = npcs.reduce((acc, npc) => {
+                                acc[`${npc.id}`] = false
+                                return acc
+                            },[])
+                            
+                            const enemiesPanels = enemies.reduce((acc, enemy, index) => {
+                                acc[`${enemy}_${index}`] = false
+                                return acc
+                            },[])
+
+                            setPanelsView(pervState => ({
+                                ...pervState, ...characterPanels, ...enemiesPanels, ...npcsPanels
+                            }))
+                        })
+                        .catch(error => console.log(error)) 
+            
+                    })
+                    .catch(error=> console.log(error))
             })
             .catch(error => {
                 console.error( error)
             })
-    },[]) 
+    },[])
 
-    const [panelsView, setPanelsView] = useState({
-        campaign: false,
-        mission: false,
-        checkList: false,
-        location: false,
-    })
+    const onClickCharacter = (characterId) => {
+        setPanelsView({... panelsView, [`${characterId}`]: true})
+    }
+    const onCloseCharacter = (characterId) => setPanelsView({...panelsView, [`${characterId}`]:false})
+
+    const onClickNpc = (npcId) => {
+        setPanelsView({...panelsView, [`${npcId}`]: true})
+    }
+    const onCloseNpc = (npcId) => setPanelsView({...panelsView,[`${npcId}`]:false})
+
+    const onClickEnemy = (enemyIndex) => {
+        console.log(panelsView)
+        console.log(`${enemyIndex}`)
+        setPanelsView({...panelsView, [`${enemyIndex}`]: true})
+    }
+    const onCloseEnemy = (enemyIndex) => setPanelsView({...panelsView,[`${enemyIndex}`]:false})
 
     const  onclickBook = () => setPanelsView({...panelsView,campaign:true})
     const onClickCloseDetails = () => setPanelsView({...panelsView,campaign:false})
@@ -52,16 +111,19 @@ function Campaign () {
 
     return (
         <View className='bg-[url(../../public/images/background.jpg)] bg-cover bg-center h-[100vh] grid grid-flow-col  '>
-            {presentLocationId && <NpcsBox locationId={presentLocationId} />}
+            {presentLocationId && <NpcsBox onClickNpc={onClickNpc} locationId={presentLocationId} />}
             <View className='flex flex-col justify-between items-center'>
-                <CharactersBox campaignId = {id}/>
+                <CharactersBox campaignId = {id} onClickCharacter={onClickCharacter}/>
+                {characters?.map((character, index) => panelsView[character.id] && <CharacterDetails key={index}/>)}
+                {npcs?.map((npc, index) => panelsView[npc.id] && <NpcDetails key={index}/>)}
+                {enemies?.map((enemy, index) => panelsView[`${enemy}_${index}`] && <EnemyDetails key={index}/>)}
                 {panelsView.campaign && <CampaignDetails campaignData={campaignData} onClickClose = {onClickCloseDetails}/>}
                 {panelsView.mission &&<MissionDetails onClickClose={onClickCloseMission}/>}
                 {panelsView.checkList && <CheckList onClickClose={onClickCloseCheckList}/>}
                 {panelsView.location && <LocationDetails locationId={presentLocationId} onClickClose={onClickCloseLocation}/>}
                 <CampaignMenu onclickBook={onclickBook} onClickPage={onClickPage} onClickCheckList= {onClickCheckList} onClickMap={onClickMap}/>
             </View>
-            <EnemiesBox ></EnemiesBox>
+            {presentLocationId && <EnemiesBox locationId={presentLocationId} onClickEnemy={onClickEnemy}></EnemiesBox>}
       
         </View>
         
