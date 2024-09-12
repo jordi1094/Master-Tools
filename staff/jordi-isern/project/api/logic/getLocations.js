@@ -13,7 +13,7 @@ const getLocations = (userId,locationId ) => {
             if (!user){
                 throw new NotFoundError('User not found')
             }
-            Location.find({_id:locationId}).select('nextLocations').lean()
+            return Location.find({_id:locationId}).select('nextLocations').lean()
             .then((location)=> {
                 const locationsIdList = location[0].nextLocations
                 return Location.find({_id: {$in:[locationsIdList]}}).select('name _id').lean()
@@ -23,7 +23,6 @@ const getLocations = (userId,locationId ) => {
                         
                         delete location._id
                     })
-                    console.log('1')
                     return locations
                 })                
                 .catch(error => {throw new SystemError(error.message)})
