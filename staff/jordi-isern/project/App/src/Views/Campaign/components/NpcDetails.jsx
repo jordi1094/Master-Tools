@@ -8,9 +8,19 @@ import DragHandleIcon from'../../../icons/drag-handle-svgrepo-com.svg'
 import CrossIcon from '../../../icons/cross-svgrepo-com.svg'
 import Image from '../../../components/core/Image'
 import Draggable from 'react-draggable'
+import logic from '../../../logic'
+import { useState, useEffect } from 'react'
 
 
-function NpcDetails({characterId}) {
+function NpcDetails({npcId}) {
+    const [npc, setNpc] = useState('')
+    useEffect(() =>{
+        logic.getNpc(npcId)
+        .then(npc => {
+        setNpc(npc)
+    })},[])
+
+
     return (
         <Draggable
         axis="both"
@@ -21,8 +31,7 @@ function NpcDetails({characterId}) {
                 <div className='handle cursor-move'> 
                         <img className='h-[3vh]  pointer-events-none' src={DragHandleIcon}></img>
                     </div>
-                <p className='bg-red color green'>hola</p>
-                {characterId}
+                <p className='bg-red color green'>{npc.name}</p>
             </div>    
         </Draggable>
     )

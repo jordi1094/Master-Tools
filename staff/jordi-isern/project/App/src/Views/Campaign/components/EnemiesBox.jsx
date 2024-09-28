@@ -9,14 +9,12 @@ function EnemiesBox({locationId, onClickEnemy}){
     useEffect(() => {
         logic.getLocation(locationId)
         .then(location => {
-            const enemiesIndexList = location.enemies
-            enemiesIndexList.map((enemyIndex) => {
-                logic.getEnemy(enemyIndex)
-                .then((enemy, index )=>{
-                    setEnemies(prevEnemies => [...prevEnemies, enemy])
-                })
-                .catch(error => console.log(error))
-            })
+            const enemiesIndexList = location.enemies.sort()
+            enemiesIndexList.reduce(async( previousPromise, enemyIndex) => {
+                await previousPromise
+                const enemy= await logic.getEnemy(enemyIndex)
+                setEnemies(prevEnemies => [...prevEnemies, enemy])
+            }, Promise.resolve())
         })
         .catch(error => console.log(error))
     },[])
@@ -24,7 +22,7 @@ function EnemiesBox({locationId, onClickEnemy}){
     return (
         <View className={`rounded-l-3xl bg-blueBackgroundBox w-[15vh] pl-2 py-5 flex flex-col gap-3 self-center justify-self-end`}>
             {enemiesList.map((enemy, index) =>{
-                {<CharacterImage key={index} onClick={() => onClickEnemy(`${enemy.index}_${index}`)} src={enemy.image ? `https://www.dnd5eapi.co${enemy.image}` : 'https://us.123rf.com/450wm/arhimicrostok/arhimicrostok1705/arhimicrostok170504136/78019673-user-sign-icon-person-symbol-human-avatar-flat-style.jpg?ver=6'} className= 'border-red1' ></CharacterImage>}
+                return <CharacterImage key={index} onClick={() => {onClickEnemy(`${enemy.index}_${index}`)}} src={enemy.image ? `https://www.dnd5eapi.co${enemy.image}` : 'https://us.123rf.com/450wm/arhimicrostok/arhimicrostok1705/arhimicrostok170504136/78019673-user-sign-icon-person-symbol-human-avatar-flat-style.jpg?ver=6'} className= 'border-red1' ></CharacterImage>
                 })}
             </View>
     )

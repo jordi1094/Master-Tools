@@ -31,7 +31,7 @@ function LocationForm() {
 
     const closeForm = (event) => {
         event.preventDefault()
-        navigate(`/createCampaign/${campaignId}`)
+        navigate(-1)
     }
 
 
@@ -54,7 +54,7 @@ function LocationForm() {
             newLocationData.nextLocations = []
             logic.saveLocation(locationId, newLocationData)
                 .then(() => {
-                    navigate(`/createCampaign/${campaignId}`)
+                    navigate(-1)
                 })
         } catch (error) {
             console.error(error)
@@ -93,7 +93,7 @@ function LocationForm() {
                             message: 'description is required'
                         }
                     })}>Description</TextAreaField>
-                    <TextAreaField id='objects' placeholder='separate the objects with ",".   For example: potion, long sword, bag of holding, gold coins,. ' className='bg-slate-700/60 rounded-md w-full p-2 flex flex-col' classNameLabel='pb-3 underline font-bold' classNameInput="text-black resize-none outline-none w-full h-[15vh]" formHook={register('objects')}>Objects</TextAreaField>
+                    <TextAreaField id='objects' placeholder='Separate the objects with commas (,). For example: potion, long sword, bag of holding, gold coins,. ' className='bg-slate-700/60 rounded-md w-full p-2 flex flex-col' classNameLabel='pb-3 underline font-bold' classNameInput="text-black resize-none outline-none w-full h-[15vh]" formHook={register('objects')}>Objects</TextAreaField>
                     <div className='w-full mt-5 align-middle col-span-4'>
                         <h5 className='mb-2 text-xl drop-shadow-sm'>Npcs</h5>
                         <Button onClick={onClickAddNpc} type='button' className=' bg-gold1 rounded-md w-auto px-2 hover:scale-105 active:scale-100 text-black text-sm h-5' >Add Npc</Button>

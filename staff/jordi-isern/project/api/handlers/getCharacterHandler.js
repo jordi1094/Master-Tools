@@ -11,10 +11,10 @@ const getCharacterHandler = (req, res) => {
     .then(payload => {
         const {sub:userId} = payload
 
-        const characterId = req.body
+        const {targetCharacter} = req.params
 
         try{
-            logic.getCharacter(userId, characterId)
+            logic.getCharacter(userId, targetCharacter)
             .then(character => {
                 res.status(200)
                 res.json(character)
