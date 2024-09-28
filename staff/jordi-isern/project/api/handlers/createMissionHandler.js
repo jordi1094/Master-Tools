@@ -1,16 +1,33 @@
-import logic from "../logic/index.js"
+import 'dotenv/config'
+import logic from "../logic/index.js";
 
-import handleErrorResponse from "../helper/handleErrorResponse.js"
+import jwt from '../util/jasonwebtoken-promised.js'
+
+import handleErrorResponse from "../helper/handleErrorResponse.js";
+
+const{JWT_SECRET} = process.env
 
 const createMissionHandler = ( req, res) => {
-    const{ userId, title, background, objective, startLocation, checkList} = req.body
-
     try{
-        logic.createMission(userId, title, background,objective, startLocation, checkList)
-            .then(() => res.status(201).send())
-            .catch((error) =>{
+        const token= req.headers.authorization.slice(7)
+        jwt.verify(token, JWT_SECRET)
+        .then(payload => {
+            const {sub: userId} = payload
+            
+            const data = req.body
+
+            try{
+                logic.createMission(userId, data)
+                    .then(() => {
+                        res.status(201)
+                        res.json()
+                    })
+                    .catch(error => handleErrorResponse(error, res))
+            }catch(error){
                 handleErrorResponse(error, res)
-            })
+            }
+
+        })
     }catch(error){
         handleErrorResponse(error,res)
     }

@@ -11,10 +11,10 @@ const getNpcHandler = (req, res) => {
     .then(payload => {
         const { sub:userId} = payload
 
-        const npcId = req.body
+        const {targetNpc} = req.params
 
         try {
-            logic.getNpc(userId, npcId)
+            logic.getNpc(userId, targetNpc)
             .then(npc => {
                 res.status(200)
                 res.json(npc)

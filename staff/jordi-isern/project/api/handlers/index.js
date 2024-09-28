@@ -13,6 +13,7 @@ import getLocationHandler from './getLocationHandler.js'
 import getLocationsHandler from './getLocationsHandler.js'
 import getNpcHandler from './getNpcHandler.js'
 import getNpcsHandler from './getNpcsHandler.js'
+import getMissionsHandler from './getMissionsHandler.js'
 import saveCampaignHandler from './saveCampaignHandler.js'
 import saveLocationHandler from './saveLocationHandler.js'
 
@@ -33,6 +34,7 @@ const routeHandler = {
     getLocationsHandler,
     getNpcHandler,
     getNpcsHandler,
+    getMissionsHandler,
     saveCampaignHandler,
     saveLocationHandler
 }

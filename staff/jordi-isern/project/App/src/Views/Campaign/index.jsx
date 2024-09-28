@@ -60,6 +60,7 @@ function Campaign () {
                             },[])
                             
                             const enemiesPanels = enemies.reduce((acc, enemy, index) => {
+                                console.log(`${enemy}_${index}`)
                                 acc[`${enemy}_${index}`] = false
                                 return acc
                             },[])
@@ -89,8 +90,6 @@ function Campaign () {
     const onCloseNpc = (npcId) => setPanelsView({...panelsView,[`${npcId}`]:false})
 
     const onClickEnemy = (enemyIndex) => {
-        console.log(panelsView)
-        console.log(`${enemyIndex}`)
         setPanelsView({...panelsView, [`${enemyIndex}`]: true})
     }
     const onCloseEnemy = (enemyIndex) => setPanelsView({...panelsView,[`${enemyIndex}`]:false})
@@ -107,17 +106,27 @@ function Campaign () {
     const onClickCloseCheckList = () => setPanelsView({...panelsView,checkList:false})     
 
     const  onClickMap = () => setPanelsView({...panelsView,location:true})
-    const onClickCloseLocation = () => setPanelsView({...panelsView,location:false})     
+    const onClickCloseLocation = () => setPanelsView({...panelsView,location:false})  
+    
+    const onCharacterCreated = () => {
+        logic.getCharacters(id)
+        .then(charactersRecived => {
+            setCharacters(charactersRecived)
+        })
+        .catch(error => console.log(error))
+    }
 
     return (
         <View className='bg-[url(../../public/images/background.jpg)] bg-cover bg-center h-[100vh] grid grid-flow-col  '>
             {presentLocationId && <NpcsBox onClickNpc={onClickNpc} locationId={presentLocationId} />}
             <View className='flex flex-col justify-between items-center'>
                 <CharactersBox campaignId = {id} onClickCharacter={onClickCharacter}/>
-                {characters?.map((character, index) => panelsView[character.id] && <CharacterDetails key={index}/>)}
-                {npcs?.map((npc, index) => panelsView[npc.id] && <NpcDetails key={index}/>)}
-                {enemies?.map((enemy, index) => panelsView[`${enemy}_${index}`] && <EnemyDetails key={index}/>)}
-                {panelsView.campaign && <CampaignDetails campaignData={campaignData} onClickClose = {onClickCloseDetails}/>}
+                {characters?.map((character, index) => panelsView[character.id] && <CharacterDetails key={index} characterId={character.id}/>)}
+                {npcs?.map((npc, index) => panelsView[npc.id] && <NpcDetails key={index} npcId={npc.id}/>)}
+                {enemies?.map((enemy, index) => panelsView[`${enemy}_${index}`] && <EnemyDetails key={index} enemyIndex={enemy.index}/>)}
+                {panelsView.campaign && <CampaignDetails campaignData={campaignData} onClickClose = {onClickCloseDetails} 
+                onCharacterAdded={onCharacterCreated}
+                />}
                 {panelsView.mission &&<MissionDetails onClickClose={onClickCloseMission}/>}
                 {panelsView.checkList && <CheckList onClickClose={onClickCloseCheckList}/>}
                 {panelsView.location && <LocationDetails locationId={presentLocationId} onClickClose={onClickCloseLocation}/>}

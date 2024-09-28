@@ -37,17 +37,25 @@ mongoose.connect(MONGODB_URL)
 
         api.post('/location', jsonBodyParser, routeHandler.createLocationHandler)
 
+        api.post('/missions', jsonBodyParser, routeHandler.createMissionHandler)
+
         api.get('/campaigns/:targetCampaign', routeHandler.getCampaignHandler)
 
         api.get('/campaigns', routeHandler.getCampaigsnHandler)
 
         api.get('/characters/:targetCampaign',routeHandler.getCharactersHandler)
 
+        api.get('/characters/getOne/:targetCharacter', routeHandler.getCharacterHandler)
+
         api.get('/locations/nextlocations/:locationId',routeHandler.getLocationsHandler)
         
         api.get('/npcs/:targetLocation',routeHandler.getNpcsHandler)
 
+        api.get('/npcs/getOne/:targetNpc', routeHandler.getNpcHandler)
+
         api.get('/locations/:targetLocation', routeHandler.getLocationHandler)
+
+        api.get('/missions/missionsList/:targetLocation', routeHandler.getMissionsHandler)
 
         api.patch('/locations/:targetLocation', jsonBodyParser, routeHandler.saveLocationHandler)
 

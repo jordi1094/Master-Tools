@@ -14,7 +14,7 @@ import logic from '../../logic'
 
 
 function CreateCampaign() {
-    const {register, handleSubmit, formState:{errors}} = useForm({
+    const {register, handleSubmit, formState:{errors}, setValue} = useForm({
         shouldFocusError: false,
         validateCriteriaMode: "all"
     })
@@ -31,6 +31,10 @@ function CreateCampaign() {
         logic.getCampaign(id)
             .then(campaign => {
                     setCampaign(campaign)
+                    setValue('title', campaign.title)
+                    setValue('background', campaign.background)
+                    setValue('objective', campaign.objective)
+                    setValue('image', campaign.image)
                     logic.getLocation(campaign.startLocation)
                     .then(location => {
                         setLocation(location)
@@ -67,9 +71,9 @@ function CreateCampaign() {
         setCharacters(prevCharacters => [...prevCharacters, character])
         setCharactersID(prevCharactersId => [...prevCharactersId, character._id])
     }
-
     
     const onSubmit = handleSubmit((newCampaingData) => {
+
         try{
             logic.saveCampaign(id, newCampaingData)
             .then(()=> navigate('/home'))
@@ -89,7 +93,7 @@ function CreateCampaign() {
                 </div>
 
                 <Form onSubmit={onSubmit} classname='flex flex-col py-[2vh] px-[7vw]' >
-                    <Field id='title' className='mt-7' classNameInput='w-full h-[3vh] p-2 text-black rounded-md' value={savedCampaignData.title}  formHook={register('title',{
+                    <Field id='title' className='mt-7' classNameInput='w-full h-[3vh] p-2 text-black rounded-md' formHook={register('title',{
                         required:{
                             value: true,
                             message:'Title is required'
@@ -100,7 +104,7 @@ function CreateCampaign() {
                     })}>
                             <h5   className='text-2xl mr-3 font-extrabold'>Title</h5>
                     </Field>
-                    <TextAreaField id='background' className='w-[70vw] drop-shadow-sm text-black mt-7  bg-slate-700/60 rounded-md p-2' value={savedCampaignData.background} classNameInput='w-full h-[10vh] resize-none' formHook={register('background',{
+                    <TextAreaField id='background' className='w-[70vw] drop-shadow-sm text-black mt-7  bg-slate-700/60 rounded-md p-2' classNameInput='w-full h-[10vh] resize-none' formHook={register('background',{
                         required:{
                             value:true,
                             message:'Background is required'
@@ -108,7 +112,7 @@ function CreateCampaign() {
                     })}>
                             <h5  className='mb-2 text-xl font-bold'>Background</h5>
                     </TextAreaField>
-                    <TextAreaField id='objective' className='w-[70vw] drop-shadow-sm mt-2  text-black bg-slate-700/60 rounded-md p-2' value={savedCampaignData.objective} classNameInput='resize-none w-full h-[10vh]' formHook={register('objective',{
+                    <TextAreaField id='z' className='w-[70vw] drop-shadow-sm mt-2  text-black bg-slate-700/60 rounded-md p-2'  classNameInput='resize-none w-full h-[10vh]' formHook={register('objective',{
                         required:{
                             value: true,
                             message:'Objective is required'
@@ -117,7 +121,7 @@ function CreateCampaign() {
                             <h5 className='mb-2 text-xl font-bold'>Objective</h5>
                     </TextAreaField>
                     <div>
-                        <Field id='image' type='url' className=' bg-slate-700/60 rounded-md p-2 mt-2' value={savedCampaignData.image} placeholder='Please enter the link to an image.' classNameInput='rounded text-black w-full px-2'  formHook={register('image',{
+                        <Field id='image' type='url' className=' bg-slate-700/60 rounded-md p-2 mt-2' placeholder='Please enter the link to an image.' classNameInput='rounded text-black w-full px-2'  formHook={register('image',{
                                 required:{
                                     value:true,
                                     message: 'Image is required'

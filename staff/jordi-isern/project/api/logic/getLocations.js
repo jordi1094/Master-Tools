@@ -6,6 +6,7 @@ import validate from "com/validate.js";
 
 const getLocations = (userId,locationId ) => {
     validate.id(userId, 'userId')
+    validate.id(locationId, 'locationId')
 
     return User.findById(userId).lean()
         .catch(error => {throw new SystemError(error.message)})

@@ -14,6 +14,7 @@ import getCharacters from './getCharacters.js'
 import getCharacter from './getCharacter.js'
 import getNpc from './getNpc.js'
 import getNpcs from './getNpcs.js'
+import getMissions from './getMissions.js'
 import saveCampaign from './saveCampaign.js'
 
 const logic = {
@@ -32,6 +33,7 @@ const logic = {
     getCharacter,
     getNpc,
     getNpcs,
+    getMissions,
     saveLocation,
     saveCampaign
 }

@@ -8,11 +8,16 @@ import DragHandleIcon from'../../../icons/drag-handle-svgrepo-com.svg'
 import CrossIcon from '../../../icons/cross-svgrepo-com.svg'
 import Image from '../../../components/core/Image'
 import Draggable from 'react-draggable'
+import CharacterForm from '../../CreateCharacter'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import logic from '../../../logic'
 
-function CampaignDetails({onClickClose, campaignData}) {
+function CampaignDetails({onClickClose, campaignData, onCharacterAdded}) {
+    const navigate = useNavigate()
+
     const [charactersList, setCharacters] = useState([])
+    const [createCharacter, setCharaterFormState] = useState(false)
 
     useEffect(() => {
         logic.getCharacters(campaignData.id)
@@ -20,8 +25,22 @@ function CampaignDetails({onClickClose, campaignData}) {
         .catch(error => console.log(error))
     },[])
 
+    const onClickAddCharacter = () => {setCharaterFormState(true)}
+    const onClickSaveAndCancelCharacter = () => setCharaterFormState(false)
+
+    const onCharacterCreated = () => {
+        setCharaterFormState(false)
+        logic.getCharacters(campaignData.id)
+            .then(characters => {
+                setCharacters(characters)
+                onCharacterAdded()
+            })
+            .catch(error => console.log(error));
+    }
+
     return (
-      <Draggable
+    <>
+        <Draggable
         axis="both"
         handle=".handle"
         defaultPosition={{x: 0, y: 100}}
@@ -48,15 +67,17 @@ function CampaignDetails({onClickClose, campaignData}) {
             </View>
             <View>
                 <Heading level='2' className='text-black pb-2'>Characters</Heading>
-                <View className='flex items-center gap-4'>
+                <View className='grid grid-cols-5 items-center gap-4'>
                 {charactersList.map((character, index) => <CharacterImage key= {index} src={character.image} className='border-gold1' />)}
-                    <Button>
+                    <Button onClick={onClickAddCharacter}>
                         <Image src= {PlusIcon} className='h-[16vh]'></Image>
                     </Button>
                 </View>
             </View>
             </div>
-      </Draggable>
+    </Draggable>
+    {createCharacter && <CharacterForm closeForm ={ onClickSaveAndCancelCharacter} onCharacterCreated={onCharacterCreated} campaignId={campaignData.id}/>}
+    </>
     );
 }
 
