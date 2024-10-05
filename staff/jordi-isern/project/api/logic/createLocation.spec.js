@@ -11,7 +11,6 @@ import { ContentError, NotFoundError } from 'com/errors.js'
 const { MONGODB_URL_TEST } = process.env
 const { ObjectId } = Types
 
-debugger
 
 describe('createLocation', () => {
     before (() => mongoose.connect(MONGODB_URL_TEST)

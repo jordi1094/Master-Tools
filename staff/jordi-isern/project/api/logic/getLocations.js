@@ -16,8 +16,8 @@ const getLocations = (userId,locationId ) => {
             }
             return Location.find({_id:locationId}).select('nextLocations').lean()
             .then((location)=> {
-                const locationsIdList = location[0].nextLocations
-                return Location.find({_id: {$in:[locationsIdList]}}).select('name _id').lean()
+                const locationsIdList = location[0].nextLocations.map(String)
+                return Location.find({_id: {$in:locationsIdList}})
                 .then(locations => {
                     locations.forEach(location => {
                         location.id = location._id.toString()

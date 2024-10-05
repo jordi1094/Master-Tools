@@ -6,59 +6,34 @@ import { campaign } from "../data/models/Campaign.js"
 
 const saveLocation = async (locationId, newLocationData) => {
     validate.id(locationId, 'locationId')
-
+    
     try {
         validateZod.LocationSchema.parse(newLocationData)
     } catch (error) {
         throw new ContentError(`Invalid location data: ${error.errors.map(e => e.message).join(', ')}`)
     }
 
-    let location
-    try {
-        location = await Location.findById(locationId)
-    } catch (error) {
-        throw new SystemError(error.message)
-    }
+    return Location.findById(locationId)
+        .catch(error => {throw new SystemError(error.message)})
+        .then(locationToEdit => {
+            if(!locationToEdit){
+                throw new NotFoundError( 'location not found')
+            }
+            
+            const { name, description, enemies, objects, nextLocationsIdList, campaign:campaignId, nextLocations} = newLocationData
+            
+            locationToEdit.name = name
+            locationToEdit.description = description
+            locationToEdit.enemies = enemies
+            locationToEdit.nextLocations = nextLocationsIdList
+            locationToEdit.objects = objects
+            locationToEdit.nextLocations = nextLocations
+            
 
-    if(newLocationData.campaign){
-    let campaign
-    try{
-        campaign = await Campaign.findById(newLocationData.campaign)
-        
-        campaign.startLocation = locationId
-
-        const campaignSaved = await campaign.save()
-    }catch(error){
-        throw new SystemError(error.message)
-    }}
-
-    if (!location) {
-        throw new NotFoundError('location not found')
-    }
-
-    if(!campaign){
-        throw new NotFoundError('campaign not found')
-    }
-
-    const { name, description, enemies, objects, nextLocationsIdList, campaign:campaignId, nextLocations} = newLocationData
-
-    location.name = name
-    location.description = description
-    location.enemies = enemies
-    location.nextLocations = nextLocationsIdList
-    location.objects = objects
-    location.nextLocations = nextLocations
-
-
-    try {
-        const locationSaved = await location.save()
-
-        locationSaved.id = locationSaved._id.toString()
-        delete locationSaved._id
-        return locationSaved
-    } catch (error) {
-        throw new SystemError(error.message)
-    }
+            return locationToEdit.save()
+            .then()
+            .catch(error => {throw new SystemError(error.message)})
+        })
 }
 
 export default saveLocation

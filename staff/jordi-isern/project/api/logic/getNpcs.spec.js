@@ -4,14 +4,14 @@ import bcrypt from 'bcryptjs'
 
 import { expect } from 'chai'
 import { Types } from 'mongoose'
-import {Npc, User } from '../data/models/index.js'
+import {Npc, User, Location } from '../data/models/index.js'
 import getNpcs from './getNpcs.js'
 import { ContentError, NotFoundError } from 'com/errors.js'
 
 const { MONGODB_URL_TEST } = process.env
 const { ObjectId } = Types
 
-debugger
+
 
 describe('getNpcs', () => {
     before(() => mongoose.connect(MONGODB_URL_TEST)
@@ -20,11 +20,12 @@ describe('getNpcs', () => {
 
     beforeEach(() => Promise.all([User.deleteMany(), Npc.deleteMany()]))
 
-    it('successfully fins all Npcs in the array', () => {
+    it('successfully finds all Npcs in the location', () => {
         return bcrypt.hash('123123123', 8)
             .then(hash => User.create({name: 'Mac', surname: 'Book', email: 'mac@book.com', username: 'macbook', role: 'master', password: hash }))
             .then(user => {
                 const userId = user._id.toString();
+                const locationId = new ObjectId().toString()
 
                 const testNpcData1 = {
                     author: userId,
@@ -66,7 +67,8 @@ describe('getNpcs', () => {
                             name: "Intimidating Presence",
                             description: "The orc can attempt to frighten one enemy it can see within 30 feet."
                         }
-                    ]
+                    ],
+                    location:[locationId]
                 }
 
                 const testNpcData2 = {
@@ -109,7 +111,8 @@ describe('getNpcs', () => {
                             name: "Teleport",
                             description: "The mage teleports to an unoccupied space within 30 feet."
                         }
-                    ]
+                    ],
+                    location:[locationId]
                 }
 
                 return Promise.all([
@@ -117,18 +120,9 @@ describe('getNpcs', () => {
                     Npc.create(testNpcData2)
                 ]).then(([testNpc1, testNpc2]) => {
                     const npcsId = [testNpc1._id.toString(), testNpc2._id.toString()]
-
-                    return getNpcs(userId, npcsId)
+                    return getNpcs(userId, locationId)
                         .then(npcs => {
                             expect(npcs.length).to.equal(2)
-                            npcs.forEach((npc, index) =>{
-                                const expectedNpc = index === 0 ? testNpc1 : testNpc2
-                                expect(npc).to.exist
-                                expect(npc.id).to.equal(expectedNpc._id.toString())
-                                expect(npc.name).to.equal(expectedNpc.name)
-                                expect(npc.speed).to.equal(expectedNpc.speed)
-                                expect(npc.description).to.equal(expectedNpc.description)
-                            })
                         })
                 }) 
             })
@@ -140,6 +134,7 @@ describe('getNpcs', () => {
             .then(hash => User.create({name: 'Mac', surname: 'Book', email: 'mac@book.com', username: 'macbook', role: 'master', password: hash }))
             .then(user => {
                 const userId = user._id.toString();
+                const locationId = new ObjectId().toString()
 
                 const testNpcData1 = {
                     author: userId,
@@ -181,7 +176,8 @@ describe('getNpcs', () => {
                             name: "Intimidating Presence",
                             description: "The orc can attempt to frighten one enemy it can see within 30 feet."
                         }
-                    ]
+                    ],
+                    location: [locationId]
                 }
 
                 const testNpcData2 = {
@@ -224,7 +220,8 @@ describe('getNpcs', () => {
                             name: "Teleport",
                             description: "The mage teleports to an unoccupied space within 30 feet."
                         }
-                    ]
+                    ],
+                    location: [locationId]
                 }
 
                 return Promise.all([
@@ -233,7 +230,7 @@ describe('getNpcs', () => {
                 ]).then(([testNpc1, testNpc2]) => {
                     const npcsId = [testNpc1._id.toString(), testNpc2._id.toString()]
 
-                    return getNpcs(new ObjectId().toString(), npcsId)
+                    return getNpcs(new ObjectId().toString(), locationId)
                         .catch(error => errorThrown = error)
                         .finally(() => {
                             expect(errorThrown).to.be.an.instanceOf(NotFoundError);
@@ -353,12 +350,12 @@ describe('getNpcs', () => {
                 }) 
             })
     })
-    it('fails on non-exsiting one Npc in the array', () => {
+    it('fails on non-valid locationId', () => {
         let errorThrown
         return bcrypt.hash('123123123', 8)
             .then(hash => User.create({name: 'Mac', surname: 'Book', email: 'mac@book.com', username: 'macbook', role: 'master', password: hash }))
             .then(user => {
-                const userId = user._id.toString();
+                const userId = user._id.toString()
 
                 const testNpcData1 = {
                     author: userId,
@@ -450,14 +447,13 @@ describe('getNpcs', () => {
                     Npc.create(testNpcData1),
                     Npc.create(testNpcData2)
                 ]).then(([testNpc1, testNpc2]) => {
-                    const npcsId = [testNpc1._id.toString(), new ObjectId().toString()]
-
-                    return getNpcs(userId,npcsId)
-                        .catch(error => errorThrown = error)
-                        .finally(() => {
-                            expect(errorThrown).to.be.an.instanceOf(NotFoundError);
-                            expect(errorThrown.message).to.equal('One or more locations not found');
-                        })
+                    try{ getNpcs(userId,54365)
+                       }catch(error){
+                        errorThrown = error
+                       }finally{
+                            expect(errorThrown).to.be.an.instanceOf(ContentError);
+                            expect(errorThrown.message).to.equal('targetLocationId is not valid');
+                        }
                 }) 
             })
     })

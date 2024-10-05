@@ -13,7 +13,7 @@ import logic from '../../../logic'
 import MissionForm from './MisionForm'
 
 
-function LocationDetails({onClickClose, locationId}) {
+function LocationDetails({onClickClose, locationId, setMission}) {
     const [location, setLocation] = useState('')
     const [nextLocations, setNextLocations] = useState([])
     const [missionPanel, setMissionsPanel] = useState(false)
@@ -36,7 +36,26 @@ function LocationDetails({onClickClose, locationId}) {
     },[locationId])
 
     if(!location){
-        return <p>Loagind...</p>
+        return<Draggable
+        axis="both"
+        handle=".handle"
+        defaultPosition={{x: 0, y: 0}}
+        bounds= 'body'
+
+        >
+        <div className='bg-white/60 rounded-xl w-[20vw] p-4 absolute' >
+            <div className=' flex justify-between'>
+                <div className='handle cursor-move'> 
+                    <img className='h-[3vh]  pointer-events-none' src={DragHandleIcon}></img>
+                </div>
+                <Button onClick={onClickClose}>
+                <Image className='h-[3vh] cursor-pointer hover:scale-110 pointer-events-none'  src = {CrossIcon}></Image>
+                </Button>
+            </div>
+
+            <p className='text-black'>loading</p>
+        </div>
+        </Draggable>
     }
 
     const onClickAddNextLocation = () => {
@@ -91,11 +110,11 @@ function LocationDetails({onClickClose, locationId}) {
                 </Button>
                 </div>
                 <ul>
-                {Object.keys(missions).length > 0 ? (missions.map((mision, index) => <li className='text-black' key={index} onClick= {setMissions(mision.id)}>{mision.name}</li>)) : <text className='text-black'> No missions</text>}
+                {missions.length > 0 ? (missions.map((mision, index) => <li className='text-black cursor-pointer active:text-gold1' key={index} onClick= {() => setMission(mision)}>{mision.title}</li>)) : <p className='text-black'> No missions</p>}
                 </ul>
                 <Heading level='2' className='text-black mb-1 border-b-2 border-black/20'>Objects</Heading>
                 <ul>
-                    {Object.keys(location.objects).length > 0 ? (location.objects.map((object, index) => <li className='text-black' key={index}>{object}</li>)) : <text className='text-black'> No objects</text>}
+                    {Object.keys(location.objects).length > 0 ? (location.objects.map((object, index) => <li className='text-black' key={index}>{object}</li>)) : <p className='text-black'> No objects</p>}
                 </ul>
                 <div className=' grid grid-cols-2 items-center alaign-center border-b-2 border-black/20'>
                 <Heading level='2' className='text-black mb-[1px]'>Next Locations</Heading>

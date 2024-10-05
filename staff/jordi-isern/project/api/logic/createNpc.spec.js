@@ -11,7 +11,6 @@ import { campaign } from '../data/models/Campaign.js'
 const { MONGODB_URL_TEST } = process.env
 const { ObjectId } = Types
 
-debugger
 
 describe('createNpc', () => {
     before(()=> mongoose.connect(MONGODB_URL_TEST)

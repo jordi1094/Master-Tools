@@ -15,7 +15,6 @@ import registerUser from './registerUser.js'
 
 const { MONGODB_URL_TEST } = process.env
 
-debugger
 
 describe('registerUser', () => {
     before(() => mongoose.connect(MONGODB_URL_TEST).then(() => User.deleteMany()))
