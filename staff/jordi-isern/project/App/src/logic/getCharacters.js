@@ -1,4 +1,5 @@
-import error, {SystemError} from 'com/errors'
+import errors, {SystemError} from 'com/errors'
+import {toast} from 'sonner'
 
 const getCharacters = (campaignId) =>{
     try {
@@ -19,12 +20,12 @@ const getCharacters = (campaignId) =>{
             .catch((error)=> {throw new SystemError('server error')})
             .then(body => {
                 const {error, message} = body
-                const constructor = error[error]
+                const constructor = errors[error]
                 throw new constructor(message)
             })
         })
     } catch (error) {
-        console.error(error.errors)
+        toast.error(error.message)
         return
     }
 }

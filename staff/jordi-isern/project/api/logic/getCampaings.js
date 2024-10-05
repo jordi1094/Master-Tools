@@ -19,9 +19,6 @@ const getCampaigns = (userId) => {
                 return Campaign.find({_id:{$in:campaignsIdList}}).select('-__v').lean()
                 .catch(error => {throw new SystemError(error.message)})
                 .then(campaigns => {
-                    if(campaigns.length !== campaignsIdList.length){
-                        throw new NotFoundError('One or more locations not found')
-                    }
                     campaigns.forEach(campaign => {
                         campaign.id = campaign._id.toString()
                         

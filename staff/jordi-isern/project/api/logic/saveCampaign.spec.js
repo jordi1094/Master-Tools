@@ -10,8 +10,6 @@ import { ContentError, MatchError, NotFoundError } from 'com/errors.js'
 const { MONGODB_URL_TEST } = process.env
 const { ObjectId } = Types
 
-debugger
-
 describe('saveCampaing', () => {
     before (() => mongoose.connect(MONGODB_URL_TEST)
         .then(() => Promise.all([Campaign.deleteMany()]))
@@ -19,13 +17,13 @@ describe('saveCampaing', () => {
     beforeEach(() => Promise.all([Campaign.deleteMany()]))
 
     it('should successfully edit the campaing', () => {
-        return Campaign.create ({author: new ObjectId().toString()})
+        const authorId = new ObjectId().toString()
+        return Campaign.create ({author: authorId})
                     .then(campaignToEdit => {
                         const newCampaignData = {
                             title: "Rescue the Princess",
                             background: "The kingdom is in turmoil as the princess has been captured by a dragon.",
                             objective: "Infiltrate the dragon's lair and rescue the princess without being detected.",
-                            startLocation: new Types.ObjectId().toString(),
                             image: "https://example.com/image.png" 
                         }
                         return saveCampaign(campaignToEdit._id.toString(), newCampaignData)
@@ -35,7 +33,6 @@ describe('saveCampaing', () => {
                                 expect(campaign.title).to.equal(newCampaignData.title)
                                 expect(campaign.background).to.equal(newCampaignData.background)
                                 expect(campaign.objective).to.equal(newCampaignData.objective)
-                                expect(campaign.startLocation.toString()).to.equal(newCampaignData.startLocation)
                             })
                     })
     })

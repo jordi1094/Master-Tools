@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/20</span>
+                <span class='fraction'>15/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">62.5% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/6</span>
+                <span class='fraction'>5/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/20</span>
+                <span class='fraction'>15/18</span>
             </div>
         
             
@@ -96,22 +96,11 @@
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -120,12 +109,21 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -134,7 +132,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Campaign, User } from "../data/models/index.js"
 import { NotFoundError, SystemError } from "com/errors.js"
 import validate from "com/validate.js"
-import { campaign } from "../data/models/Campaign.js"
 &nbsp;
 const getCampaigns = (userId) =&gt; {
     validate.id(userId,' userId')
@@ -146,21 +143,21 @@ const getCampaigns = (userId) =&gt; {
                 throw new NotFoundError('User not Found')
             }
 &nbsp;
-            const campaignsIdList = user.campaigns
+            return Campaign.find({author: user._id.toString()})
+            .catch(<span class="fstat-no" title="function not covered" >error =&gt; {<span class="cstat-no" title="statement not covered" ></span>throw new SystemError(error.message)}</span>)
+            .then(campaignsIdList =&gt; { 
 &nbsp;
-            return Campaign.find({_id:{$in:campaignsIdList}}).select('-__v').lean()
+                return Campaign.find({_id:{$in:campaignsIdList}}).select('-__v').lean()
                 .catch(<span class="fstat-no" title="function not covered" >error =&gt; {<span class="cstat-no" title="statement not covered" ></span>throw new SystemError(error.message)}</span>)
                 .then(campaigns =&gt; {
-                    if(campaigns.length !== campaignsIdList.length){
-                        throw new NotFoundError('One or more locations not found')
-                    }
                     campaigns.forEach(campaign =&gt; {
                         campaign.id = campaign._id.toString()
-&nbsp;
+                        
                         delete campaign._id
                     })
                     return campaigns
                 })
+            })
         })
 }
 &nbsp;
@@ -172,7 +169,7 @@ export default getCampaigns
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-09-03T17:04:40.027Z
+                at 2024-10-05T09:32:45.234Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -1,4 +1,5 @@
 import errors, { SystemError } from "com/errors"
+import {toast} from 'sonner'
 
 const getCharacter = (targetCharacter) =>{
     try {
@@ -7,25 +8,25 @@ const getCharacter = (targetCharacter) =>{
                 Authorization:`Bearer ${sessionStorage.token}`
             }
         })
-        .catch((error) => {
+        .catch(() => {
             throw new SystemError('server error')
         })
         .then(response => {
             if(response.status === 200){
                 return response.json()
-                .catch((error) => { throw new SystemError('server error')})
+                .catch(() => { throw new SystemError('server error')})
                 .then(character => character)
             }
             return response.json()
-            .catch((error)=> {throw new SystemError('server error')})
+            .catch(()=> {throw new SystemError('server error')})
             .then(body => {
                 const {error, message} = body
-                const constructor = error[error]
+                const constructor = errors[error]
                 throw new constructor(message)
             })
         })
     } catch (error) {
-        console.error(error.errors)
+        toast.error(error.message)
     }  
 }
 export default getCharacter

@@ -11,7 +11,7 @@ const getLocation = (userId, locationId) => {
         .catch(error => {throw new SystemError(error.message)})
         .then(user => {
             if(!user){
-                throw new NotFoundError(' User not Found')
+                throw new NotFoundError('User not Found')
             }
             return Location.findById(locationId).select('-__v -author').lean()
                 .catch(error => { throw new SystemError(error.message)})

@@ -9,9 +9,8 @@ import {User} from '../data/models/index.js'
 import authenticateUser from './authenticateUser.js'
 import { ContentError, CredentialsError } from 'com/errors.js'
 
-const { MONGODB_URL_TEST } = process.env
+const{ MONGODB_URL_TEST } = process.env
 
-debugger
 
 describe('authenticateUser',()=> {
     before(() => mongoose.connect(MONGODB_URL_TEST).then(() => User.deleteMany()))

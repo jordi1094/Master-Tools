@@ -1,4 +1,4 @@
-import { ContentError, CredentialsError, DuplicityError, MatchError, NotFoundError } from 'com/errors.js'
+import { ContentError, CredentialsError, DuplicityError, MatchError, NotFoundError, SystemError } from 'com/errors.js'
 
 function handleErrorResponse(error, res) {
     let status = 500
@@ -14,7 +14,7 @@ function handleErrorResponse(error, res) {
     else if (error instanceof NotFoundError)
         status = 404
 
-    res.status(status).json({ error: error.constructor.name, message: error.message })
+    res.status(status).json({ error: "SystemError", message: "There is an error, please try it latter." })
 }
 
 export default handleErrorResponse

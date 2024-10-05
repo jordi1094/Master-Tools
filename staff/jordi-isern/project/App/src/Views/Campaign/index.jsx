@@ -13,6 +13,7 @@ import CharacterDetails from "./components/CharacterDetails"
 import NpcDetails from "./components/NpcDetails"
 import EnemyDetails from "./components/EnemyDetails"
 import CheckList from "./components/CheckList"
+import {toast} from "sonner"
 
 
 function Campaign () {
@@ -22,6 +23,7 @@ function Campaign () {
     const [characters, setCharacters] = useState([])
     const [enemies, setEnemies] = useState([])
     const [npcs, setNpcs] = useState([])
+    const [currentMission , setMission] = useState()
 
 
 
@@ -42,7 +44,7 @@ function Campaign () {
                 .then(charactersRecived => {
                     setCharacters(charactersRecived)
                 })
-                .catch(error => console.log(error))
+                .catch(error => toast.error(error.message))
 
                 logic.getLocation(campaign.startLocation)
                     .then(location => {
@@ -69,13 +71,13 @@ function Campaign () {
                                 ...pervState, ...characterPanels, ...enemiesPanels, ...npcsPanels
                             }))
                         })
-                        .catch(error => console.log(error)) 
+                        .catch(error => toast.error(error.message)) 
             
                     })
-                    .catch(error=> console.log(error))
+                    .catch(error=> toast.error(error.message))
             })
             .catch(error => {
-                console.error( error)
+                toast.error(error.message)
             })
     },[])
 
@@ -113,7 +115,7 @@ function Campaign () {
         .then(charactersRecived => {
             setCharacters(charactersRecived)
         })
-        .catch(error => console.log(error))
+        .catch(error => toast.error(error.message))
     }
 
     return (
@@ -127,13 +129,12 @@ function Campaign () {
                 {panelsView.campaign && <CampaignDetails campaignData={campaignData} onClickClose = {onClickCloseDetails} 
                 onCharacterAdded={onCharacterCreated}
                 />}
-                {panelsView.mission &&<MissionDetails onClickClose={onClickCloseMission}/>}
+                {panelsView.mission &&<MissionDetails onClickClose={onClickCloseMission} mission={currentMission}/>}
                 {panelsView.checkList && <CheckList onClickClose={onClickCloseCheckList}/>}
-                {panelsView.location && <LocationDetails locationId={presentLocationId} onClickClose={onClickCloseLocation}/>}
+                {panelsView.location && <LocationDetails locationId={presentLocationId} onClickClose={onClickCloseLocation} setMission={setMission}/>}
                 <CampaignMenu onclickBook={onclickBook} onClickPage={onClickPage} onClickCheckList= {onClickCheckList} onClickMap={onClickMap}/>
             </View>
             {presentLocationId && <EnemiesBox locationId={presentLocationId} onClickEnemy={onClickEnemy}></EnemiesBox>}
-      
         </View>
         
     )

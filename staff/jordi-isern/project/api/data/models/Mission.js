@@ -29,6 +29,5 @@ const mission = new Schema({
     checkList:[task]
 })
 
-const Mission = model('Mission', mission)
-
+const Mission = model('Missions', mission)
 export default Mission

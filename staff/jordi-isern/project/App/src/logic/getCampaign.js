@@ -1,4 +1,5 @@
-import error, {SystemError} from 'com/errors'
+import errors, {SystemError} from 'com/errors'
+import {toast} from 'sonner'
 
 const getCampaign = (targetCampaign) => {
     try {
@@ -8,23 +9,23 @@ const getCampaign = (targetCampaign) => {
             }
         })
         .catch(() => {
-            throw new SystemError('server error')})
+            throw new SystemError('Server error')})
         .then(response => {
             if(response.status === 200) {
                 return response.json()
-                .catch(()=>{ throw new SystemError('server error')})
+                .catch(()=>{ throw new SystemError('Server error')})
                 .then(campaign => campaign)
             }
             return response.json()
-            .catch (() => {throw new SystemError('server error')})
+            .catch (() => {throw new SystemError('Server error')})
             .then(body => {
                 const {error , message} = body
-                const constructor = error[error]
+                const constructor = errors[error]
                 throw new constructor(message)
             })
         })   
     }catch(error){
-        console.error(error.errors)
+        toast.error(error.message)
         return
     }
 }

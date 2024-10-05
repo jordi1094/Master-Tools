@@ -5,7 +5,7 @@ import createCharacter from "./createCharacter"
 import createNpc from "./createNpc"
 import getFullMonterList from "./getFullMontersList"
 import createCampaing from "./createCampaing"
-import createMission from "./CreateMission"
+import createMission from "./createMission"
 import getCampaign from './getCampaign'
 import getCampaigns from "./getCampaigns"
 import getLocation from "./getLocation"
