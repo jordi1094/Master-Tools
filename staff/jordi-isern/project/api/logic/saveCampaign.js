@@ -22,12 +22,13 @@ const saveCampaign = (campaignId, newCampaignData) => {
                 throw( new NotFoundError('campaign not found'))
             }
 
-            const {title, background, objective, image} = newCampaignData
+            const {title, background, objective, image, startLocation} = newCampaignData
             
             campaignToEdit.title= title
             campaignToEdit.background= background
             campaignToEdit.objective = objective
             campaignToEdit.image = image
+            campaignToEdit.startLocation = startLocation
 
 
 

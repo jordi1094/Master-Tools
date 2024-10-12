@@ -16,7 +16,7 @@ const createLocation = (userId) => {
         }
 
         return Location.create(location)
-            .then((location)=> {return location.lean()})
+            .then((location)=> {return location})
         })
 }
 

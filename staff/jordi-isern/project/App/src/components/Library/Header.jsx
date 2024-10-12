@@ -1,5 +1,3 @@
-import Button from '../core/Button'
-import Image from '../core/Image'
 import Heading from '../core/Heading'
 import logic from '../../logic'
 import {Link} from 'react-router-dom'

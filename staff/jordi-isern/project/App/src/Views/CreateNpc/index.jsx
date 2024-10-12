@@ -44,9 +44,9 @@ function NpcForm ({closeForm ,onNpcCreated, locationId}){
             logic.createNpc(npcData)
                 .then((npc) =>{
                     onNpcCreated(npc)})
-                .catch(error => console.error(error))
+                .catch(error => toast.error(error.message))
         }catch(error) {
-            console.error(error)
+            toast.error(error.message)
         }
 
      })

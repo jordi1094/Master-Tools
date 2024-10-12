@@ -13,7 +13,6 @@ import './App.css'
 
 
 function App() {
-  console.log('App -> virtual dom')
 
   const [state, setState] = useState('')
 

@@ -11,7 +11,6 @@ import logic from '../../logic'
 
 
 function RegisterForm () {
-    console.log( 'Register -> render')
     const navigate = useNavigate()
 
     const handleRegisterSubmit = event => {
@@ -31,12 +30,12 @@ function RegisterForm () {
             logic.registerUser(name, surname, email, username, role, password, passwordRepeat)
                 .then(() => navigate('/login'))
                 .catch(error => {
-                    console.log(error)
+                    toast.error(error.message)
 
                     alert(error.message)
                 })
         }catch (error) {
-            console.error(error)
+            toast.error(error.message)
 
             alert(error.message)
         }

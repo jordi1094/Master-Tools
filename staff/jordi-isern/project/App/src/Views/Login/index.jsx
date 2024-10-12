@@ -10,7 +10,6 @@ import logic from '../../logic'
 
 
 function Login ({onUserLogedIn}) {
-    console.log( 'Login -> render')
 
 
     const handleLoginSubmit = event => {
@@ -30,7 +29,7 @@ function Login ({onUserLogedIn}) {
                     alert(error.setMessage)
                 })
         }catch (error) {
-            console.log(error)
+            toast.error(error.message)
 
             alert(error.setMessage)
         }

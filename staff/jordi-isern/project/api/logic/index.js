@@ -16,6 +16,7 @@ import getNpc from './getNpc.js'
 import getNpcs from './getNpcs.js'
 import getMissions from './getMissions.js'
 import saveCampaign from './saveCampaign.js'
+import changeTaskStatus from './changeTaskStatus.js'
 
 const logic = {
     registerUser,
@@ -35,7 +36,8 @@ const logic = {
     getNpcs,
     getMissions,
     saveLocation,
-    saveCampaign
+    saveCampaign,
+    changeTaskStatus
 }
 
 export default logic

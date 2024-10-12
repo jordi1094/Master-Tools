@@ -31,7 +31,7 @@ function MissionForm ({locationId, onClose}){
 
 
         }catch(error) {
-            console.log(error)
+            toast.error(error.message)
         }
     })
 

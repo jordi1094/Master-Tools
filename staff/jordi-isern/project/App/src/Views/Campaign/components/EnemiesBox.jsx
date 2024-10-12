@@ -16,12 +16,12 @@ function EnemiesBox({locationId, onClickEnemy}){
                 setEnemies(prevEnemies => [...prevEnemies, enemy])
             }, Promise.resolve())
         })
-        .catch(error => console.log(error))
+        .catch(error => toast.error(error.message))
     },[])
 
     return (
         <View className={`rounded-l-3xl bg-blueBackgroundBox w-[15vh] pl-2 py-5 flex flex-col gap-3 self-center justify-self-end`}>
-            {enemiesList.map((enemy, index) =>{
+            {enemiesList.sort().map((enemy, index) =>{
                 return <CharacterImage key={index} onClick={() => {onClickEnemy(`${enemy.index}_${index}`)}} src={enemy.image ? `https://www.dnd5eapi.co${enemy.image}` : 'https://us.123rf.com/450wm/arhimicrostok/arhimicrostok1705/arhimicrostok170504136/78019673-user-sign-icon-person-symbol-human-avatar-flat-style.jpg?ver=6'} className= 'border-red1' ></CharacterImage>
                 })}
             </View>

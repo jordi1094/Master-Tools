@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 import { expect } from 'chai'
 import { Types } from 'mongoose'
-import { User,Campaign} from '../data/models/index.js'
+import {Campaign} from '../data/models/index.js'
 import saveCampaign from './saveCampaign.js'
 import { ContentError, MatchError, NotFoundError } from 'com/errors.js'
 
@@ -79,5 +79,5 @@ describe('saveCampaing', () => {
             })
     })
 
-    after(() => Campaign.deleteMany())
+    after(() => {Campaign.deleteMany().then(mongoose.disconnect())})
 })

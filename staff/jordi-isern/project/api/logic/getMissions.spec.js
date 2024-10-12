@@ -13,7 +13,7 @@ const { ObjectId } = Types
 
 debugger
 
-describe.only('getMissions',() => {
+describe('getMissions',() => {
     before(() => mongoose.connect(MONGODB_URL_TEST)
         .then(() => Promise.all([Location.deleteMany(), Mission.deleteMany(), User.deleteMany()]))
     )

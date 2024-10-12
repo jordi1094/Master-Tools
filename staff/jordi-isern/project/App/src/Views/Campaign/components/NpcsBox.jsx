@@ -9,7 +9,7 @@ function NpcsBox({className, locationId, onClickNpc}){
     useEffect(() => {
         logic.getNpcs(locationId)
         .then(npcs => setNpcs(npcs))
-        .catch(error => console.log(error))
+        .catch(error => toast.error(error.message))
     },[])
     return (
         <View className={`${className} h-auto rounded-r-3xl bg-blueBackgroundBox w-[15vh] pl-2 py-5 flex flex-col gap-3 self-center` }>

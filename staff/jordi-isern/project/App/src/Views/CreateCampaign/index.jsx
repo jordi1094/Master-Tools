@@ -35,18 +35,20 @@ function CreateCampaign() {
                     setValue('background', campaign.background)
                     setValue('objective', campaign.objective)
                     setValue('image', campaign.image)
-                    logic.getLocation(campaign.startLocation)
-                    .then(location => {
+                    if(campaign.startLocation){
+                        logic.getLocation(campaign.startLocation)
+                        .then(location => {
                         setLocation(location)
-                    })
+                        })
+                    }
                 })
-                .catch(error => {console.log(error)})
+                .catch(error => toast.error(error.message))
             
         logic.getCharacters(id)
             .then(characters => {
                 setCharacters(characters)
             })
-            .catch(error => console.log(error))
+            .catch(error => toast.error(error.message))
     },[])
 
 
@@ -55,30 +57,33 @@ function CreateCampaign() {
 
     const onClickAddLocation = handleSubmit((newCampaingData) => {
         try{
-            logic.saveCampaign(id, newCampaingData)
-            .then(
-                logic.createLocation()
-                .then(location => navigate(`/createCampaign/${id}/location/${location._id.toString()}`))
-                .catch(error => {console.log(error)})
-            ).catch(error => {console.log(error)})
+            
+            logic.createLocation()
+                .then(location => {
+                    newCampaingData.startLocation = location._id.toString()         
+                    logic.saveCampaign(id, newCampaingData)
+                    .then(() =>navigate(`/createCampaign/${id}/location/${location._id.toString()}`))
+                    .catch(error => toast.error(error.message))
+                })
+            .catch(error => toast.error(error.message))
         }catch(error){
-            console.log(error)
+            toast.error(error.message)
         }        
     })
 
     const onCharacterCreated = (character) => {
         setCharaterFormState(false)
         setCharacters(prevCharacters => [...prevCharacters, character])
-        setCharactersID(prevCharactersId => [...prevCharactersId, character._id])
     }
     
     const onSubmit = handleSubmit((newCampaingData) => {
 
         try{
+            newCampaingData.startLocation = startLocation.id.toString()
             logic.saveCampaign(id, newCampaingData)
             .then(()=> navigate('/home'))
         }catch(error){
-            console.log(error)
+            toast.error(error.message)
         }
     })
 
