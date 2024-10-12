@@ -22,7 +22,7 @@ function CampaignDetails({onClickClose, campaignData, onCharacterAdded}) {
     useEffect(() => {
         logic.getCharacters(campaignData.id)
         .then(characters => setCharacters(characters))
-        .catch(error => console.log(error))
+        .catch(error => toast.error(error.message))
     },[])
 
     const onClickAddCharacter = () => {setCharaterFormState(true)}
@@ -35,7 +35,7 @@ function CampaignDetails({onClickClose, campaignData, onCharacterAdded}) {
                 setCharacters(characters)
                 onCharacterAdded()
             })
-            .catch(error => console.log(error));
+            .catch(error => toast.error(error.message));
     }
 
     return (

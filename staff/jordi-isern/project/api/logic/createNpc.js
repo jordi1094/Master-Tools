@@ -36,7 +36,7 @@ const createNpc = (userId, npcData) => {
                 strength: new MainSkill({score: strengthScore, modifier: strengthModifier}),
                 dexterity: new MainSkill({score: dexterityScore, modifier: dexterityModifier}),
                 constitution: new MainSkill({score: constitutionScore, modifier: constitutionModifier}),
-                iniciativeSkill: new MainSkill({score: initiativeScore, modifier: initiativeModifier}),
+                iniciative: new MainSkill({score: initiativeScore, modifier: initiativeModifier}),
                 wishdom: new MainSkill({score: wisdomScore, modifier: wisdomModifier}),
                 charisma: new MainSkill({score: charismaScore, modifier: charismaModifier}),
                 hitPoints: new HitPoints({maxHitPoints, currentHitPoints, temporalHitPoints}),

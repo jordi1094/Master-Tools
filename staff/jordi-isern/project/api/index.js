@@ -61,6 +61,7 @@ mongoose.connect(MONGODB_URL)
 
         api.patch('/campaigns/:targetCampaign', jsonBodyParser, routeHandler.saveCampaignHandler)
         
+        api.patch('/mission/:targetMission', jsonBodyParser, routeHandler.changeTaskStatusHandler )
 
         api.listen(PORT,() => console.log(`API running on PORT ${PORT}`))
     })

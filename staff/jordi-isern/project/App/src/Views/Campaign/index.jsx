@@ -62,7 +62,6 @@ function Campaign () {
                             },[])
                             
                             const enemiesPanels = enemies.reduce((acc, enemy, index) => {
-                                console.log(`${enemy}_${index}`)
                                 acc[`${enemy}_${index}`] = false
                                 return acc
                             },[])
@@ -108,7 +107,8 @@ function Campaign () {
     const onClickCloseCheckList = () => setPanelsView({...panelsView,checkList:false})     
 
     const  onClickMap = () => setPanelsView({...panelsView,location:true})
-    const onClickCloseLocation = () => setPanelsView({...panelsView,location:false})  
+    const onClickCloseLocation = () => setPanelsView({...panelsView,location:false}) 
+    
     
     const onCharacterCreated = () => {
         logic.getCharacters(id)
@@ -123,15 +123,15 @@ function Campaign () {
             {presentLocationId && <NpcsBox onClickNpc={onClickNpc} locationId={presentLocationId} />}
             <View className='flex flex-col justify-between items-center'>
                 <CharactersBox campaignId = {id} onClickCharacter={onClickCharacter}/>
-                {characters?.map((character, index) => panelsView[character.id] && <CharacterDetails key={index} characterId={character.id}/>)}
-                {npcs?.map((npc, index) => panelsView[npc.id] && <NpcDetails key={index} npcId={npc.id}/>)}
-                {enemies?.map((enemy, index) => panelsView[`${enemy}_${index}`] && <EnemyDetails key={index} enemyIndex={enemy.index}/>)}
+                {characters?.map((character, index) => panelsView[character.id] && <CharacterDetails key={index} characterId={character.id} onClickClose={() => onCloseCharacter(character.id)}/>)}
+                {npcs?.map((npc, index) => panelsView[npc.id] && <NpcDetails key={index} npcId={npc.id} onClickClose={() => onCloseNpc(npc.id)}/>)}
+                {enemies?.sort().map((enemy, index) => panelsView[`${enemy}_${index}`] && <EnemyDetails key={index} enemyIndex={enemy} onClickClose={() => onCloseEnemy(`${enemy}_${index}`)}/>)}
                 {panelsView.campaign && <CampaignDetails campaignData={campaignData} onClickClose = {onClickCloseDetails} 
                 onCharacterAdded={onCharacterCreated}
                 />}
                 {panelsView.mission &&<MissionDetails onClickClose={onClickCloseMission} mission={currentMission}/>}
-                {panelsView.checkList && <CheckList onClickClose={onClickCloseCheckList}/>}
-                {panelsView.location && <LocationDetails locationId={presentLocationId} onClickClose={onClickCloseLocation} setMission={setMission}/>}
+                {panelsView.checkList && <CheckList onClickClose={onClickCloseCheckList} mission = {currentMission}/>}
+                {panelsView.location && <LocationDetails locationId={presentLocationId} onClickClose={onClickCloseLocation} setMission={setMission} setNextLocation={setLocation}/>}
                 <CampaignMenu onclickBook={onclickBook} onClickPage={onClickPage} onClickCheckList= {onClickCheckList} onClickMap={onClickMap}/>
             </View>
             {presentLocationId && <EnemiesBox locationId={presentLocationId} onClickEnemy={onClickEnemy}></EnemiesBox>}

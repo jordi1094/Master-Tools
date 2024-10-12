@@ -13,41 +13,41 @@ const npc = new Schema({
         type: ObjectId,
         ref: 'User'
     },
-    image: {
+    image: { //
         type: String
     },
 
-    name: {
+    name: { //
         type: String,
         required: true
     },
-    description:{
+    description:{ //
         type: String,
         required: true
     },
-    race:{
+    race:{ //
         type: String,
         required: true
     },
-    alignment:{
+    alignment:{ //
         type: String,
         required: true
     },
-    armorClass:{
+    armorClass:{//
         type: Number,
         required: true
     },
-    hitPoint: {hitPoints},
-    speed:{
+    hitPoints: hitPoints,//
+    speed:{//
         type:Number,
         required: true
     },
-    strength:{mainSkill},
-    dexterity:{mainSkill},
-    constitution:{mainSkill},
-    iniciative:{mainSkill},
-    wishdom:{mainSkill},
-    charisma:{mainSkill},
+    strength:mainSkill,//
+    dexterity:mainSkill,//
+    constitution:mainSkill,//
+    iniciative:mainSkill,//
+    wishdom:mainSkill,//
+    charisma:mainSkill, //
     skill:{
         name:{type: String},
         modifier:{type: Number}
@@ -55,15 +55,15 @@ const npc = new Schema({
     senses:[{
         type:String
     }],
-    lenguages:{
+    lenguages:{ //
         type: String
     },
-    challengeRating:{
+    challengeRating:{ //
         type: Number,
         required: true
     },
-    acctions: [action],
-    location:[{
+    actions: [action], //
+    location:[{ //
         type: ObjectId,
         ref: 'Location'
     }]

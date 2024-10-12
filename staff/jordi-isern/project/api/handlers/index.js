@@ -16,6 +16,7 @@ import getNpcsHandler from './getNpcsHandler.js'
 import getMissionsHandler from './getMissionsHandler.js'
 import saveCampaignHandler from './saveCampaignHandler.js'
 import saveLocationHandler from './saveLocationHandler.js'
+import changeTaskStatusHandler from './changeTaskStatusHandler.js'
 
 
 const routeHandler = {
@@ -36,7 +37,8 @@ const routeHandler = {
     getNpcsHandler,
     getMissionsHandler,
     saveCampaignHandler,
-    saveLocationHandler
+    saveLocationHandler,
+    changeTaskStatusHandler
 }
 
 export default routeHandler

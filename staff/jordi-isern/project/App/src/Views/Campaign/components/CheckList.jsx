@@ -7,8 +7,30 @@ import Image from '../../../components/core/Image'
 import Draggable from 'react-draggable';
 import CheckListElement from '../../../components/core/CheckListElement'
 
-function CheckList({onClickClose}) {
+function CheckList({onClickClose, mission}) {
+    if(!mission){
 
+        return<Draggable
+        axis="both"
+        handle=".handle"
+        defaultPosition={{x: 0, y: 0}}
+        bounds= 'body'
+
+        >
+        <div className='bg-white/60 rounded-xl w-[20vw] p-4 absolute' >
+            <div className=' flex justify-between'>
+                <div className='handle cursor-move'> 
+                    <img className='h-[3vh]  pointer-events-none' src={DragHandleIcon}></img>
+                </div>
+                <Button onClick={onClickClose}>
+                <Image className='h-[3vh] cursor-pointer hover:scale-110 pointer-events-none'  src = {CrossIcon}></Image>
+                </Button>
+            </div>
+
+            <p className='text-black'>Please select a mission in the lications details</p>
+        </div>
+        </Draggable>
+    }
 
     return (
       <Draggable
@@ -27,18 +49,10 @@ function CheckList({onClickClose}) {
                 <Image className='h-[3vh] cursor-pointer hover:scale-110 pointer-events-none'  src = {CrossIcon}></Image>
                 </Button>
             </div>
-            <Heading level='1' className='underline text-center text-black'>Check List</Heading>
-            <View className='mt-[2ch] h-[8vh] overflow-auto overflow-y-scroll '>
-                <CheckListElement>mision1</CheckListElement>
-                <CheckListElement>mision2</CheckListElement>
-                <CheckListElement>mision3</CheckListElement>
-                <CheckListElement>mision4</CheckListElement>
-                <CheckListElement>mision5</CheckListElement>
-                <CheckListElement>mision6</CheckListElement>
-                     
-            </View>
-      
-           
+                <Heading level='1' className='underline text-center text-black'>Check List</Heading>
+                <View className='mt-[2ch] h-[12vh] overflow-auto overflow-y-scroll '>
+                        {mission.checkList.map((task, index) => <CheckListElement key={index} task={task} mission ={mission}/>)}
+                </View>           
             </div>
       </Draggable>
     );

@@ -82,11 +82,11 @@ function CharacterForm ({closeForm ,onCharacterCreated, campaignId}){
                 .then((character) => {
                     onCharacterCreated(character)})
                 .catch(error => {
-                    console.error(error)
+                    toast.error(error.message)
                 })
             
         }catch(error){
-        console.error(error)       
+            toast.error(error.message)       
         }
     })
     return (
