@@ -12,6 +12,7 @@ import CharacterForm from '../../CreateCharacter'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logic from '../../../logic'
+import {toast} from 'sonner'
 
 function CampaignDetails({onClickClose, campaignData, onCharacterAdded}) {
     const navigate = useNavigate()

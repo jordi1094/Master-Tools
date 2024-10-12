@@ -1,8 +1,6 @@
 import Button from '../../../components/core/Button'
 import Heading from '../../../components/core/Heading'
 import View from '../../../components/Library/View'
-import CharacterImage from '../../../components/Library/CharacterImage'
-import PlusIcon from '../../../icons/plus.svg'
 import DragHandleIcon from'../../../icons/drag-handle-svgrepo-com.svg'
 import CrossIcon from '../../../icons/cross-svgrepo-com.svg'
 import Image from '../../../components/core/Image'
@@ -11,6 +9,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import logic from '../../../logic'
 import MissionForm from './MisionForm'
+import {toast} from 'sonner'
 
 
 function LocationDetails({onClickClose, locationId, setMission, setNextLocation}) {

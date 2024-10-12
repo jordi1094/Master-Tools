@@ -10,6 +10,7 @@ import DetailDoubleValue from '../../../components/Library/DetailDoubleValue'
 import logic from '../../../logic'
 import Draggable from 'react-draggable'
 import { useState } from 'react'
+import {toast} from 'sonner'
 
 
 function CharacterDetails({characterId, onClickClose}) {

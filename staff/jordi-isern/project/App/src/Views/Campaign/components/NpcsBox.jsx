@@ -2,6 +2,7 @@ import View from "../../../components/Library/View"
 import CharacterImage from "../../../components/Library/CharacterImage"
 import logic from "../../../logic"
 import { useState, useEffect } from "react"
+import {toast} from 'sonner'
 
 function NpcsBox({className, locationId, onClickNpc}){
     const [npcsList, setNpcs] = useState([])

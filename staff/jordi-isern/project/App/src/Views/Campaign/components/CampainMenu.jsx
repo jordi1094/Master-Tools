@@ -7,6 +7,7 @@ import PaperIcon from "../../../icons/paper.svg"
 import CheckListIcon from "../../../icons/checkList.svg"
 import MapIcon from "../../../icons/map.svg"
 import {Link} from 'react-router-dom'
+import {toast} from 'sonner'
 
 
 function CampaignMenu ({onclickBook, onClickPage, onClickCheckList, onClickMap}){

@@ -11,6 +11,7 @@ import Image from '../../components/core/Image'
 import React from "react"
 import CharacterStatsPanel from '../../components/Library/CharacterStatsPanel'
 import ActionInput from '../../components/Library/ActionInput'
+import {toast} from 'sonner'
 
 function NpcForm ({closeForm ,onNpcCreated, locationId}){
     const {register, handleSubmit, formState:{errors}} = useForm({

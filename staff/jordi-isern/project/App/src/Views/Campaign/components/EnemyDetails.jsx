@@ -9,6 +9,7 @@ import DetailDoubleValue from '../../../components/Library/DetailDoubleValue'
 import Draggable from 'react-draggable'
 import logic from '../../../logic'
 import { useState, useEffect } from 'react'
+import {toast} from 'sonner'
 
 
 function EnemyDetails({enemyIndex, onClickClose}) {
@@ -18,6 +19,7 @@ function EnemyDetails({enemyIndex, onClickClose}) {
         .then(enemy => {
             setEnemy(enemy)
         })
+        .cathc(error => toast.error(error.message))
     },[])
     const setmodifiervalue= (value) => {
         if(value === 1) {return '-5'}
