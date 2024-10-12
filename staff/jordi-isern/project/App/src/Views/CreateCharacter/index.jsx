@@ -14,6 +14,7 @@ import EquipmentPanel from "./components/EquipmentPanel.jsx"
 import CrossIcon from '../../icons/cross-svgrepo-com.svg'
 import Image from '../../components/core/Image'
 import React from "react"
+import {toast} from 'sonner'
 
 function CharacterForm ({closeForm ,onCharacterCreated, campaignId}){
     const {register, handleSubmit, formState:{errors}} = useForm({

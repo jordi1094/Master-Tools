@@ -1,10 +1,10 @@
 import './index.css'
 
 
-function Select({id, options}){
-    return <select name = {id} >
-        <option hidden selected>"Select an option"</option>
-        {options.map(option => <option value={option}>{option}</option>)}
+function Select({id, options, className, placeholder}){
+    return <select name = {id} className={className} >
+        <option hidden selected>{placeholder}</option>
+        {options.map((option, index) => <option key={index} value={option}>{option}</option>)}
     </select>  
 }
 

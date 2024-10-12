@@ -7,6 +7,7 @@ import CrossIcon from '../../../icons/cross-svgrepo-com.svg'
 import React from "react"
 import TextAreaField from '../../../components/core/TextAreaField'
 import logic from '../../../logic'
+import {toast} from 'sonner'
 
 function MissionForm ({locationId, onClose}){
     const {register, handleSubmit, formState:{errors}} = useForm({
@@ -27,8 +28,8 @@ function MissionForm ({locationId, onClose}){
                 status: false
             }))
             logic.createMission(missionData)
-            onClose()
-
+            .catch(error => toast.error(error.message))
+            .then(() => onClose())
 
         }catch(error) {
             toast.error(error.message)

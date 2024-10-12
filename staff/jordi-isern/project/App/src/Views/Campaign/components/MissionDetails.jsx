@@ -2,13 +2,10 @@
 import Button from '../../../components/core/Button'
 import Heading from '../../../components/core/Heading'
 import View from '../../../components/Library/View'
-import CharacterImage from '../../../components/Library/CharacterImage'
-import PlusIcon from '../../../icons/plus.svg'
 import DragHandleIcon from'../../../icons/drag-handle-svgrepo-com.svg'
 import CrossIcon from '../../../icons/cross-svgrepo-com.svg'
 import Image from '../../../components/core/Image'
 import Draggable from 'react-draggable';
-import { useState } from 'react'
 
 function MisionDetails({onClickClose, mission}) {
     if(!mission){

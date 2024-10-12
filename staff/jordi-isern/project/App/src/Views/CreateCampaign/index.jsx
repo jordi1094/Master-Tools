@@ -11,6 +11,7 @@ import CharacterResume from './components/CharacterResume'
 import Field from '../../components/core/Field'
 import CrossIcon from '../../icons/cross-svgrepo-com.svg'
 import logic from '../../logic'
+import {toast} from 'sonner'
 
 
 function CreateCampaign() {
@@ -40,6 +41,7 @@ function CreateCampaign() {
                         .then(location => {
                         setLocation(location)
                         })
+                        .catch(error => toast.error(error.message))
                     }
                 })
                 .catch(error => toast.error(error.message))

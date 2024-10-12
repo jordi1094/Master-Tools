@@ -6,6 +6,7 @@ import FieldPassword from '../../components/core/FieldPassword'
 import Button from '../../components/core/Button'
 import {Link} from 'react-router-dom'
 import logic from '../../logic'
+import {toast} from 'sonner'
 
 
 
@@ -30,8 +31,6 @@ function Login ({onUserLogedIn}) {
                 })
         }catch (error) {
             toast.error(error.message)
-
-            alert(error.setMessage)
         }
     }
 
@@ -42,7 +41,7 @@ function Login ({onUserLogedIn}) {
             <Field id = 'username' placeholder= 'Username' className='flex gap-2 h-6 justify-between w-full' classNameInput='w-full rounded-md px-2 text-gold1'>Username</Field>
 
             {/* //TODO change type password to test with the buton  */}
-            <FieldPassword id= 'password' placeholder= 'Password'>Password</FieldPassword>
+            <FieldPassword id= 'password' placeholder= 'Password' className='flex gap-2 h-6 justify-between w-full' classNameInput='w-full rounded-md px-2 text-gold1'>Password</FieldPassword>
             <Button type = 'submit' className ='text-white bg-[--blueBackgroundBox] rounded-md mt-4 hover:scale-y-105 active:scale-y-100 px-3 w-[100%]'> Login Now</Button>
         </FormWithFeedback>
         <Link to= '/register'>Not registered?</Link>

@@ -2,6 +2,7 @@ import View from "../../../components/Library/View"
 import CharacterImage from "../../../components/Library/CharacterImage"
 import logic from "../../../logic"
 import { useEffect, useState } from "react"
+import {toast} from 'sonner'
 
 function EnemiesBox({locationId, onClickEnemy}){
     const [enemiesList, setEnemies] = useState([])
