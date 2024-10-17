@@ -39,8 +39,6 @@ function Login ({onUserLogedIn}) {
         <FormWithFeedback className= 'bg-gradient-to-b from-blueBackgroundBox p-3 pt-0 rounded-lg flex flex-col items-center gap-y-3' onSubmit={handleLoginSubmit}>
             <Heading level={2}>Login</Heading>
             <Field id = 'username' placeholder= 'Username' className='flex gap-2 h-6 justify-between w-full' classNameInput='w-full rounded-md px-2 text-gold1'>Username</Field>
-
-            {/* //TODO change type password to test with the buton  */}
             <FieldPassword id= 'password' placeholder= 'Password' className='flex gap-2 h-6 justify-between w-full' classNameInput='w-full rounded-md px-2 text-gold1'>Password</FieldPassword>
             <Button type = 'submit' className ='text-white bg-[--blueBackgroundBox] rounded-md mt-4 hover:scale-y-105 active:scale-y-100 px-3 w-[100%]'> Login Now</Button>
         </FormWithFeedback>

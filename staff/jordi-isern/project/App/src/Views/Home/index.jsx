@@ -12,7 +12,7 @@ function Home () {
 
     useEffect(() => {
         loadCampaigns()
-    },[])
+    },[campaigns])
 
     const loadCampaigns = () => {
         try{
@@ -31,10 +31,17 @@ function Home () {
         navigate(`/campaign/${campaignId}`)
     }
 
+    const onClickDelete = (campaignId) => {
+        logic.deleteCampaign(campaignId)
+        .then(loadCampaigns)
+        .catch(error => {toast.error(error.message)})
+
+    }
+
     return(<View>
         <Header></Header>
         <View className='bg-[url(../../public/images/background.jpg)] bg-cover h-[95vh] pt-6 pl-8 grid grid-cols-5 gap-7 items-start'>
-            {campaigns.map((campaign, index) => <HistoryButton onClick={() =>onClickCampaign(campaign.id)}  key={index} Title={campaign.title} src={campaign.image} />)}
+            {campaigns.map((campaign, index) => <HistoryButton onClick={() =>onClickCampaign(campaign.id)} onClickDelete={() => onClickDelete(campaign.id)} key={index} Title={campaign.title} src={campaign.image} />)}
         </View>
     </View>
     )
