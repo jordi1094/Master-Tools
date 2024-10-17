@@ -1,5 +1,5 @@
-import { Campaign, User } from "../data/models/index.js";
-import { SystemError, NotFoundError, MatchError, ContentError} from "com/errors.js";
+import { Campaign} from "../data/models/index.js";
+import { SystemError, NotFoundError, ContentError} from "com/errors.js";
 import validate from "com/validate.js";
 import validateZod from "com/validations/index.js"
 

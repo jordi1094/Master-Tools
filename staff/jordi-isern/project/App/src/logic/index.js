@@ -20,6 +20,7 @@ import createLocation from "./createLocation"
 import saveLocation from "./saveLocation"
 import saveCampaign from "./saveCampaign"
 import changeTaskStatus from "./changeTaskStatus"
+import deleteCampaign from "./deleteCampaign"
 
 const logic = {
     isUserLoggedIn,
@@ -43,7 +44,8 @@ const logic = {
     createLocation,
     saveLocation,
     saveCampaign,
-    changeTaskStatus
+    changeTaskStatus,
+    deleteCampaign
     }
 
 export default logic

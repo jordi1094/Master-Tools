@@ -63,6 +63,8 @@ mongoose.connect(MONGODB_URL)
         
         api.patch('/mission/:targetMission', jsonBodyParser, routeHandler.changeTaskStatusHandler )
 
+        api.delete('/campaign/delete/:targetCampaign', routeHandler.deleteCampaignHandler)
+
         api.listen(PORT,() => console.log(`API running on PORT ${PORT}`))
     })
     .catch(error => console.error(error))

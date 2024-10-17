@@ -1,8 +1,7 @@
-import { Campaign, Location } from "../data/models/index.js"
+import {Location } from "../data/models/index.js"
 import { SystemError, NotFoundError, ContentError } from "com/errors.js"
 import validate from "com/validate.js"
 import validateZod from "com/validations/index.js"
-import { campaign } from "../data/models/Campaign.js"
 
 const saveLocation = async (locationId, newLocationData) => {
     validate.id(locationId, 'locationId')

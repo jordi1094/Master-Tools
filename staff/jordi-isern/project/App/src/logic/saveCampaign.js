@@ -23,8 +23,7 @@ const saveCampaign = (campaignId, newCampaignData) => {
             })
         })
     } catch (error) {
-        console.error(error.errors)
-        return
+        return(error)
     }
 }
 
