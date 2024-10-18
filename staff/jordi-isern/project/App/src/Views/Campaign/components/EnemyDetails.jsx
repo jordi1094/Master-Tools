@@ -19,7 +19,7 @@ function EnemyDetails({enemyIndex, onClickClose}) {
         .then(enemy => {
             setEnemy(enemy)
         })
-        .cathc(error => toast.error(error.message))
+        .catch(error => toast.error(error.message))
     },[])
     const setmodifiervalue= (value) => {
         if(value === 1) {return '-5'}
