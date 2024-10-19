@@ -30,6 +30,7 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
         - [Money](#money)
         - [Skils](#skils)
       - [Npc](#npc)
+  - [Coverage](#coverage)
   - [Roadmap](#roadmap)
 
 ## How to Use
@@ -70,19 +71,6 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
   
 
 - Delete campaign
-  - Delete character
-  - Delete objective
-  - Delete background
-  - Delete Startlocation
-    - Delete Npc
-    - Delete enemy
-    - Delete object
-    - Delete description
-    - Delete next locations
-  - Delete mission
-    - Delete background
-    - Delete objective
-    - Delete Task
 
  - View Campaigns
   
@@ -269,6 +257,8 @@ DnD Master Tools is an aplication that will give you all the necessary tools to 
 - skills  (Array [object{name skill(string, required),enum:Acrobatics | Animal Handling | Arcana | Athletics | Deception | History | Insight | Intimidation | Investigation | Medicine | Nature | Perception | Performance | Persuasion | Religion | Sleight of Hand | Stealth | Survival =>  variable}])
 - sense (Sense)
 
+## Coverage
+![Coverage](Coverage%20Screenshot.png)
 
 ## Roadmap
 
