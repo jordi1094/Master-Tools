@@ -118,6 +118,35 @@ function Campaign () {
         .catch(error => toast.error(error.message))
     }
 
+    const onClickNextLocation = (newLocationId) => {
+        setLocation(newLocationId)
+        
+        logic.getLocation(newLocationId)
+                    .then(location => {
+                        setEnemies(location.enemies.sort())
+                        logic.getNpcs(newLocationId)
+                        .then(npcsRecived => {
+                            setNpcs(npcsRecived)
+                            const npcsPanels = npcs.reduce((acc, npc) => {
+                                acc[`${npc.id}`] = false
+                                return acc
+                            },[])
+                            
+                            const enemiesPanels = location.enemies.sort().reduce((acc, enemy, index) => {
+                                acc[`${enemy}_${index}`] = false
+                                return acc
+                            },[])
+                            console.log(enemiesPanels)
+                            setPanelsView(pervState => ({
+                                ...pervState, ...enemiesPanels, ...npcsPanels
+                            }))
+                        })
+                        .catch(error => {toast.error(error.message); console.log(error)}) 
+            
+                    })
+                    .catch(error=> {toast.error(error.message);console.log(error)})
+    }
+
     return (
         <View className='bg-[url(../../public/images/background.jpg)] bg-cover bg-center h-[100vh] grid grid-flow-col  '>
             {presentLocationId && <NpcsBox onClickNpc={onClickNpc} locationId={presentLocationId} />}
@@ -131,7 +160,7 @@ function Campaign () {
                 />}
                 {panelsView.mission &&<MissionDetails onClickClose={onClickCloseMission} mission={currentMission}/>}
                 {panelsView.checkList && <CheckList onClickClose={onClickCloseCheckList} mission = {currentMission}/>}
-                {panelsView.location && <LocationDetails locationId={presentLocationId} onClickClose={onClickCloseLocation} setMission={setMission} setNextLocation={setLocation}/>}
+                {panelsView.location && <LocationDetails locationId={presentLocationId} onClickClose={onClickCloseLocation} setMission={setMission} setNextLocation={onClickNextLocation}/>}
                 <CampaignMenu onclickBook={onclickBook} onClickPage={onClickPage} onClickCheckList= {onClickCheckList} onClickMap={onClickMap}/>
             </View>
             {presentLocationId && <EnemiesBox locationId={presentLocationId} onClickEnemy={onClickEnemy}></EnemiesBox>}

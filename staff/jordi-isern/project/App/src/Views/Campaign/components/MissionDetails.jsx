@@ -26,8 +26,8 @@ function MisionDetails({onClickClose, mission}) {
                 <Image className='h-[3vh] cursor-pointer hover:scale-110 pointer-events-none'  src = {CrossIcon}></Image>
                 </Button>
             </div>
-
-            <p className='text-black'>Please select a mission in the lications details</p>
+            <Heading level='1' className='underline text-center text-black'>Mission</Heading>
+            <p className='text-black'>Please select a mission in the locations details</p>
         </div>
         </Draggable>
     }
