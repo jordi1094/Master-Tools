@@ -10,6 +10,7 @@ function EnemiesBox({locationId, onClickEnemy}){
     useEffect(() => {
         logic.getLocation(locationId)
         .then(location => {
+            setEnemies([])
             const enemiesIndexList = location.enemies.sort()
             enemiesIndexList.reduce(async( previousPromise, enemyIndex) => {
                 await previousPromise
@@ -18,7 +19,7 @@ function EnemiesBox({locationId, onClickEnemy}){
             }, Promise.resolve())
         })
         .catch(error => toast.error(error.message))
-    },[])
+    },[locationId])
 
     return (
         <View className={`rounded-l-3xl bg-blueBackgroundBox w-[15vh] pl-2 py-5 flex flex-col gap-3 self-center justify-self-end`}>
