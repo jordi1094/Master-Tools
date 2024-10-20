@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Routes, Route, Navigate } from 'react-router-dom'
 import Home from './Views/Home'
 import RegisterForm from './Views/RegisterForm'
@@ -18,8 +18,11 @@ function App() {
 
   const onUserLogedIn = () =>{
     setState('loggin done')
-
   }
+
+  useEffect(() => {
+    document.title = 'Master Tools'
+  })
 
   return (
       <Routes>
