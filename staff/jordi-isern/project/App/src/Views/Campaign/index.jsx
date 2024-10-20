@@ -148,7 +148,7 @@ function Campaign () {
     }
 
     return (
-        <View className='bg-[url(../../public/images/background.jpg)] bg-cover bg-center h-[100vh] grid grid-flow-col  '>
+        <View className='bg-[url("/images/background.jpg")] bg-cover bg-center h-[100vh] grid grid-flow-col  '>
             {presentLocationId && <NpcsBox onClickNpc={onClickNpc} locationId={presentLocationId} />}
             <View className='flex flex-col justify-between items-center'>
                 <CharactersBox campaignId = {id} onClickCharacter={onClickCharacter}/>
