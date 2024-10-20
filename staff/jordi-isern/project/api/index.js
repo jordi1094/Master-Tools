@@ -9,9 +9,9 @@ import routeHandler from './handlers/index.js'
 
 
 
-const { MONGODB_URL, PORT} = process.env
+const {MONGODB_URL_ONLINE, PORT} = process.env
 
-mongoose.connect(MONGODB_URL)
+mongoose.connect(MONGODB_URL_ONLINE)
     .then(() => {
         const { JsonWebTokenError, TokenExpiredError } = jwt
 
