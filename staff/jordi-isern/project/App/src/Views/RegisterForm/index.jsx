@@ -52,8 +52,8 @@ function RegisterForm () {
             <FieldPassword id= 'password' placeholder= 'Password'className='flex gap-2 h-6 justify-between w-full' classNameInput='w-full rounded-md px-2 text-gold1'>Password</FieldPassword>
             <FieldPassword id= 'repeatPassword' placeholder= 'Repeat assword' className='flex gap-2 h-6 justify-between w-full' classNameInput='w-full rounded-md px-2 text-gold1'>Reperat password</FieldPassword>
             <Button type = 'submit' className = 'text-white bg-[--blueBackgroundBox] rounded-md mt-4 hover:scale-y-105 active:scale-y-100 px-3 w-[100%] justify-self-end'> Register Now</Button>
+            <Link to='/login'>Registered?</Link>
         </FormWithFeedback>
-        <Link to='/login'>Registered?</Link>
 
     </View>
 
