@@ -35,7 +35,7 @@ function Login ({onUserLogedIn}) {
     }
 
     return( 
-        <View className='bg-[url(../../public/images/background.jpg)] bg-cover bg-center h-[100vh] flex items-center justify-center flex-col'>
+        <View className='bg-[url("/images/background.jpg")] bg-cover bg-center h-[100vh] flex items-center justify-center flex-col'>
         <FormWithFeedback className= 'bg-gradient-to-b from-blueBackgroundBox p-3 pt-0 rounded-lg flex flex-col items-center gap-y-3' onSubmit={handleLoginSubmit}>
             <Heading level={2}>Login</Heading>
             <Field id = 'username' placeholder= 'Username' className='flex gap-2 h-6 justify-between w-full' classNameInput='w-full rounded-md px-2 text-gold1'>Username</Field>

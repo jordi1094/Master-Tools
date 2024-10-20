@@ -90,7 +90,7 @@ function CreateCampaign() {
     })
 
     return(
-        <View className= 'bg-[url(images/backgroundBlue.jpg)] fixed bg-cover bg-center h-screen w-screen '>
+        <View className= 'bg-[url("images/backgroundBlue.jpg")] fixed bg-cover bg-center h-screen w-screen '>
             <div className='aboslute top-0 w-full h-full overflow-y-auto  flex flex-col items-center '>
                 <div className="flex items-center w-full">
                     <h1 className="text-center flex-grow">Campaign</h1>

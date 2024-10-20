@@ -40,7 +40,7 @@ function RegisterForm () {
 
 
     return( 
-        <View className='bg-[url(../../public/images/background.jpg)] bg-cover bg-center h-[100vh] flex items-center justify-center flex-col'>
+        <View className='bg-[url("/images/background.jpg")] bg-cover bg-center h-[100vh] flex items-center justify-center flex-col'>
         <FormWithFeedback onSubmit={handleRegisterSubmit} className='bg-gradient-to-b from-blueBackgroundBox p-3 h-[43vh] pt-0 rounded-lg flex flex-col items-center gap-y-7'>
             <Heading level={2}>Register</Heading>
             <Field id = 'name' placeholder= 'Name' className='flex gap-2 h-6 justify-between w-full' classNameInput='w-full rounded-md px-2 text-gold1'>Name </Field>
