@@ -37,7 +37,7 @@ function MissionForm ({locationId, onClose}){
     })
 
     return (
-        <div className="fixed w-screen h-screen bg-[url(../../public/images/backgroundBlue.jpg)] bg-cover bg-center top-0 ">
+        <div className="fixed w-screen h-screen bg-[url('images/backgroundBlue.jpg')] bg-cover bg-center top-0 ">
             <div  className="absolute top-0 left-0 w-full h-full overflow-y-auto">
                 <Form onSubmit={onSubmit} className='px-[7vw] pt-[5vh] grid grid-cols-4 grid-rows-[4vh] gap-2 justify-items-center'>
                 <Field id='title' className="col-span-2 flex gap-2 h-auto w-full" classNameInput="rounded-md p-2 bg-white/70 w-full text-black font-bold focus:outline-none" autoComplete='off' formHook={register('title',{

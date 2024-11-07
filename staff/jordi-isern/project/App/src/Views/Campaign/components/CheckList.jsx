@@ -26,7 +26,7 @@ function CheckList({onClickClose, mission}) {
                 <Image className='h-[3vh] cursor-pointer hover:scale-110 pointer-events-none'  src = {CrossIcon}></Image>
                 </Button>
             </div>
-
+            <Heading level='1' className='underline text-center text-black'>Check List</Heading>
             <p className='text-black'>Please select a mission in the lications details</p>
         </div>
         </Draggable>
