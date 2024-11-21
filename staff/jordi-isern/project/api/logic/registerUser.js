@@ -1,8 +1,9 @@
-import { User, Campaign } from "../data/models/index.js";
+import { User, Campaign, Character } from "../data/models/index.js";
 import { DuplicityError, SystemError } from "com/errors.js";
 import validate from "com/validate.js";
 import bcrypt from 'bcryptjs'
 import { campaign } from "../data/models/Campaign.js";
+import { Types } from "mongoose";
 
 
 const registerUser = ( name, surname, email, username, role, password, passwordRepeat) => {
@@ -44,6 +45,7 @@ const registerUser = ( name, surname, email, username, role, password, passwordR
               return Campaign.findById('672cef33fa11f84b5c8da6a1')
                 .catch(error => {throw new SystemError(error.message)})
                 .then(sampleCampaign => {
+
                   const newCampaign = new Campaign({
                     author: user._id,
                     title: sampleCampaign.title,
@@ -52,10 +54,26 @@ const registerUser = ( name, surname, email, username, role, password, passwordR
                     startLocation: sampleCampaign.startLocation,
                     image: sampleCampaign.image
                   })
-
                   newCampaign.save()
                   .catch(error => {throw new SystemError(error.message)})
-                  .then(() =>{})
+                  .then((campaign) =>{
+                    return Character.find({campaing:'672cef33fa11f84b5c8da6a1'})
+                      .catch(error => {throw new SystemError(error.message)})
+                      .then((sampleCharacters)=> {
+                        sampleCharacters.forEach((sampleCharacter) => {
+                          const newCharacter = new Character(sampleCharacter)
+                          newCharacter.campaing = campaign._id
+                          newCharacter.save()
+                          .catch(error => {
+                            throw new SystemError(error.message)
+                          })
+                          .then((newCharacterSaved) => {
+                            console.log(newCharacterSaved)
+                          })
+                        })
+                      })
+                      
+                  })
                 })
              })
         })
