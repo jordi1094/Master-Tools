@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --gold1: #ffbf00;
+    --blueBackgroundBox: #949E9A;
+    --black: #16161D;
+    --red: #880808;
+    --backgroundImage:url(../../public/images/background.jpg);
+
+}
+
+
+@layer base {
+    body{
+        @apply
+        m-0
+    }
+}
+
+@layer base {
+    h1 {
+        @apply
+        text-3xl
+        font-extrabold
+    }
+}
+
+@layer base {
+    h2 {
+        @apply
+        text-xl
+        text-gold1
+        mt-2
+        font-semibold
+    }
+}
+
+@layer base {
+    * {
+        @apply
+        text-gold1
+    }
+}
+
+@layer base {
+    a{
+        @apply
+        text-black1
+        font-medium
+        visited:text-purple-600
+    }
+}
+
+@layer base {
+    textarea{
+        @apply
+        bg-white
+        rounded-md
+        p-1
+        
+    }
+}
+
+@layer base{
+    input{
+        @apply
+        focus:outline-none
+        [&::-webkit-inner-spin-button]:appearance-none
+        [&::-webkit-outer-spin-button]:appearance-none
+        [appearance:textfield]
+    }
+}
