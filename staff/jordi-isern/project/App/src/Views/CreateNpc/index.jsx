@@ -8,7 +8,6 @@ import MainInfoNpc from '../CreateCampaign/components/MainInfoNpc'
 import TextAreaField from "../../components/core/TextAreaField"
 import CrossIcon from '../../icons/cross-svgrepo-com.svg'
 import Image from '../../components/core/Image'
-import React from "react"
 import CharacterStatsPanel from '../../components/Library/CharacterStatsPanel'
 import ActionInput from '../../components/Library/ActionInput'
 import {toast} from 'sonner'
