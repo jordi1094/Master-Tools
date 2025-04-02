@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react"
-<<<<<<< HEAD
 import { useNavigate, useParams } from "react-router-dom"
-=======
->>>>>>> 3bc5f4f253c90c23f22d5578cf9c875e9c35770f
 import logic from '../../logic'
 import CharactersBox from "./components/CharactersBox"
 import NpcsBox from "./components/NpcsBox"

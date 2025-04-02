@@ -5,10 +5,6 @@ import RegisterForm from './Views/RegisterForm'
 import Login from './Views/Login'
 import Campaign from './Views/Campaign'
 import CreateCampaign from './Views/CreateCampaign'
-<<<<<<< HEAD
-import CreateCharacter from './Views/CreateCharacter'
-=======
->>>>>>> 3bc5f4f253c90c23f22d5578cf9c875e9c35770f
 import LocationForm from './Views/CreateCampaign/components/LocationForm'
 import logic from './logic'
 import './App.css'
