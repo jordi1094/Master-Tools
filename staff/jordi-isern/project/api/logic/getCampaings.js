@@ -12,7 +12,11 @@ const getCampaigns = (userId) => {
                 throw new NotFoundError('User not Found')
             }
 
+<<<<<<< HEAD
             return Campaign.find({_id : {$in:user.campaigns}})
+=======
+            return Campaign.find({author: user._id.toString()})
+>>>>>>> 3bc5f4f253c90c23f22d5578cf9c875e9c35770f
             .catch(error => {throw new SystemError(error.message)})
             .then(campaignsIdList => { 
 
