@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import logic from '../../logic'
 import CharactersBox from "./components/CharactersBox"
 import NpcsBox from "./components/NpcsBox"
